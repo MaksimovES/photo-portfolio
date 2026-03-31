@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #FAF7F2;
+    --color-bg-surface: #F5F0E8;
+    --color-text-primary: #1E160E;
+    --color-text-secondary: #6B5A4E;
+    --color-text-muted: #8C7B70;
+    --color-accent: #C9A96E;
+    --color-accent-deep: #A07840;
+    --color-border: #DDD3C7;
+    --color-border-light: #EDE4D8;
+
+    --header-height: 72px;
+
+    --ease-emphasis: cubic-bezier(0.2, 0, 0, 1);
+    --ease-menu: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    background-color: var(--color-bg);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    position: relative;
+    color: var(--color-text-primary);
+    font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body.no-grain::after {
+    display: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.25;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+
+
+  ::selection {
+    background-color: #C9A96E;
+    color: #1E160E;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F5F0E8;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #C4B5A8;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C9A96E;
+  }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Tenor Sans', Georgia, sans-serif;
+  }
+
+  .font-body {
+    font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gold underline animation utility */
+  .underline-gold {
+    position: relative;
+  }
+  .underline-gold::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #C9A96E;
+    transition: width 0.4s var(--ease-emphasis);
+  }
+  .underline-gold:hover::after {
+    width: 100%;
+  }
+}

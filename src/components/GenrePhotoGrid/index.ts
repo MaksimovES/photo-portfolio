@@ -1,0 +1,1 @@
+export { GenrePhotoGrid } from './GenrePhotoGrid'
