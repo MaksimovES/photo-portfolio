@@ -46,14 +46,15 @@ export default function Layout() {
   }, [menuOpen])
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] flex flex-col">
       <Header isMenuOpen={menuOpen} onMenuToggle={() => setMenuOpen((prev) => !prev)} />
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col">
         <AnimatePresence mode={isMenuTransition ? 'sync' : 'wait'} onExitComplete={() => window.scrollTo(0, 0)}>
           {outlet ? (
             <motion.div
               key={location.pathname}
+              className="flex-1 flex flex-col"
               initial={{ opacity: 0, y: isMenuTransition ? 18 : 28 }}
               animate={{ opacity: 1, y: 0, transition: pageTransition }}
               exit={{ opacity: 0, y: -18, transition: pageExit }}

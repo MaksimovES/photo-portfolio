@@ -12,7 +12,7 @@ const fadeUp = {
 
 export default function ContactsPage() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 pt-20 pb-16">
+    <section className="flex-1 flex flex-col items-center justify-center px-5 sm:px-8 pt-20 pb-32 sm:pb-16">
       <div className="text-center space-y-6 sm:space-y-8 max-w-2xl w-full">
         <motion.div
           custom={0}
@@ -76,7 +76,7 @@ export default function ContactsPage() {
         >
           {/* Telegram */}
           <motion.a
-            href="https://t.me/"
+            href="https://t.me/ketrin_maxim"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 border border-gold/30 rounded-sm overflow-hidden w-full sm:w-auto sm:min-w-[220px] justify-center"
@@ -103,7 +103,7 @@ export default function ContactsPage() {
 
           {/* Instagram */}
           <motion.a
-            href="https://instagram.com/"
+            href="https://instagram.com/ketrin_maxim"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 border border-gold/30 rounded-sm overflow-hidden w-full sm:w-auto sm:min-w-[220px] justify-center"

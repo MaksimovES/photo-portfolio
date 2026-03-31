@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-const SECTIONS = ['hero', 'directions', 'cases', 'reviews', 'faq']
+const SECTIONS = ['hero', 'directions', 'forwhom', 'cases', 'reviews', 'faq']
 const TOTAL = SECTIONS.length
 
 const pad = (n: number) => String(n).padStart(2, '0')
@@ -32,7 +32,7 @@ export default function SectionIndex({ visible }: { visible: boolean }) {
   return (
     <motion.div
       // z-[9998]: под зернистостью (9999), над фото Hero (нужно опустить там до < 9998), под меню (10002+)
-      className="fixed bottom-4 right-6 md:bottom-10 md:right-10 z-[9998] flex items-center gap-3 pointer-events-none"
+      className="hidden md:flex fixed bottom-4 right-6 md:bottom-10 md:right-10 z-[9998] items-center gap-3 pointer-events-none"
       initial={{ opacity: 0 }}
       animate={visible ? { opacity: 1 } : { opacity: 0 }}
       transition={{ delay: 2.2, duration: 0.8, ease: [0.2, 0, 0, 1] }}

@@ -5,11 +5,11 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative z-[10000] bg-[#1A1008] text-cream-300 border-t border-white/5">
+    <footer className="relative z-[10000] bg-[#1A1008] text-cream-300 border-t border-white/5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
       {/* Мобильная версия — Горизонтально-ориентированная верстка */}
-      <div className="px-6 pt-12 pb-10 md:hidden">
+      <div className="px-6 pt-8 pb-10 md:hidden">
         {/* Верхний ряд: Имя и Слоган в две колонки */}
-        <div className="flex justify-between items-start gap-4 mb-12">
+        <div className="flex justify-between items-start gap-4 mb-6">
           <p className="font-display font-light text-2xl text-cream-100 leading-[0.9] uppercase tracking-tighter">
             Ketrin <br /> Maxim
           </p>
@@ -24,12 +24,12 @@ export default function Footer() {
             <p className="font-body text-[9px] uppercase tracking-[0.2em] text-gold/50 mb-5">
               Направления
             </p>
-            <nav className="grid grid-cols-1 gap-y-2.5">
+            <nav className="grid grid-cols-1 gap-y-4">
               {GENRES.map((genre) => (
                 <Link
                   key={genre.slug}
                   to={`/genre/${genre.slug}`}
-                  className="font-body text-[11px] text-cream-400 hover:text-gold transition-colors duration-300"
+                  className="font-body text-[14px] leading-[1.1] text-cream-400 hover:text-gold transition-colors duration-300"
                 >
                   {genre.label}
                 </Link>
@@ -43,7 +43,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-y-3">
               <a
-                href="#"
+                href="https://instagram.com/ketrin_maxim"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-body text-[11px] uppercase tracking-[0.1em] text-cream-400 border-b border-gold/20 pb-0.5"
@@ -51,7 +51,7 @@ export default function Footer() {
                 Instagram
               </a>
               <a
-                href="#"
+                href="https://t.me/ketrin_maxim"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-body text-[11px] uppercase tracking-[0.1em] text-cream-400 border-b border-gold/20 pb-0.5"
@@ -97,7 +97,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-8">
             <a
-              href="#"
+              href="https://instagram.com/ketrin_maxim"
               target="_blank"
               rel="noopener noreferrer"
               className="font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
@@ -105,7 +105,7 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              href="#"
+              href="https://t.me/ketrin_maxim"
               target="_blank"
               rel="noopener noreferrer"
               className="font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
@@ -117,7 +117,7 @@ export default function Footer() {
       </div>
 
       {/* Нижняя информационная панель */}
-      <div className="px-6 md:px-16 lg:px-24 py-6 md:py-8">
+      <div className="px-6 md:px-16 lg:px-24 pt-6 pb-0 md:py-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
           <p className="font-body text-[10px] md:text-[12px] text-cream-400/30 tracking-[0.1em]">
             © {year} ketrin_maxim. Все права защищены.

@@ -9,11 +9,11 @@ interface MenuOverlayProps {
 
 const overlayVariants = {
   closed: {
-    clipPath: 'inset(0 0 100% 0)',
+    y: '-100%',
     transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
   },
   open: {
-    clipPath: 'inset(0 0 0% 0)',
+    y: '0%',
     transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
   },
 }
@@ -42,15 +42,15 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
       onClose()
       return
     }
+    navigate(path, { state: { fromMenu: true } })
     onClose()
-    setTimeout(() => navigate(path, { state: { fromMenu: true } }), 40)
   }
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[10002] bg-[#1A1008] flex flex-col"
+          className="fixed inset-0 z-[10002] bg-[#1A1008] flex flex-col will-change-transform"
           variants={overlayVariants}
           initial="closed"
           animate="open"
@@ -190,39 +190,42 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
             className="px-6 md:px-16 lg:px-24 pb-6 md:pb-10 border-t border-cream-500/10 pt-4 md:pt-6 shrink-0"
           >
             {/* Мобильная раскладка: всё в колонку */}
-            <div className="flex flex-col gap-4 md:hidden">
+            <div className="flex flex-col gap-5 md:hidden">
               {/* Навигация */}
-              <div className="flex items-center justify-center gap-6">
+              <div className="flex items-center justify-center gap-7">
                 <button
                   onClick={() => handleNavClick('/about')}
-                  className="flex items-center gap-2 cursor-pointer"
+                  className="flex items-center gap-2.5 px-2 py-1.5 cursor-pointer"
                 >
                   <span className="h-px w-6 bg-gold/40 block" />
-                  <span className="font-body text-xs tracking-[0.15em] uppercase text-cream-400">
+                  <span className="font-body text-[13px] tracking-[0.16em] uppercase text-cream-400">
                     Обо мне
                   </span>
                 </button>
 
                 <button
                   onClick={() => handleNavClick('/contacts')}
-                  className="flex items-center gap-2 cursor-pointer"
+                  className="flex items-center gap-2.5 px-2 py-1.5 cursor-pointer"
                 >
                   <span className="h-px w-6 bg-gold/40 block" />
-                  <span className="font-body text-xs tracking-[0.15em] uppercase text-cream-400">
+                  <span className="font-body text-[13px] tracking-[0.16em] uppercase text-cream-400">
                     Контакты
                   </span>
                 </button>
               </div>
 
               {/* Соцсети */}
-              <div className="flex items-center justify-center gap-5">
-                {(['Instagram', 'Telegram'] as const).map((name) => (
+              <div className="flex items-center justify-center gap-7">
+                {([
+                  { name: 'Instagram', href: 'https://instagram.com/ketrin_maxim' },
+                  { name: 'Telegram', href: 'https://t.me/ketrin_maxim' },
+                ] as const).map(({ name, href }) => (
                   <a
                     key={name}
-                    href="#"
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-body text-2xs tracking-[0.15em] uppercase text-cream-500/60"
+                    className="font-body text-xs tracking-[0.16em] uppercase text-cream-500/60 px-2 py-1.5"
                   >
                     {name}
                   </a>
@@ -291,10 +294,13 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
               </div>
 
               <div className="flex items-center gap-6">
-                {(['Instagram', 'Telegram'] as const).map((name) => (
+                {([
+                  { name: 'Instagram', href: 'https://instagram.com/ketrin_maxim' },
+                  { name: 'Telegram', href: 'https://t.me/ketrin_maxim' },
+                ] as const).map(({ name, href }) => (
                   <motion.a
                     key={name}
-                    href="#"
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-body text-2xs tracking-[0.15em] uppercase text-cream-500/60 relative"

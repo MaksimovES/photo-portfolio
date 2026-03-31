@@ -26,7 +26,7 @@ export default function GenrePage() {
   const gridPhotos = slug ? GENRE_PHOTOS[slug] : undefined
 
   return (
-    <div className="min-h-screen">
+    <div className="flex-1 flex flex-col">
       {/* Hero section */}
       <section className="flex flex-col items-center justify-center px-8 pt-32 pb-20">
         <div className="text-center space-y-6 max-w-2xl">

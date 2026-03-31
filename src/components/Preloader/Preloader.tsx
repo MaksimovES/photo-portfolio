@@ -5,9 +5,29 @@ interface PreloaderProps {
   onComplete: () => void
 }
 
+function KineticName({ text, visible }: { text: string; visible: boolean }) {
+  return (
+    <span className="inline">
+      {text.split('').map((char, i) => (
+        <motion.span
+          key={i}
+          className="inline-block"
+          style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}
+          initial={{ opacity: 0, filter: 'blur(12px)', y: 18 }}
+          animate={visible ? { opacity: 1, filter: 'blur(0px)', y: 0 } : { opacity: 0, filter: 'blur(12px)', y: 18 }}
+          transition={{ duration: 0.65, ease: [0.2, 0, 0, 1], delay: i * 0.048 }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </span>
+  )
+}
+
 export default function Preloader({ onComplete }: PreloaderProps) {
   const [count, setCount] = useState(0)
   const [exiting, setExiting] = useState(false)
+  const [nameVisible, setNameVisible] = useState(false)
   const started = useRef(false)
 
   const alreadyShown =
@@ -21,6 +41,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     }
 
     document.body.classList.add('no-grain')
+    setNameVisible(true)
 
     if (started.current) return
     started.current = true
@@ -48,7 +69,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[10001] flex flex-col items-center justify-center select-none"
+      className="fixed inset-0 z-[10005] flex flex-col items-center justify-center select-none"
       style={{ backgroundColor: '#1E160E' }}
       animate={exiting ? { y: '-100vh' } : { y: 0 }}
       transition={{ duration: 0.82, ease: [0.76, 0, 0.24, 1] }}
@@ -57,6 +78,16 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       <div className="absolute top-10 left-0 right-0 flex justify-center">
         <span className="font-body text-2xs tracking-[0.45em] text-cream-500 uppercase">
           Портфолио
+        </span>
+      </div>
+
+      {/* Name */}
+      <div className="mb-4 text-center">
+        <span
+          className="font-display text-cream-100 leading-none tracking-[0.18em] uppercase"
+          style={{ fontSize: 'clamp(1rem, 3vw, 1.8rem)' }}
+        >
+          <KineticName text="KETRIN MAXIM" visible={nameVisible} />
         </span>
       </div>
 

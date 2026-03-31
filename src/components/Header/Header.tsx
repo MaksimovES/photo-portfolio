@@ -30,7 +30,7 @@ export default function Header({ isMenuOpen, onMenuToggle }: HeaderProps) {
         'flex items-center justify-between',
         'px-6 md:px-10 lg:px-14',
         'transition-all duration-500',
-        isDark ? 'h-16 bg-[#1E160E]/95 backdrop-blur-sm z-[10003]' : 'h-20 bg-transparent z-[10002]',
+        isDark ? 'h-16 bg-[#1A1008]/95 backdrop-blur-sm z-[10003]' : 'h-20 bg-transparent z-[10002]',
       ].join(' ')}
     >
       {/* Логотип / имя */}

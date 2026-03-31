@@ -38,7 +38,15 @@ const shutterVariants = {
 }
 
 // Кинетический текст — каждый символ появляется с размытием
-function KineticHeading({ text, isVisible, delay = 0 }: { text: string; isVisible: boolean; delay?: number }) {
+function KineticHeading({
+  text,
+  isVisible,
+  delay = 0,
+}: {
+  text: string
+  isVisible: boolean
+  delay?: number
+}) {
   return (
     <span className="inline">
       {text.split('').map((char, i) => (
@@ -105,7 +113,7 @@ const counters = [
 
 export default function Hero({ isVisible }: HeroProps) {
   return (
-    <section className="min-h-screen flex flex-col justify-start px-6 md:px-10 lg:px-14 pt-24 pb-16 bg-cream-100">
+    <section className="min-h-dvh flex flex-col justify-start px-6 md:px-10 lg:px-14 pt-24 pb-16 bg-cream-100">
       <motion.div
         className="w-full max-w-screen-2xl mx-auto"
         variants={containerVariants}
@@ -115,25 +123,28 @@ export default function Hero({ isVisible }: HeroProps) {
         {/* Label */}
         <motion.span
           variants={itemVariants}
-          className="block font-body text-2xs tracking-[0.35em] text-gold uppercase mb-6"
+          className="block font-body text-2xs tracking-[0.35em] text-gold uppercase mb-1"
         >
           Портфолио фотографа
         </motion.span>
 
         {/* Full-width heading — kinetic */}
         <h1
-          className="relative z-10 font-display font-light text-warm-dark leading-[1] tracking-[-0.03em] mb-6 md:mb-0
-            text-[clamp(1.7rem,6vw,4rem)]"
+          className="relative z-10 font-display font-light text-warm-dark leading-[1] tracking-[-0.03em] mb-5 md:mb-0 md:mt-16 lg:mt-24
+            text-[clamp(1.6rem,6vw,4rem)]"
         >
-          <KineticHeading text="Не делаю ретушь" isVisible={isVisible} delay={0.1} />
+          <KineticHeading text="Не делаю ретушь -" isVisible={isVisible} delay={0.1} />
           <br />
-          <KineticHeading text="Потому что с Вами всё так" isVisible={isVisible} delay={0.45} />
+          <KineticHeading text="Потому что с Вами всё так!" isVisible={isVisible} delay={0.45} />
         </h1>
 
         {/* Bottom row: photo + info */}
-        <div className="flex flex-col md:flex-row items-start gap-10 md:gap-16">
+        <div className="flex flex-col md:flex-row items-start gap-3 md:gap-16">
           {/* Photo — on mobile first (order-1), on desktop right (order-2) */}
-          <div className="relative w-[70%] mx-auto md:w-[50%] flex justify-center md:justify-end flex-shrink-0 order-1 md:order-2 md:-mt-20" style={{ zIndex: 10000 }}>
+          <div
+            className="relative w-[60%] mx-auto md:w-[66%] flex justify-center md:justify-end flex-shrink-0 order-1 md:order-2 md:-mt-24 lg:-mt-32"
+            style={{ zIndex: 10000 }}
+          >
             <div className="relative" style={{ width: 'min(480px, 80vw)', aspectRatio: '3/4' }}>
               {/* Shutter overlay — slides down when photo reveals */}
               <motion.div
@@ -148,13 +159,13 @@ export default function Hero({ isVisible }: HeroProps) {
                 initial="hidden"
                 animate={isVisible ? 'visible' : 'hidden'}
               >
-              <div className="absolute inset-0 rounded-sm overflow-hidden">
-                <img
-                  src="https://picsum.photos/seed/portfolio/480/640"
-                  alt="placeholder"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                <div className="absolute inset-0 rounded-sm overflow-hidden">
+                  <img
+                    src="https://picsum.photos/seed/portfolio/480/640"
+                    alt="placeholder"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </motion.div>
               {/* Frame */}
               <motion.div
@@ -167,8 +178,10 @@ export default function Hero({ isVisible }: HeroProps) {
                 {/* Outer border */}
                 <svg className="absolute inset-0 w-full h-full overflow-visible" fill="none">
                   <motion.rect
-                    x="1" y="1"
-                    width="calc(100% - 2px)" height="calc(100% - 2px)"
+                    x="1"
+                    y="1"
+                    width="calc(100% - 2px)"
+                    height="calc(100% - 2px)"
                     stroke="#C9A96E"
                     strokeWidth="0.75"
                     strokeOpacity="0.4"
@@ -240,7 +253,7 @@ export default function Hero({ isVisible }: HeroProps) {
           </div>
 
           {/* Info — on mobile second (order-2), on desktop left (order-1) */}
-          <div className="flex-1 md:max-w-md order-2 md:order-1 md:mt-20">
+          <div className="flex-1 md:max-w-md order-2 md:order-1 md:mt-36 lg:mt-24">
             {/* Tagline */}
             <motion.p
               variants={itemVariants}
@@ -254,20 +267,21 @@ export default function Hero({ isVisible }: HeroProps) {
               variants={itemVariants}
               className="font-body text-warm-medium/80 text-sm md:text-base leading-relaxed mb-8 max-w-[300px] md:max-w-none"
             >
-              Моя задача — уловить вашу уникальность, эмоции и мимолётные движения, которые делают
-              вас собой. На снимках вы увидите себя такими, какие вы есть — с вашими эмоциями,
-              индивидуальностью и характером. Ваша уникальность — это то, что делает вас красивыми.
+              Ловлю ваши настоящие эмоции и уникальность в каждом кадре. Посмотрите на себя моими
+              глазами — и вы увидите, как сильно ваша индивидуальность делает вас прекрасными.
             </motion.p>
 
             {/* Counters */}
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-8 mb-8"
-            >
+            <motion.div variants={itemVariants} className="flex gap-8 mb-8">
               {counters.map((c, i) => (
                 <div key={i} className="flex flex-col gap-0.5">
                   <span className="font-display font-light text-warm-dark text-[clamp(1.6rem,4vw,2.2rem)] leading-none tracking-[-0.02em]">
-                    <AnimatedCounter to={c.to} suffix={c.suffix} isVisible={isVisible} delay={0.8 + i * 0.15} />
+                    <AnimatedCounter
+                      to={c.to}
+                      suffix={c.suffix}
+                      isVisible={isVisible}
+                      delay={0.8 + i * 0.15}
+                    />
                   </span>
                   <span className="font-body text-2xs tracking-[0.18em] text-warm-medium/60 uppercase">
                     {c.label}
@@ -279,7 +293,7 @@ export default function Hero({ isVisible }: HeroProps) {
             {/* CTA */}
             <motion.div variants={itemVariants}>
               <a
-                href="#directions"
+                href="#cases"
                 className="inline-flex items-center gap-3 border border-gold text-warm-dark font-body
                   text-2xs tracking-[0.18em] uppercase px-8 py-4
                   hover:bg-gold hover:border-gold transition-colors duration-300"

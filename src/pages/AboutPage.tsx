@@ -2,7 +2,7 @@ import Typography from '../components/Typography'
 
 export default function AboutPage() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-8 pt-20">
+    <section className="flex-1 flex flex-col items-center justify-center px-8 pt-20 pb-20">
       <div className="text-center space-y-6 max-w-2xl">
         <Typography variant="label" className="text-gold tracking-[0.3em]">
           О фотографе
