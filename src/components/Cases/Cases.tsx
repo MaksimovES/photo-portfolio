@@ -48,7 +48,7 @@ function GenreItem({
 
         <div className="flex-1">
           <div className="flex justify-between items-center">
-            <h3 className="font-display text-warm-medium text-lg md:text-2xl uppercase tracking-wider group-hover:text-gold transition-colors duration-300">
+            <h3 className="font-display text-warm-medium text-lg md:text-2xl uppercase tracking-wider md:group-hover:text-gold transition-colors duration-300">
               {genre.label}
             </h3>
             <span className={`text-gold transition-transform duration-500 ${isOpen ? 'rotate-45' : ''}`}>
@@ -84,10 +84,10 @@ function GenreItem({
                     }}
                     className="group/btn relative flex items-center gap-3 py-2"
                   >
-                    <span className="font-body text-[11px] md:text-xs uppercase tracking-[0.3em] text-warm-dark group-hover/btn:text-gold transition-colors duration-300">
+                    <span className="font-body text-[11px] md:text-xs uppercase tracking-[0.3em] text-warm-dark md:group-hover/btn:text-gold transition-colors duration-300">
                       Подробнее
                     </span>
-                    <div className="relative w-8 h-px bg-gold/40 group-hover/btn:w-12 transition-all duration-500">
+                    <div className="relative w-8 h-px bg-gold/40 md:group-hover/btn:w-12 transition-all duration-500">
                       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-gold" />
                     </div>
                   </button>
