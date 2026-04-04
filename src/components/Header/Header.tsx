@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useScrolled } from '../../hooks/useScrolled'
 import { useIsDesktop } from '../../hooks/useIsDesktop'
 
@@ -18,7 +18,6 @@ function getButtonColor(isMenuOpen: boolean, scrolled: boolean) {
 export default function Header({ isMenuOpen, onMenuToggle }: HeaderProps) {
   const scrolled = useScrolled()
   const isDesktop = useIsDesktop()
-  const location = useLocation()
 
   const isDark = scrolled || isMenuOpen
   const buttonColor = getButtonColor(isMenuOpen, scrolled)

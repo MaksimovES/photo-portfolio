@@ -13,7 +13,7 @@ export default function Footer() {
           <p className="font-display font-light text-2xl text-cream-100 leading-[0.9] uppercase tracking-tighter">
             Ketrin <br /> Maxim
           </p>
-          <p className="font-body text-[12px] text-warm-muted leading-relaxed max-w-[180px] text-right opacity-80">
+          <p className="font-body text-[12px] text-warm-muted leading-relaxed max-w-[180px] opacity-80 text-right">
             Живые эмоции и настоящие истории в каждом кадре.
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function Footer() {
           <p className="font-display font-light text-4xl text-cream-100 leading-none uppercase tracking-tighter">
             Ketrin <br /> Maxim
           </p>
-          <p className="font-body text-sm text-warm-muted leading-relaxed max-w-xs italic">
+          <p className="font-body text-sm text-warm-muted leading-relaxed max-w-xs">
             Фотограф для тех, кто ценит живые эмоции и настоящие истории.
           </p>
         </div>

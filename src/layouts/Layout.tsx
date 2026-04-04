@@ -32,6 +32,7 @@ export default function Layout() {
 
   useEffect(() => {
     setMenuOpen(false)
+    window.scrollTo(0, 0)
   }, [location.pathname])
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function Layout() {
   }, [menuOpen])
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] flex flex-col">
+    <>
       <Header isMenuOpen={menuOpen} onMenuToggle={() => setMenuOpen((prev) => !prev)} />
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       <main className="flex-1 flex flex-col">
@@ -65,6 +66,6 @@ export default function Layout() {
         </AnimatePresence>
       </main>
       <Footer />
-    </div>
+    </>
   )
 }

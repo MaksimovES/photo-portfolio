@@ -21,33 +21,45 @@
     --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+
+
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
   html {
-    background-color: var(--color-bg);
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overscroll-behavior-y: none;
-    height: 100%;
   }
 
   body {
     position: relative;
-    background-color: var(--color-bg);
+    background-color: #1A1008;
     color: var(--color-text-primary);
     font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
-    overscroll-behavior-y: none;
-    min-height: 100%;
+  }
+
+  /* Единственное место, отвечающее за sticky-footer layout */
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--color-bg);
   }
 
   body.no-grain::after {
@@ -131,4 +143,5 @@
   .underline-gold:hover::after {
     width: 100%;
   }
+
 }

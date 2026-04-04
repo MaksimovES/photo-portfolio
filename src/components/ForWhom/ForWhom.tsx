@@ -71,12 +71,12 @@ export default function ForWhom() {
     <section
       id="forwhom"
       ref={ref}
-      className="py-16 md:py-24 lg:py-32 px-6 md:px-10 lg:px-14 bg-cream-100 overflow-hidden"
+      className="py-10 md:py-24 lg:py-32 px-6 md:px-10 lg:px-14 bg-cream-100 overflow-hidden"
     >
       <div className="max-w-screen-xl mx-auto">
 
         {/* Two-column grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-4 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-3 lg:gap-20 items-start">
 
           {/* ── LEFT: heading + line + (desktop) closing & button ── */}
           <div>
@@ -91,7 +91,7 @@ export default function ForWhom() {
 
             {/* Animated gold rule */}
             <motion.div
-              className="mt-8 h-px bg-gold origin-left"
+              className="mt-5 md:mt-8 h-px bg-gold origin-left"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
               transition={{ duration: 1.1, ease: [0.2, 0, 0, 1], delay: 0.35 }}
@@ -135,7 +135,7 @@ export default function ForWhom() {
                     ease: [0.22, 1, 0.36, 1],
                     delay: 0.2 + i * 0.1,
                   }}
-                  className="border-t border-cream-400 py-5 md:py-6 flex items-baseline gap-5"
+                  className="border-t border-cream-400 py-4 md:py-6 flex items-baseline gap-5"
                 >
                   <span className="flex-shrink-0 font-body text-[10px] uppercase tracking-[0.2em] text-gold/50 tabular-nums">
                     {String(i + 1).padStart(2, '0')}
@@ -152,7 +152,7 @@ export default function ForWhom() {
 
         {/* Mobile closing + button (below quotes) */}
         <motion.div
-          className="lg:hidden mt-12 flex flex-col items-start gap-7"
+          className="lg:hidden mt-8 flex flex-col items-start gap-5"
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.2, 0, 0, 1], delay: closingDelay }}
