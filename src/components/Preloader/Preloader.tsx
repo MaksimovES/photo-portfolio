@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, animate } from 'framer-motion'
 
 interface PreloaderProps {
@@ -67,7 +68,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   if (alreadyShown) return null
 
-  return (
+  return createPortal(
     <motion.div
       className="fixed inset-0 z-[10005] flex flex-col items-center justify-center select-none"
       style={{ backgroundColor: '#1E160E' }}
@@ -93,14 +94,12 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
       {/* Counter */}
       <div className="relative overflow-hidden">
-        <motion.span
+        <span
           className="font-display text-cream-100 block leading-none"
           style={{ fontSize: 'clamp(5rem, 15vw, 10rem)', letterSpacing: '-0.04em' }}
-          key={count}
-          animate={{ opacity: 1 }}
         >
           {String(count).padStart(2, '0')}
-        </motion.span>
+        </span>
       </div>
 
       {/* Progress line */}
@@ -111,6 +110,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         animate={{ scaleX: 1 }}
         transition={{ duration: 1.8, ease: [0.2, 0, 0, 1] }}
       />
-    </motion.div>
+    </motion.div>,
+    document.body
   )
 }
