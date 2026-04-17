@@ -37,25 +37,49 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="text-right">
+          <div className="text-left">
             <p className="font-body text-[9px] uppercase tracking-[0.2em] text-gold/50 mb-5">
               Связь
             </p>
-            <div className="flex flex-col gap-y-3">
+            <div className="flex flex-col gap-y-3 items-start">
               <a
                 href="https://instagram.com/ketrin_maxim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-body text-[11px] uppercase tracking-[0.1em] text-cream-400 border-b border-gold/20 pb-0.5"
+                aria-label="Instagram"
+                className="group inline-flex items-center gap-2 font-body text-[11px] uppercase tracking-[0.1em] text-cream-400"
               >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-[14px] h-[14px] text-gold/80"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+                </svg>
                 Instagram
               </a>
               <a
                 href="https://t.me/ketrin_maxim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-body text-[11px] uppercase tracking-[0.1em] text-cream-400 border-b border-gold/20 pb-0.5"
+                aria-label="Telegram"
+                className="group inline-flex items-center gap-2 font-body text-[11px] uppercase tracking-[0.1em] text-cream-400"
               >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-[14px] h-[14px] text-gold/80"
+                  aria-hidden="true"
+                >
+                  <path d="M21.86 3.35a1.2 1.2 0 0 0-1.23-.19L2.9 10.14c-.86.34-.85 1.57.02 1.89l4.36 1.6 1.68 5.27c.2.62 1 .8 1.45.32l2.47-2.56 4.48 3.3c.62.46 1.51.13 1.68-.62l3.2-14.6a1.2 1.2 0 0 0-.38-1.39ZM9.9 14.52l-.38 3.72-1.23-3.88 9.2-6.72-7.59 6.88Z" />
+                </svg>
                 Telegram
               </a>
             </div>
@@ -100,16 +124,40 @@ export default function Footer() {
               href="https://instagram.com/ketrin_maxim"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
+              aria-label="Instagram"
+              className="group inline-flex items-center gap-2.5 font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
             >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-4 h-4 text-gold/70 group-hover:text-gold transition-colors duration-300"
+                aria-hidden="true"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+              </svg>
               Instagram
             </a>
             <a
               href="https://t.me/ketrin_maxim"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
+              aria-label="Telegram"
+              className="group inline-flex items-center gap-2.5 font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
             >
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-4 h-4 text-gold/70 group-hover:text-gold transition-colors duration-300"
+                aria-hidden="true"
+              >
+                <path d="M21.86 3.35a1.2 1.2 0 0 0-1.23-.19L2.9 10.14c-.86.34-.85 1.57.02 1.89l4.36 1.6 1.68 5.27c.2.62 1 .8 1.45.32l2.47-2.56 4.48 3.3c.62.46 1.51.13 1.68-.62l3.2-14.6a1.2 1.2 0 0 0-.38-1.39ZM9.9 14.52l-.38 3.72-1.23-3.88 9.2-6.72-7.59 6.88Z" />
+              </svg>
               Telegram
             </a>
           </div>
