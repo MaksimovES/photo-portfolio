@@ -18,7 +18,7 @@ export default function HomePage() {
       <Preloader onComplete={() => setPreloaderDone(true)} />
       <SectionIndex visible={preloaderDone} />
       <div id="hero"><Hero isVisible={preloaderDone} /></div>
-      <div id="directions"><HorizontalScroll /></div>
+      <HorizontalScroll />
       <ForWhom />
       <div id="cases"><Cases /></div>
       <div id="reviews"><Reviews /></div>

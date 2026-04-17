@@ -1,0 +1,60 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "Екатерина Максимова" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e6]: Екатерина Максимова
+    - button "Открыть меню" [ref=e397] [cursor=pointer]:
+      - generic [ref=e398]: Меню
+  - main [ref=e14]:
+    - generic [ref=e400]:
+      - generic [ref=e402]:
+        - generic [ref=e403]: 02 — Street
+        - heading "Стрит" [level=2] [ref=e404]
+        - heading "Съемка на природе или на улицах города" [level=2] [ref=e405]
+      - generic [ref=e411]:
+        - generic [ref=e413]: Галерея
+        - generic [ref=e414]:
+          - img "Фото 1" [ref=e416] [cursor=pointer]
+          - img "Фото 2" [ref=e418] [cursor=pointer]
+          - img "Фото 3" [ref=e420] [cursor=pointer]
+          - img "Фото 4" [ref=e422] [cursor=pointer]
+          - img "Фото 5" [ref=e424] [cursor=pointer]
+          - img "Фото 6" [ref=e426] [cursor=pointer]
+          - img "Фото 7" [ref=e428] [cursor=pointer]
+          - img "Фото 8" [ref=e430] [cursor=pointer]
+          - img "Фото 9" [ref=e432] [cursor=pointer]
+          - img "Фото 10" [ref=e434] [cursor=pointer]
+          - img "Фото 11" [ref=e436] [cursor=pointer]
+          - img "Фото 12" [ref=e438] [cursor=pointer]
+          - img "Фото 13" [ref=e440] [cursor=pointer]
+          - img "Фото 14" [ref=e442] [cursor=pointer]
+          - img "Фото 15" [ref=e444] [cursor=pointer]
+          - img "Фото 16" [ref=e446] [cursor=pointer]
+  - contentinfo [ref=e317]:
+    - generic [ref=e318]:
+      - generic [ref=e319]:
+        - paragraph [ref=e320]:
+          - text: Ketrin
+          - text: Maxim
+        - paragraph [ref=e321]: Фотограф для тех, кто ценит живые эмоции и настоящие истории.
+      - generic [ref=e322]:
+        - paragraph [ref=e323]: Направления
+        - navigation [ref=e324]:
+          - link "Студийная" [ref=e325] [cursor=pointer]:
+            - /url: /genre/studio
+          - link "Стрит" [ref=e326] [cursor=pointer]:
+            - /url: /genre/street
+          - link "Театр" [ref=e327] [cursor=pointer]:
+            - /url: /genre/theatre
+          - link "Семейная" [ref=e328] [cursor=pointer]:
+            - /url: /genre/family
+      - generic [ref=e329]:
+        - paragraph [ref=e330]: Контакты
+        - generic [ref=e331]:
+          - link "Instagram" [ref=e332] [cursor=pointer]:
+            - /url: https://instagram.com/ketrin_maxim
+          - link "Telegram" [ref=e333] [cursor=pointer]:
+            - /url: https://t.me/ketrin_maxim
+    - generic [ref=e335]:
+      - paragraph [ref=e336]: © 2026 ketrin_maxim. Все права защищены.
+      - paragraph [ref=e339]: Санкт-Петербург — Россия

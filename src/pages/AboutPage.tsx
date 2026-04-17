@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 const EASE = [0.2, 0, 0, 1] as const
@@ -47,8 +47,21 @@ export default function AboutPage() {
   const principlesInView = useInView(principlesRef, { once: true, margin: '-80px' })
   const closingInView = useInView(closingRef, { once: true, margin: '-80px' })
 
+  const { scrollYProgress } = useScroll({
+    target: manifestoRef,
+    offset: ['start end', 'end start'],
+  })
+  const decorY = useTransform(scrollYProgress, [0, 1], [50, -50])
+
   return (
-    <section className="flex-1 bg-cream-100" style={{ paddingTop: 'var(--header-height)' }}>
+    <section className="flex-1 bg-cream-100 relative overflow-hidden" style={{ paddingTop: 'var(--header-height)' }}>
+      <motion.div
+        className="absolute top-4 right-0 md:right-10 lg:right-16 font-display leading-none select-none pointer-events-none text-[220px] md:text-[360px] text-gold/[0.18]"
+        style={{ y: decorY }}
+        aria-hidden
+      >
+        K
+      </motion.div>
       {/* ══════════ HERO ══════════ */}
       <div className="px-6 md:px-10 lg:px-14 pt-10 md:pt-20 pb-16 md:pb-24">
         <div className="max-w-screen-xl mx-auto">

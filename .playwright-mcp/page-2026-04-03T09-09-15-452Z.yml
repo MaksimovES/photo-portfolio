@@ -1,0 +1,41 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "Екатерина Максимова" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e6]: Екатерина Максимова
+    - button "Открыть меню" [ref=e7] [cursor=pointer]:
+      - generic [ref=e9]: Меню
+  - main [ref=e14]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: О фотографе
+      - heading "Обо мне" [level=1] [ref=e20]
+      - paragraph [ref=e22]: Текст о фотографе, достижения и история — появятся здесь в Фазе 3.
+      - generic [ref=e25]: В разработке
+  - contentinfo [ref=e27]:
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - paragraph [ref=e30]:
+          - text: Ketrin
+          - text: Maxim
+        - paragraph [ref=e31]: Фотограф для тех, кто ценит живые эмоции и настоящие истории.
+      - generic [ref=e32]:
+        - paragraph [ref=e33]: Направления
+        - navigation [ref=e34]:
+          - link "Студийная" [ref=e35] [cursor=pointer]:
+            - /url: /genre/studio
+          - link "Стрит" [ref=e36] [cursor=pointer]:
+            - /url: /genre/street
+          - link "Театр" [ref=e37] [cursor=pointer]:
+            - /url: /genre/theatre
+          - link "Семейная" [ref=e38] [cursor=pointer]:
+            - /url: /genre/family
+      - generic [ref=e39]:
+        - paragraph [ref=e40]: Контакты
+        - generic [ref=e41]:
+          - link "Instagram" [ref=e42] [cursor=pointer]:
+            - /url: https://instagram.com/ketrin_maxim
+          - link "Telegram" [ref=e43] [cursor=pointer]:
+            - /url: https://t.me/ketrin_maxim
+    - generic [ref=e45]:
+      - paragraph [ref=e46]: © 2026 ketrin_maxim. Все права защищены.
+      - paragraph [ref=e49]: Санкт-Петербург — Россия

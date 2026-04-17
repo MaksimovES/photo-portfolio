@@ -1,11 +1,17 @@
 import { useState, useCallback, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface TheatreCarouselBlockProps {
   director: string
   production: string
   photos: string[]
   index: number
+}
+
+const slideVariants = {
+  enter: (d: number) => ({ opacity: 0, x: d > 0 ? '12%' : '-12%' }),
+  center: { opacity: 1, x: 0 },
+  exit: (d: number) => ({ opacity: 0, x: d > 0 ? '-12%' : '12%' }),
 }
 
 export function TheatreCarouselBlock({
@@ -15,6 +21,7 @@ export function TheatreCarouselBlock({
   index,
 }: TheatreCarouselBlockProps) {
   const [current, setCurrent] = useState(0)
+  const [direction, setDirection] = useState(0)
   const [loaded, setLoaded] = useState<Set<number>>(new Set())
   const touchStartX = useRef<number>(0)
 
@@ -22,13 +29,18 @@ export function TheatreCarouselBlock({
     setLoaded(prev => new Set(prev).add(i))
   }
 
+  const goTo = useCallback((nextIdx: number, dir: number) => {
+    setDirection(dir)
+    setCurrent(nextIdx)
+  }, [])
+
   const prev = useCallback(() => {
-    setCurrent(i => (i - 1 + photos.length) % photos.length)
-  }, [photos.length])
+    goTo((current - 1 + photos.length) % photos.length, -1)
+  }, [current, photos.length, goTo])
 
   const next = useCallback(() => {
-    setCurrent(i => (i + 1) % photos.length)
-  }, [photos.length])
+    goTo((current + 1) % photos.length, 1)
+  }, [current, photos.length, goTo])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
@@ -64,18 +76,22 @@ export function TheatreCarouselBlock({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Slides */}
-        {photos.map((photo, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              i === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
+        {/* Slides via AnimatePresence */}
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={current}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.5, ease: [0.2, 0, 0, 1] }}
+            className="absolute inset-0"
           >
-            {/* Shimmer-оверлей поверх фото */}
+            {/* Shimmer overlay */}
             <motion.div
               className="absolute inset-0 z-10 bg-cream-200 overflow-hidden pointer-events-none"
-              animate={{ opacity: loaded.has(i) ? 0 : 1 }}
+              animate={{ opacity: loaded.has(current) ? 0 : 1 }}
               transition={{ duration: 0.55, ease: [0.2, 0, 0, 1] }}
             >
               <div
@@ -89,15 +105,15 @@ export function TheatreCarouselBlock({
             </motion.div>
 
             <img
-              src={photo}
-              alt={`${production} — ${i + 1}`}
+              src={photos[current]}
+              alt={`${production} — ${current + 1}`}
               className="w-full h-full object-cover"
-              loading={i === 0 ? 'eager' : 'lazy'}
+              loading={current === 0 ? 'eager' : 'lazy'}
               draggable={false}
-              onLoad={() => handleLoad(i)}
+              onLoad={() => handleLoad(current)}
             />
-          </div>
-        ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Left arrow */}
         <button
@@ -106,7 +122,7 @@ export function TheatreCarouselBlock({
             absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-20
             w-9 h-9 md:w-10 md:h-10
             flex items-center justify-center
-            bg-warm-dark/50 hover:bg-warm-dark/80
+            bg-warm-dark/50 md:hover:bg-warm-dark/80
             text-cream-100
             transition-all duration-300
             opacity-100 md:opacity-0 md:group-hover:opacity-100
@@ -134,7 +150,7 @@ export function TheatreCarouselBlock({
             absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20
             w-9 h-9 md:w-10 md:h-10
             flex items-center justify-center
-            bg-warm-dark/50 hover:bg-warm-dark/80
+            bg-warm-dark/50 md:hover:bg-warm-dark/80
             text-cream-100
             transition-all duration-300
             opacity-100 md:opacity-0 md:group-hover:opacity-100
@@ -161,11 +177,11 @@ export function TheatreCarouselBlock({
             {photos.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setCurrent(i)}
+                onClick={() => goTo(i, i > current ? 1 : -1)}
                 className={`transition-all duration-300 rounded-full ${
                   i === current
                     ? 'w-5 h-[3px] bg-gold'
-                    : 'w-[5px] h-[5px] bg-cream-100/40 hover:bg-cream-100/70'
+                    : 'w-[5px] h-[5px] bg-cream-100/40 md:hover:bg-cream-100/70'
                 }`}
                 aria-label={`Фото ${i + 1}`}
               />

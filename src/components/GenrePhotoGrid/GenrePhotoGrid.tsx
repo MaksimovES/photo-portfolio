@@ -26,10 +26,12 @@ function PhotoItem({
   const delay = (index % 4) * 0.07
 
   return (
-    <div
+    <motion.div
       ref={ref}
       className="relative z-[10000] aspect-[3/4] overflow-hidden bg-cream-300 cursor-pointer"
       onClick={onClick}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.15, ease: [0.2, 0, 0, 1] }}
     >
       <motion.img
         src={src}
@@ -56,7 +58,7 @@ function PhotoItem({
           />
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
 

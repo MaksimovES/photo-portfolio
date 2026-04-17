@@ -143,15 +143,22 @@ export default function Hero({ isVisible }: HeroProps) {
             Посмотрите на себя моими глазами — и вы увидите, как прекрасны.
           </motion.p>
 
-          {/* Stats — 3-col grid with dividers */}
+          {/* Stats — cards */}
           <motion.div
-            className="grid grid-cols-3 divide-x divide-cream-400 border-t border-b border-cream-400 py-3 md:py-4 mb-5 md:mb-8"
+            className="grid grid-cols-3 gap-3 md:gap-4 mb-5 md:mb-8"
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.86 }}
           >
             {counters.map((c, i) => (
-              <div key={i} className={`flex flex-col gap-1 md:gap-1.5 ${i > 0 ? 'pl-3 md:pl-5' : ''}`}>
+              <motion.div
+                key={i}
+                className="flex flex-col gap-1 md:gap-1.5 rounded-lg md:rounded-xl
+                  bg-cream-200 border border-cream-400 shadow-sm p-3 md:p-5"
+                initial={{ opacity: 0, y: 12 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                transition={{ duration: 0.5, ease: [0.2, 0, 0, 1], delay: 0.96 + i * 0.12 }}
+              >
                 <span
                   className="font-display font-light text-warm-dark leading-none tabular-nums"
                   style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.5rem)' }}
@@ -161,7 +168,7 @@ export default function Hero({ isVisible }: HeroProps) {
                 <span className="font-body text-2xs tracking-[0.12em] text-warm-medium/60 uppercase leading-snug">
                   {c.label}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -174,11 +181,18 @@ export default function Hero({ isVisible }: HeroProps) {
             <a
               href="#cases"
               className="group flex md:inline-flex items-center justify-center md:justify-start gap-4
-                border border-warm-dark/20 hover:border-gold
-                text-warm-dark font-body text-2xs tracking-[0.22em] uppercase
-                px-8 transition-all duration-300 hover:bg-gold/10"
+                 rounded-lg md:rounded-xl bg-cream-200 border border-cream-400 shadow-sm
+                 hover:border-gold hover:shadow-md
+                 text-warm-dark font-body text-2xs tracking-[0.22em] uppercase
+                 px-8 transition-all duration-300 hover:bg-gold/10 shimmer-btn"
               style={{ minHeight: '48px' }}
             >
+              <motion.span
+                className="block h-px bg-gold flex-shrink-0"
+                initial={{ width: 0 }}
+                animate={isVisible ? { width: 24 } : { width: 0 }}
+                transition={{ delay: 1.35, duration: 0.4 }}
+              />
               Направления съёмок
               <motion.span
                 className="block h-px bg-gold flex-shrink-0"

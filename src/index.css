@@ -40,7 +40,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    overscroll-behavior-y: none;
+    overflow-x: hidden;
+    overscroll-behavior: none;
   }
 
   body {
@@ -50,7 +51,7 @@
     font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    overflow-x: hidden;
+    overscroll-behavior: none;
   }
 
   /* Единственное место, отвечающее за sticky-footer layout */
@@ -124,6 +125,26 @@
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  .shimmer-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(201, 169, 110, 0.15) 40%,
+      rgba(201, 169, 110, 0.25) 50%,
+      rgba(201, 169, 110, 0.15) 60%,
+      transparent 100%
+    );
+    animation: shimmer 4.5s var(--ease-smooth) infinite;
+    pointer-events: none;
   }
 
   /* Gold underline animation utility */

@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 import { useScrolled } from '../../hooks/useScrolled'
 import { useIsDesktop } from '../../hooks/useIsDesktop'
 
@@ -8,7 +9,6 @@ interface HeaderProps {
   onMenuToggle: () => void
 }
 
-// Цвет кнопки по состоянию (без CSS-перехода — мгновенно через Framer Motion)
 function getButtonColor(isMenuOpen: boolean, scrolled: boolean) {
   if (isMenuOpen) return '#FAF7F2'
   if (scrolled) return '#F5F0E8'
@@ -18,9 +18,18 @@ function getButtonColor(isMenuOpen: boolean, scrolled: boolean) {
 export default function Header({ isMenuOpen, onMenuToggle }: HeaderProps) {
   const scrolled = useScrolled()
   const isDesktop = useIsDesktop()
+  const prevMenuOpen = useRef(isMenuOpen)
+  const isClosing = prevMenuOpen.current && !isMenuOpen
+
+  useEffect(() => {
+    prevMenuOpen.current = isMenuOpen
+  }, [isMenuOpen])
 
   const isDark = scrolled || isMenuOpen
   const buttonColor = getButtonColor(isMenuOpen, scrolled)
+  const colorTransition = isClosing
+    ? { duration: 0 }
+    : { duration: 0.5, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }
 
   return (
     <header
@@ -36,7 +45,7 @@ export default function Header({ isMenuOpen, onMenuToggle }: HeaderProps) {
       <Link to="/">
         <motion.div
           animate={{ color: buttonColor }}
-          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          transition={colorTransition}
           whileHover={isDesktop ? { color: '#C9A96E' } : undefined}
         >
           <span className="font-display font-light text-2xl md:text-3xl leading-none tracking-[-0.01em]">
@@ -50,7 +59,7 @@ export default function Header({ isMenuOpen, onMenuToggle }: HeaderProps) {
         onClick={onMenuToggle}
         className="flex items-center gap-3 cursor-pointer select-none"
         animate={{ color: buttonColor }}
-        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+        transition={colorTransition}
         whileHover={isDesktop ? { color: '#C9A96E' } : undefined}
         whileTap={isDesktop ? { scale: 0.93 } : undefined}
         aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}

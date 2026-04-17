@@ -217,7 +217,6 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
               {/* Соцсети */}
               <div className="flex items-center justify-center gap-7">
                 {([
-                  { name: 'Instagram', href: 'https://instagram.com/ketrin_maxim' },
                   { name: 'Telegram', href: 'https://t.me/ketrin_maxim' },
                 ] as const).map(({ name, href }) => (
                   <a
@@ -295,7 +294,6 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
 
               <div className="flex items-center gap-6">
                 {([
-                  { name: 'Instagram', href: 'https://instagram.com/ketrin_maxim' },
                   { name: 'Telegram', href: 'https://t.me/ketrin_maxim' },
                 ] as const).map(({ name, href }) => (
                   <motion.a

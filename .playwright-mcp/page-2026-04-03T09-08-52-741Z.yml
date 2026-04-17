@@ -1,0 +1,221 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "Екатерина Максимова" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e6]: Екатерина Максимова
+    - button "Открыть меню" [ref=e7] [cursor=pointer]:
+      - generic [ref=e9]: Меню
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - generic:
+        - generic:
+          - generic: "01"
+          - generic: /
+          - generic: "06"
+      - generic [ref=e18]:
+        - img "Портфолио фотографа" [ref=e23]
+        - generic [ref=e24]:
+          - generic [ref=e27]: Портфолио фотографа
+          - heading "Н е д е л а ю р е т у ш ь п о т о м у ч т о - с В а м и в с ё т а к !" [level=1] [ref=e28]:
+            - generic [ref=e29]:
+              - generic [ref=e31]:
+                - generic [ref=e32]: Н
+                - generic [ref=e33]: е
+              - generic [ref=e35]:
+                - generic [ref=e36]: д
+                - generic [ref=e37]: е
+                - generic [ref=e38]: л
+                - generic [ref=e39]: а
+                - generic [ref=e40]: ю
+              - generic [ref=e42]:
+                - generic [ref=e43]: р
+                - generic [ref=e44]: е
+                - generic [ref=e45]: т
+                - generic [ref=e46]: у
+                - generic [ref=e47]: ш
+                - generic [ref=e48]: ь
+            - generic [ref=e49]:
+              - generic [ref=e51]:
+                - generic [ref=e52]: п
+                - generic [ref=e53]: о
+                - generic [ref=e54]: т
+                - generic [ref=e55]: о
+                - generic [ref=e56]: м
+                - generic [ref=e57]: у
+              - generic [ref=e59]:
+                - generic [ref=e60]: ч
+                - generic [ref=e61]: т
+                - generic [ref=e62]: о
+              - generic [ref=e65]: "-"
+            - generic [ref=e66]:
+              - generic [ref=e69]: с
+              - generic [ref=e71]:
+                - generic [ref=e72]: В
+                - generic [ref=e73]: а
+                - generic [ref=e74]: м
+                - generic [ref=e75]: и
+              - generic [ref=e77]:
+                - generic [ref=e78]: в
+                - generic [ref=e79]: с
+                - generic [ref=e80]: ё
+              - generic [ref=e82]:
+                - generic [ref=e83]: т
+                - generic [ref=e84]: а
+                - generic [ref=e85]: к
+                - generic [ref=e86]: "!"
+          - paragraph [ref=e87]: Ловлю ваши настоящие эмоции и уникальность в каждом кадре. Посмотрите на себя моими глазами — и вы увидите, как прекрасны.
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]: "0"
+              - generic [ref=e91]: историй снято
+            - generic [ref=e92]:
+              - generic [ref=e93]: "0"
+              - generic [ref=e94]: лет в профессии
+            - generic [ref=e95]:
+              - generic [ref=e96]: "0"
+              - generic [ref=e97]: направления
+          - link "Направления съёмок" [ref=e99] [cursor=pointer]:
+            - /url: "#cases"
+            - text: Направления съёмок
+      - heading "Примеры работ" [level=2] [ref=e103]
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - heading "Если ваш запрос звучит как:" [level=2] [ref=e145]
+          - generic [ref=e146]:
+            - paragraph [ref=e147]: — тогда вам ко мне!
+            - link "Записаться" [ref=e148] [cursor=pointer]:
+              - /url: https://t.me/ketrin_maxim
+              - text: Записаться
+        - generic [ref=e151]:
+          - generic: «
+          - generic [ref=e152]:
+            - generic [ref=e153]:
+              - generic [ref=e154]: "01"
+              - paragraph [ref=e155]: «Хочу увидеть себя настоящего»
+            - generic [ref=e156]:
+              - generic [ref=e157]: "02"
+              - paragraph [ref=e158]: «Хочу почувствовать себя уверенее»
+            - generic [ref=e159]:
+              - generic [ref=e160]: "03"
+              - paragraph [ref=e161]: «Хочу запечатлеть важный этап в жизни»
+            - generic [ref=e162]:
+              - generic [ref=e163]: "04"
+              - paragraph [ref=e164]: «Ни разу не был(а) на съёмке, хочу попробовать»
+            - generic [ref=e165]:
+              - generic [ref=e166]: "05"
+              - paragraph [ref=e167]: «Нужны новые снимки для соцсетей»
+            - generic [ref=e168]:
+              - generic [ref=e169]: "06"
+              - paragraph [ref=e170]: «Хочу уделить время себе»
+      - generic [ref=e174]:
+        - heading "Направления" [level=2] [ref=e176]
+        - generic [ref=e178]:
+          - generic [ref=e180] [cursor=pointer]:
+            - generic [ref=e181]: "01"
+            - generic [ref=e183]:
+              - heading "Студийная" [level=3] [ref=e184]
+              - img [ref=e186]
+          - generic [ref=e189] [cursor=pointer]:
+            - generic [ref=e190]: "02"
+            - generic [ref=e192]:
+              - heading "Стрит" [level=3] [ref=e193]
+              - img [ref=e195]
+          - generic [ref=e198] [cursor=pointer]:
+            - generic [ref=e199]: "03"
+            - generic [ref=e201]:
+              - heading "Театр" [level=3] [ref=e202]
+              - img [ref=e204]
+          - generic [ref=e207] [cursor=pointer]:
+            - generic [ref=e208]: "04"
+            - generic [ref=e210]:
+              - heading "Семейная" [level=3] [ref=e211]
+              - img [ref=e213]
+      - generic [ref=e221]:
+        - heading "Отзывы клиентов" [level=2] [ref=e223]:
+          - text: Отзывы
+          - text: клиентов
+        - region "Отзывы клиентов" [ref=e225]:
+          - button "Предыдущий отзыв" [ref=e226] [cursor=pointer]:
+            - generic [ref=e227]: ←
+          - button "Следующий отзыв" [ref=e228] [cursor=pointer]:
+            - generic [ref=e229]: →
+          - generic [ref=e231]:
+            - generic [ref=e233]:
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - generic [ref=e236]: Свадьба
+                  - generic [ref=e237]: Март 2024
+                - paragraph [ref=e238]: “Невероятно атмосферные фотографии! Каждый кадр передаёт настроение нашего дня. Рекомендуем всем парам.”
+              - generic [ref=e241]: Анна и Дмитрий
+            - generic [ref=e244]:
+              - generic [ref=e245]:
+                - generic [ref=e246]:
+                  - generic [ref=e247]: Портрет
+                  - generic [ref=e248]: Февраль 2024
+                - paragraph [ref=e249]: “Долго искала фотографа для бизнес-портрета. Результат превзошёл все ожидания — живые и выразительные снимки.”
+              - generic [ref=e252]: Мария Соколова
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - generic [ref=e257]:
+                  - generic [ref=e258]: Семья
+                  - generic [ref=e259]: Январь 2024
+                - paragraph [ref=e260]: “Замечательная семейная съёмка. Дети не напрягались, всё прошло легко. Снимки бесценны!”
+              - generic [ref=e263]: Семья Петровых
+            - generic [ref=e266]:
+              - generic [ref=e267]:
+                - generic [ref=e268]:
+                  - generic [ref=e269]: Репортаж
+                  - generic [ref=e270]: Декабрь 2023
+                - paragraph [ref=e271]: “Снимал наше корпоративное мероприятие. Все коллеги восхищены результатом. Профессионально.”
+              - generic [ref=e274]: Александр Ковалёв
+          - generic [ref=e276]:
+            - generic [ref=e277]: 1 / 2
+            - tablist "Слайды отзывов" [ref=e278]:
+              - tab "Показать отзывы, шаг 1 из 2" [selected] [ref=e279] [cursor=pointer]
+              - tab "Показать отзывы, шаг 2 из 2" [ref=e280] [cursor=pointer]
+      - generic [ref=e283]:
+        - heading "Частые вопросы" [level=2] [ref=e284]
+        - generic [ref=e285]:
+          - button "Сколько времени занимает фотосессия?" [ref=e288] [cursor=pointer]:
+            - generic [ref=e289]: Сколько времени занимает фотосессия?
+            - generic [ref=e290]: +
+          - button "Когда я получу готовые фотографии?" [ref=e293] [cursor=pointer]:
+            - generic [ref=e294]: Когда я получу готовые фотографии?
+            - generic [ref=e295]: +
+          - button "Можно ли провести съёмку в другом городе?" [ref=e298] [cursor=pointer]:
+            - generic [ref=e299]: Можно ли провести съёмку в другом городе?
+            - generic [ref=e300]: +
+          - button "Как подготовиться к фотосессии?" [ref=e303] [cursor=pointer]:
+            - generic [ref=e304]: Как подготовиться к фотосессии?
+            - generic [ref=e305]: +
+          - button "Какова стоимость съёмки?" [ref=e308] [cursor=pointer]:
+            - generic [ref=e309]: Какова стоимость съёмки?
+            - generic [ref=e310]: +
+  - contentinfo [ref=e312]:
+    - generic [ref=e313]:
+      - generic [ref=e314]:
+        - paragraph [ref=e315]:
+          - text: Ketrin
+          - text: Maxim
+        - paragraph [ref=e316]: Фотограф для тех, кто ценит живые эмоции и настоящие истории.
+      - generic [ref=e317]:
+        - paragraph [ref=e318]: Направления
+        - navigation [ref=e319]:
+          - link "Студийная" [ref=e320] [cursor=pointer]:
+            - /url: /genre/studio
+          - link "Стрит" [ref=e321] [cursor=pointer]:
+            - /url: /genre/street
+          - link "Театр" [ref=e322] [cursor=pointer]:
+            - /url: /genre/theatre
+          - link "Семейная" [ref=e323] [cursor=pointer]:
+            - /url: /genre/family
+      - generic [ref=e324]:
+        - paragraph [ref=e325]: Контакты
+        - generic [ref=e326]:
+          - link "Instagram" [ref=e327] [cursor=pointer]:
+            - /url: https://instagram.com/ketrin_maxim
+          - link "Telegram" [ref=e328] [cursor=pointer]:
+            - /url: https://t.me/ketrin_maxim
+    - generic [ref=e330]:
+      - paragraph [ref=e331]: © 2026 ketrin_maxim. Все права защищены.
+      - paragraph [ref=e334]: Санкт-Петербург — Россия

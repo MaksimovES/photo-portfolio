@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, type PanInfo } from 'framer-motion'
 
 interface LightboxProps {
@@ -16,16 +16,9 @@ const overlay = {
   exit: { opacity: 0 },
 }
 
-export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: LightboxProps) {
+function LightboxContent({ photos, currentIndex, onClose, onChangeIndex }: LightboxProps) {
   const [direction, setDirection] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-  const location = useLocation()
-  const mountPathRef = useRef(location.pathname)
-  const currentPathRef = useRef(location.pathname)
-
-  useEffect(() => {
-    currentPathRef.current = location.pathname
-  }, [location.pathname])
 
   const hasPrev = currentIndex > 0
   const hasNext = currentIndex < photos.length - 1
@@ -44,7 +37,6 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
     }
   }, [currentIndex, hasNext, onChangeIndex])
 
-  // Keyboard navigation
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose()
@@ -55,30 +47,21 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose, goPrev, goNext])
 
-  // Lock body scroll — compensate for scrollbar width to prevent layout shift
   useEffect(() => {
-    const scrollY = window.scrollY
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.left = '0'
-    document.body.style.right = '0'
+    const originalOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
-    document.body.style.paddingRight = `${scrollbarWidth}px`
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`
+    }
     return () => {
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
+      document.documentElement.style.overflow = originalOverflow
       document.body.style.overflow = ''
       document.body.style.paddingRight = ''
-      if (currentPathRef.current === mountPathRef.current) {
-        window.scrollTo(0, scrollY)
-      }
     }
   }, [])
 
-  // Swipe handler
   function handleDragEnd(_: unknown, info: PanInfo) {
     if (info.offset.x > SWIPE_THRESHOLD && info.velocity.x > 0) {
       goPrev()
@@ -87,7 +70,6 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
     }
   }
 
-  // Click on overlay (outside photo) to close
   function handleOverlayClick(e: React.MouseEvent) {
     if (e.target === containerRef.current) onClose()
   }
@@ -96,14 +78,17 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
     enter: (d: number) => ({
       x: d > 0 ? '40%' : '-40%',
       opacity: 0,
+      scale: 0.92,
     }),
     center: {
       x: 0,
       opacity: 1,
+      scale: 1,
     },
     exit: (d: number) => ({
       x: d > 0 ? '-40%' : '40%',
       opacity: 0,
+      scale: 0.95,
     }),
   }
 
@@ -116,20 +101,18 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
       exit="exit"
       transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
     >
-      {/* Dark backdrop */}
       <motion.div
         className="absolute inset-0 bg-warm-dark/95"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.35, ease: [0.2, 0, 0, 1] }}
       />
 
-      {/* Close button */}
       <button
         onClick={onClose}
         className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center
-                   text-cream-200/70 hover:text-cream-100 transition-colors"
+                   text-cream-200/70 md:hover:text-cream-100 transition-colors"
         aria-label="Закрыть"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -137,18 +120,16 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
         </svg>
       </button>
 
-      {/* Counter */}
       <div className="absolute top-4 left-4 z-10 font-body text-xs text-cream-200/50 tracking-[0.15em] select-none">
         {currentIndex + 1} / {photos.length}
       </div>
 
-      {/* Nav arrows — hidden on mobile, visible on md+ */}
       {hasPrev && (
         <button
           onClick={goPrev}
           className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 z-10
                      w-11 h-11 items-center justify-center
-                     text-cream-200/50 hover:text-cream-100 transition-colors"
+                     text-cream-200/50 md:hover:text-cream-100 transition-colors"
           aria-label="Предыдущее фото"
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -161,7 +142,7 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
           onClick={goNext}
           className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-10
                      w-11 h-11 items-center justify-center
-                     text-cream-200/50 hover:text-cream-100 transition-colors"
+                     text-cream-200/50 md:hover:text-cream-100 transition-colors"
           aria-label="Следующее фото"
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -170,7 +151,6 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
         </button>
       )}
 
-      {/* Photo area — click outside closes, swipe navigates */}
       <div
         ref={containerRef}
         className="relative z-[1] flex items-center justify-center w-full h-full px-4 py-16 md:px-20"
@@ -184,7 +164,7 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.35, ease: [0.2, 0, 0, 1] }}
+            transition={{ duration: 0.4, ease: [0.2, 0, 0, 1] }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.15}
@@ -202,4 +182,8 @@ export function Lightbox({ photos, currentIndex, onClose, onChangeIndex }: Light
       </div>
     </motion.div>
   )
+}
+
+export function Lightbox(props: LightboxProps) {
+  return createPortal(<LightboxContent {...props} />, document.body)
 }

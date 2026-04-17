@@ -29,7 +29,7 @@ export default function Footer() {
                 <Link
                   key={genre.slug}
                   to={`/genre/${genre.slug}`}
-                  className="font-body text-[14px] leading-[1.1] text-cream-400 hover:text-gold transition-colors duration-300"
+                  className="font-body text-[14px] leading-[1.1] text-cream-400 md:hover:text-gold transition-colors duration-300"
                 >
                   {genre.label}
                 </Link>
@@ -42,29 +42,6 @@ export default function Footer() {
               Связь
             </p>
             <div className="flex flex-col gap-y-3 items-start">
-              <a
-                href="https://instagram.com/ketrin_maxim"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="group inline-flex items-center gap-2 font-body text-[11px] uppercase tracking-[0.1em] text-cream-400"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-[14px] h-[14px] text-gold/80"
-                  aria-hidden="true"
-                >
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
-                </svg>
-                Instagram
-              </a>
               <a
                 href="https://t.me/ketrin_maxim"
                 target="_blank"
@@ -107,7 +84,7 @@ export default function Footer() {
               <Link
                 key={genre.slug}
                 to={`/genre/${genre.slug}`}
-                className="font-body text-sm text-cream-400 hover:text-gold transition-colors duration-300"
+                className="font-body text-sm text-cream-400 md:hover:text-gold transition-colors duration-300"
               >
                 {genre.label}
               </Link>
@@ -121,34 +98,11 @@ export default function Footer() {
           </p>
           <div className="flex gap-8">
             <a
-              href="https://instagram.com/ketrin_maxim"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="group inline-flex items-center gap-2.5 font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-4 h-4 text-gold/70 group-hover:text-gold transition-colors duration-300"
-                aria-hidden="true"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
-              </svg>
-              Instagram
-            </a>
-            <a
               href="https://t.me/ketrin_maxim"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"
-              className="group inline-flex items-center gap-2.5 font-body text-xs uppercase tracking-widest text-cream-400 hover:text-gold transition-all duration-300"
+              className="group inline-flex items-center gap-2.5 font-body text-xs uppercase tracking-widest text-cream-400 md:hover:text-gold transition-all duration-300"
             >
               <svg
                 viewBox="0 0 24 24"

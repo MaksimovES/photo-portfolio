@@ -1,4 +1,5 @@
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, Navigate, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Typography from '../components/Typography'
 import { getGenreBySlug } from '../utils/genres'
 import { TheatreCarouselBlock } from '../components/TheatreCarousel'
@@ -72,6 +73,37 @@ export default function GenrePage() {
           <GenrePhotoGrid photos={gridPhotos} />
         </section>
       )}
+
+      {/* Back to directions */}
+      <div className="pb-16 md:pb-24 px-6 md:px-14">
+        <div className="max-w-screen-xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link
+              to="/#directions"
+              className="inline-flex items-center gap-3 py-3 group"
+            >
+              <motion.span
+                className="text-gold"
+                animate={{ x: [0, -4, 0] }}
+                transition={{ duration: 1.4, ease: 'easeInOut', repeat: Infinity, repeatDelay: 1.6 }}
+              >
+                <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
+                  <path d="M8 2L3 7L8 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </motion.span>
+              <span className="font-body text-2xs uppercase tracking-[0.22em] text-warm-medium md:group-hover:text-gold transition-colors duration-300">
+                Все направления
+              </span>
+              <span className="h-px w-6 bg-gold/30" />
+            </Link>
+          </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
