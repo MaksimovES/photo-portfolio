@@ -32,8 +32,22 @@ export default function Layout() {
 
   useEffect(() => {
     setMenuOpen(false)
-    window.scrollTo(0, 0)
-  }, [location.pathname])
+    if (!location.hash) window.scrollTo(0, 0)
+  }, [location.pathname, location.hash])
+
+  // Smooth-scroll to #hash target after page transition settles.
+  // Runs on every navigation (location.key changes) so hash links work
+  // both cross-page (e.g. /about → /#cases) and same-page.
+  useEffect(() => {
+    if (!location.hash) return
+    const id = location.hash.slice(1)
+    if (!id) return
+    const timer = window.setTimeout(() => {
+      const el = document.getElementById(id)
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 850)
+    return () => window.clearTimeout(timer)
+  }, [location.key, location.hash])
 
   useEffect(() => {
     if (menuOpen) {
@@ -51,7 +65,7 @@ export default function Layout() {
       <Header isMenuOpen={menuOpen} onMenuToggle={() => setMenuOpen((prev) => !prev)} />
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       <main className="flex-1 flex flex-col">
-        <AnimatePresence mode={isMenuTransition ? 'sync' : 'wait'} onExitComplete={() => window.scrollTo(0, 0)}>
+        <AnimatePresence mode={isMenuTransition ? 'sync' : 'wait'} onExitComplete={() => { if (!location.hash) window.scrollTo(0, 0) }}>
           {outlet ? (
             <motion.div
               key={location.pathname}
