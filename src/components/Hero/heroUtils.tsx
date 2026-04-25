@@ -1,5 +1,5 @@
 import { motion, animate } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 // ─── Animated Counter ────────────────────────────────────────────────────────
 export function AnimatedCounter({
@@ -83,6 +83,7 @@ export function KineticHeading({
 }
 
 // ─── Counters Data ────────────────────────────────────────────────────────────
+// eslint-disable-next-line react-refresh/only-export-components
 export const counters = [
   { to: 127, label: 'историй снято' },
   { to: 8,   label: 'лет в профессии' },
