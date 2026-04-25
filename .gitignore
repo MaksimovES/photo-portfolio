@@ -33,6 +33,13 @@ lerna-debug.log*
 *.sln
 *.sw?
 
+# Shell scripts
+*.sh
+
+# Markdown
+*.md
+!README.md
+
 # OS files
 .DS_Store
 .DS_Store?
