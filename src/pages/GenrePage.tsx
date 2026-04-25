@@ -123,7 +123,7 @@ export default function GenrePage() {
             <div className="shrink-0">
               <div className="flex items-baseline gap-1.5">
                 <span className="font-display text-4xl md:text-5xl text-warm-dark tracking-tight leading-none">
-                  10 000 ₽
+                  от 10 000 ₽
                 </span>
                 <span className="font-body text-xs text-warm-muted">/ час</span>
               </div>
