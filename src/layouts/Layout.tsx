@@ -32,7 +32,7 @@ function BackToTopButton() {
           exit={{ opacity: 0, y: 12 }}
           transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 left-6 md:bottom-10 md:left-10 z-[9998] w-10 h-10 md:w-12 md:h-12
+          className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[9998] w-10 h-10 md:w-12 md:h-12
             flex items-center justify-center
             bg-cream-100/90 backdrop-blur-sm border border-cream-400/60
             text-warm-dark md:hover:text-gold md:hover:border-gold

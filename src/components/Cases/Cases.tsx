@@ -69,20 +69,37 @@ function GenreItem({
               >
                 <div className="pt-5 pb-6 flex flex-col items-start gap-5">
                   <div className="space-y-2">
-                    <p className="font-body text-warm-medium text-sm md:text-base leading-relaxed max-w-xl">
-                      {descriptions[genre.slug] || genre.description}
-                    </p>
-                    <span className="block font-body text-[10px] md:text-xs text-gold tracking-[0.2em] uppercase italic opacity-80">
-                      {details[genre.slug]}
-                    </span>
+                    <div className="overflow-hidden">
+                      <motion.p
+                        className="font-body text-warm-medium text-sm md:text-base leading-relaxed max-w-xl"
+                        initial={{ y: '110%' }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.65, ease: [0.19, 1, 0.22, 1], delay: 0.1 }}
+                      >
+                        {descriptions[genre.slug] || genre.description}
+                      </motion.p>
+                    </div>
+                    <div className="overflow-hidden">
+                      <motion.span
+                        className="block font-body text-[10px] md:text-xs text-gold tracking-[0.2em] uppercase italic opacity-80"
+                        initial={{ y: '110%' }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.55, ease: [0.19, 1, 0.22, 1], delay: 0.2 }}
+                      >
+                        {details[genre.slug]}
+                      </motion.span>
+                    </div>
                   </div>
 
-                  <button
+                  <motion.button
                     onClick={(e) => {
                       e.stopPropagation()
                       navigate(`/genre/${genre.slug}`)
                     }}
                     className="group/btn relative flex items-center gap-3 py-2"
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.45, ease: [0.2, 0, 0, 1], delay: 0.3 }}
                   >
                     <span className="font-body text-[11px] md:text-xs uppercase tracking-[0.3em] text-warm-dark md:group-hover/btn:text-gold transition-colors duration-300">
                       Подробнее
@@ -90,7 +107,7 @@ function GenreItem({
                     <div className="relative w-8 h-px bg-gold/40 md:group-hover/btn:w-12 transition-all duration-500">
                       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-gold" />
                     </div>
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
             )}
