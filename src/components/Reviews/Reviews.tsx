@@ -54,6 +54,27 @@ const reviews: Review[] = [
 
 const GAP_PX = 24
 
+/** Layered radial + linear gradients — site palette only, stable per review id. */
+const REVIEW_AVATAR_GRADIENTS: readonly string[] = [
+  'radial-gradient(ellipse 75% 65% at 25% 15%, #DBBE8A 0%, transparent 68%), radial-gradient(ellipse 60% 70% at 80% 85%, #C47A58 0%, transparent 62%), linear-gradient(140deg, #FAF7F2 0%, #EDE4D8 45%, #C9A96E 100%)',
+  'radial-gradient(ellipse 70% 55% at 70% 25%, #C9A96E 0%, transparent 65%), radial-gradient(ellipse 55% 75% at 20% 75%, #A05C3B 0%, transparent 60%), linear-gradient(165deg, #EDE4D8 0%, #DDD3C7 50%, #8C7B70 100%)',
+  'radial-gradient(ellipse 80% 50% at 50% 10%, #DBBE8A 0%, transparent 70%), radial-gradient(ellipse 65% 80% at 15% 60%, #A07840 0%, transparent 58%), linear-gradient(120deg, #F5F0E8 0%, #C9A96E 55%, #A05C3B 100%)',
+  'radial-gradient(ellipse 60% 80% at 85% 40%, #EDE4D8 0%, transparent 65%), radial-gradient(ellipse 75% 60% at 10% 90%, #6B5A4E 0%, transparent 55%), linear-gradient(200deg, #DDD3C7 0%, #C4B5A8 40%, #8C7B70 100%)',
+]
+
+function ReviewAvatar({ reviewId }: { reviewId: number }) {
+  const gradient =
+    REVIEW_AVATAR_GRADIENTS[(reviewId - 1) % REVIEW_AVATAR_GRADIENTS.length]
+
+  return (
+    <div
+      className="size-12 flex-shrink-0 rounded-full ring-1 ring-gold/25 ring-offset-1 ring-offset-cream-100 shadow-warm-sm"
+      style={{ background: gradient }}
+      aria-hidden="true"
+    />
+  )
+}
+
 interface CardProps {
   review: Review
   className?: string
@@ -83,7 +104,8 @@ function ReviewCard({ review, className = '' }: CardProps) {
         </p>
       </div>
 
-      <div className="flex items-center gap-4 mt-auto w-full min-w-0">
+      <div className="flex items-center gap-3 mt-auto w-full min-w-0">
+        <ReviewAvatar reviewId={review.id} />
         <span className="h-px flex-1 bg-cream-400" />
         <span className="font-display text-warm-dark text-lg flex-shrink min-w-0 truncate">
           {review.name}

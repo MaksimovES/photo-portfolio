@@ -132,6 +132,17 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Easter egg — camera OSD in the corner */}
+      <div className="group/egg pointer-events-none absolute bottom-[calc(0.75rem+env(safe-area-inset-bottom))] right-6 md:right-16 lg:right-24 flex items-center gap-1.5 md:pointer-events-auto">
+        <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+          <span className="absolute -inset-0.5 inline-flex animate-pulse rounded-full bg-terracotta/55" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-terracotta shadow-[0_0_6px_rgba(160,92,59,0.5)]" />
+        </span>
+        <span className="font-body text-[8px] md:text-[8px] tracking-wide text-cream-400/25 md:group-hover/egg:text-gold/60 transition-colors duration-700 ease-out">
+          улыбнитесь, вас снимает скрытая камера :)
+        </span>
+      </div>
     </footer>
   )
 }

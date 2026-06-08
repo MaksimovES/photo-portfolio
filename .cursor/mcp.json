@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "codegraph": {
+      "type": "stdio",
+      "command": "codegraph",
+      "args": [
+        "serve",
+        "--mcp",
+        "--path",
+        "/Users/maksimovjs/Desktop/vs_code/photo_portfolio"
+      ]
+    }
+  }
+}
