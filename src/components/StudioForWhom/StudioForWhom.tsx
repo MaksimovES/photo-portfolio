@@ -7,7 +7,8 @@ const QUOTES = [
   'запечатлеть важный этап в жизни',
   'впервые оказаться на съёмке',
   'обновить снимки для соцсетей',
-  'уделить время себе.',
+  'уделить время себе. ',
+  'Студийная съёмка позволяет сделать акцент на вас, а не на окружении.',
 ]
 
 const TELEGRAM_URL = 'https://t.me/ketrin_maxim'
@@ -71,7 +72,6 @@ export function StudioForWhom() {
         <span className="text-warm-dark">Чаще всего ко мне обращаются, когда хочется: </span>
         {QUOTES.map((quote, i) => (
           <span key={quote}>
-            {i > 0 && (i === QUOTES.length - 1 ? ' или ' : ', ')}
             <span className="text-warm-medium">{quote}</span>
           </span>
         ))}

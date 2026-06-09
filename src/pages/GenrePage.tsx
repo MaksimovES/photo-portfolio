@@ -6,6 +6,7 @@ import { TheatreCarouselBlock } from '../components/TheatreCarousel'
 import { GenrePhotoGrid } from '../components/GenrePhotoGrid'
 import { StudioForWhom } from '../components/StudioForWhom'
 import { StudioTerms } from '../components/StudioTerms'
+import { StreetTerms } from '../components/StreetTerms'
 import { THEATRE_PRODUCTIONS } from '../data/theatreData'
 import { STUDIO_PHOTOS } from '../data/studioData'
 import { STREET_PHOTOS } from '../data/streetData'
@@ -18,6 +19,17 @@ const GENRE_PHOTOS: Record<string, string[]> = {
   family: FAMILY_PHOTOS,
 }
 
+const nbsp = '\u00A0'
+
+const STREET_POINTS = [
+  {
+    text: `Спланируем маршрут по${nbsp}вашим любимым улицам и памятным местам, чтобы кадры отражали вашу историю.`,
+  },
+  {
+    text: `Идеальный формат, чтобы отлично провести время, отдохнуть от${nbsp}суеты и насладиться природой или архитектурой.`,
+  }
+] as const
+
 export default function GenrePage() {
   const { slug } = useParams<{ slug: string }>()
   const genre = slug ? getGenreBySlug(slug) : undefined
@@ -29,6 +41,7 @@ export default function GenrePage() {
 
   const isTheatre = slug === 'theatre'
   const isStudio = slug === 'studio'
+  const isStreet = slug === 'street'
   const gridPhotos = slug ? GENRE_PHOTOS[slug] : undefined
 
   return (
@@ -61,9 +74,21 @@ export default function GenrePage() {
               genre.label
             )}
           </Typography>
-          <Typography variant="h2" className="text-warm-medium text-xl md:text-xl">
-            {genre.description}
-          </Typography>
+          {isStreet ? (
+            <div className="w-full text-left md:text-center space-y-4 md:space-y-5">
+              {STREET_POINTS.map(({ text }) => (
+                <p
+                  className="font-body text-[0.9375rem] sm:text-base md:text-lg leading-[1.65] text-pretty"
+                >
+                  <span className="text-warm-medium">{text}</span>
+                </p>
+              ))}
+            </div>
+          ) : (
+            <Typography variant="h2" className="text-warm-medium text-xl md:text-xl">
+              {genre.description}
+            </Typography>
+          )}
         </div>
 
         {/* Divider */}
@@ -133,6 +158,8 @@ export default function GenrePage() {
 
       {isStudio ? (
         <StudioTerms />
+      ) : isStreet ? (
+        <StreetTerms />
       ) : (
         <section className="pb-16 md:pb-24 px-6 md:px-14">
           <motion.div
