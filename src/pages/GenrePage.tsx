@@ -39,6 +39,12 @@ const STUDIO_POINTS = [
   },
 ] as const
 
+const FAMILY_POINTS = [
+  {
+    text: `Идеальный формат, чтобы провести время с близкими и получить фотографии, которые будут радовать вас спустя${nbsp}годы.`,
+  },
+] as const
+
 export default function GenrePage() {
   const { slug } = useParams<{ slug: string }>()
   const genre = slug ? getGenreBySlug(slug) : undefined
@@ -79,9 +85,9 @@ export default function GenrePage() {
               genre.label
             )}
           </Typography>
-          {isStreet || isStudio ? (
+          {isStreet || isStudio || isFamily ? (
             <div className="w-full text-center space-y-4 md:space-y-5">
-              {(isStreet ? STREET_POINTS : STUDIO_POINTS).map(({ text }) => (
+              {(isStreet ? STREET_POINTS : isStudio ? STUDIO_POINTS : FAMILY_POINTS).map(({ text }) => (
                 <p
                   key={text}
                   className="font-body text-[0.9375rem] sm:text-base md:text-lg leading-[1.65] text-pretty"
