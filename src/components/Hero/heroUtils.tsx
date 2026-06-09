@@ -82,10 +82,38 @@ export function KineticHeading({
   )
 }
 
-// ─── Counters Data ────────────────────────────────────────────────────────────
+// ─── Dash Label ──────────────────────────────────────────────────────────────
+export function DashLabel({ children }: { children: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="block h-px w-8 bg-gold flex-shrink-0" />
+      <span className="font-body text-2xs tracking-[0.35em] text-gold uppercase">
+        {children}
+      </span>
+    </div>
+  )
+}
+
+// ─── Philosophy Blocks Data ──────────────────────────────────────────────────
 // eslint-disable-next-line react-refresh/only-export-components
-export const counters = [
-  { to: 127, label: 'историй снято' },
-  { to: 8,   label: 'лет в профессии' },
-  { to: 4,   label: 'направления' },
+export const philosophyBlocks = [
+  {
+    title: 'Естественность и искренность',
+    textMobile: 'Импровизирую от настроения, музыки и момента — без постановки.',
+    textDesktop:
+      'Не люблю постановочные кадры — импровизирую от вашего настроения, музыки и момента.',
+  },
+  {
+    title: 'Комфорт и бережность',
+    textMobile:
+      'С психологическим образованием создаю атмосферу, где можно расслабиться и быть собой.',
+    textDesktop:
+      'Благодаря образованию в психологии создаю атмосферу, в которой вы расслабляетесь и остаётесь собой.',
+  },
+  {
+    title: 'Живые эмоции',
+    textMobile: 'Не прошу позировать — даю задания, раскрывающие естественность и движение.',
+    textDesktop:
+      'Не прошу позировать — даю небольшие задания, которые раскрывают естественность и органичное движение.',
+  },
 ]
