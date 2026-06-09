@@ -25,7 +25,7 @@ export default function Hero({ isVisible }: HeroProps) {
 
         {/* ══════════════════════════════════════════════════
             MOBILE PHOTO PANEL
-            Full-bleed crop + gradient scrim for slogan/description
+            Editorial card: clean photo + dedicated text zone below
         ══════════════════════════════════════════════════ */}
         <div className="md:hidden order-1 flex flex-col min-h-0 px-6">
           <motion.div
@@ -39,62 +39,76 @@ export default function Hero({ isVisible }: HeroProps) {
 
           <div
             className="relative w-full flex-shrink-0 rounded-lg border border-gold/30
-              bg-cream-200 p-1.5 shadow-warm-sm"
+              bg-cream-200 p-1.5 shadow-warm-sm overflow-hidden"
           >
-            <div className="relative w-full h-[44dvh] overflow-hidden rounded-[5px]">
-            <motion.img
-              src="/main-page/1test.JPG"
-              alt="Портфолио фотографа"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-              loading="eager"
-              initial={{ scale: 1.1 }}
-              animate={isVisible ? { scale: 1.05 } : { scale: 1.1 }}
-              transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
-            />
+            <div className="relative w-full h-[40dvh] overflow-hidden rounded-[5px]">
+              <motion.img
+                src="/main-page/1test.JPG"
+                alt="Портфолио фотографа"
+                className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
+                loading="eager"
+                initial={{ scale: 1.1 }}
+                animate={isVisible ? { scale: 1.05 } : { scale: 1.1 }}
+                transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
+              />
+            </div>
 
-            <div
-              className="absolute inset-x-0 bottom-0 h-[52%] pointer-events-none
-                bg-gradient-to-t from-cream-100 from-25% via-cream-100 via-55% to-cream-100/0"
-              aria-hidden
-            />
-
-            <div
-              className="absolute inset-x-0 bottom-0 h-[52%]
-                flex flex-col justify-end pb-3 gap-2"
+            <motion.div
+              className="relative px-4 pt-5 pb-5 flex flex-col gap-4"
+              initial={{ opacity: 0, y: 16 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.45 }}
             >
+              <span
+                className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-gold/45 to-transparent"
+                aria-hidden
+              />
+
               <h1
-                className="font-display font-light text-warm-dark leading-[1.06] tracking-[-0.03em]
-                  max-w-[min(100%,36ch)]
-                  [text-shadow:0_1px_0_#FAF7F2,0_2px_20px_rgba(250,247,242,0.85)]"
-                style={{ fontSize: 'clamp(1.625rem, 4.8vw, 4.5rem)' }}
+                className="font-display font-light text-warm-dark leading-[1.1] tracking-[-0.025em]"
+                style={{ fontSize: 'clamp(1.375rem, 5.2vw, 1.75rem)' }}
               >
-                <span className="block">
+                <span className="block text-warm-dark/90">
                   <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
                 </span>
-                <span className="block">
-                  <KineticHeading text="потому что с вами " isVisible={isVisible} delay={0.4} />
+                <span className="block mt-1 text-warm-dark/90">
+                  <KineticHeading text="потому что с вами" isVisible={isVisible} delay={0.35} />
+                </span>
+                <span
+                  className="block mt-2"
+                  style={{ fontSize: 'clamp(1.625rem, 6.5vw, 2.125rem)' }}
+                >
                   <KineticHeading
                     text="всё так!"
                     isVisible={isVisible}
-                    delay={0.55}
+                    delay={0.52}
                     className="italic text-gold-deep font-normal"
                   />
                 </span>
               </h1>
 
+              <div className="flex items-center gap-2.5" aria-hidden>
+                <span className="block h-px w-6 bg-gold/55 flex-shrink-0" />
+                <span className="block h-1 w-1 rounded-full bg-gold/50 flex-shrink-0" />
+                <span className="block h-px flex-1 bg-gold/25" />
+              </div>
+
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-                transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 0.72 }}
               >
-                <HeroLead className="max-w-[44ch] border-l-0 pl-0 text-warm-dark">
-                  Я верю, что настоящая красота — в естественности.
-                  Моя задача уловить вашу уникальность, эмоции
-                  и мимолётные движения, которые делают вас собой.
+                <HeroLead className="text-warm-medium leading-[1.65] text-[0.8125rem]">
+                  <span className="block text-warm-dark">
+                    Я верю, что настоящая красота — в естественности.
+                  </span>
+                  <span className="block mt-2">
+                    Моя задача уловить вашу уникальность, эмоции
+                    и мимолётные движения, которые делают вас собой.
+                  </span>
                 </HeroLead>
               </motion.div>
-            </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
@@ -180,7 +194,7 @@ export default function Hero({ isVisible }: HeroProps) {
         <div
           className="flex flex-col flex-1 justify-start md:justify-start lg:justify-center order-2 md:order-1
             px-6 md:px-7 lg:px-9
-            pt-4 pb-8 md:pt-10 md:pb-10 lg:py-14 min-w-0
+            pt-6 pb-8 md:pt-10 md:pb-10 lg:py-14 min-w-0
             md:-translate-y-[5%]"
         >
 

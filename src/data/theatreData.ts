@@ -82,45 +82,79 @@ const triSestry: TheatreProduction = {
 
 // ─── 05 ──────────────────────────────────────────────────────────────────────
 const gorki10: TheatreProduction = {
-  director: 'Дмитрий Крымов',
-  production: 'Горки-10',
-  photos: ph('g10'),
+  director: '',
+  production: 'Новая сцена Александринского театра: Электрик.А',
+  photos: [
+    '/directions/theathre/5/1.JPG',
+    '/directions/theathre/5/2.JPG',
+    '/directions/theathre/5/3.JPG',
+    '/directions/theathre/5/4.JPG',
+    '/directions/theathre/5/5.JPG',
+    '/directions/theathre/5/6.JPG',
+    '/directions/theathre/5/7.JPG',
+  ],
 }
 
 // ─── 06 ──────────────────────────────────────────────────────────────────────
 const zhiznISudba: TheatreProduction = {
-  director: 'Лев Додин',
-  production: 'Жизнь и судьба',
-  photos: ph('zhs'),
+  director: '',
+  production: 'Театр на Васильевском: Дуэль',
+  photos: [
+    '/directions/theathre/6/1.JPG',
+    '/directions/theathre/6/2.JPG',
+    '/directions/theathre/6/3.JPG',
+    '/directions/theathre/6/4.JPG',
+    '/directions/theathre/6/5.JPG',
+    '/directions/theathre/6/6.JPG',
+    '/directions/theathre/6/7.JPG',
+  ],
 }
 
 // ─── 07 ──────────────────────────────────────────────────────────────────────
 const idealnyMuzh: TheatreProduction = {
-  director: 'Константин Богомолов',
-  production: 'Идеальный муж',
-  photos: ph('im'),
+  director: '',
+  production: 'Decki: Women`s gym',
+  photos: [
+    '/directions/theathre/7/1.JPG',
+    '/directions/theathre/7/2.JPG',
+    '/directions/theathre/7/3.JPG',
+    '/directions/theathre/7/4.JPG',
+    '/directions/theathre/7/5.JPG',
+    '/directions/theathre/7/6.JPG',
+    '/directions/theathre/7/7.JPG',
+  ],
 }
 
 // ─── 08 ──────────────────────────────────────────────────────────────────────
 const evgeniyOnegin: TheatreProduction = {
-  director: 'Римас Туминас',
-  production: 'Евгений Онегин',
-  photos: ph('eo'),
+  director: '',
+  production: 'Новая сцена Александринского театра: Нирвана',
+  photos: [
+    '/directions/theathre/8/1.JPG',
+    '/directions/theathre/8/2.JPG',
+    '/directions/theathre/8/3.JPG',
+    '/directions/theathre/8/4.JPG',
+    '/directions/theathre/8/5.JPG',
+    '/directions/theathre/8/6.JPG',
+    '/directions/theathre/8/7.JPG',
+  ],
 }
 
 // ─── 09 ──────────────────────────────────────────────────────────────────────
 const maskarad: TheatreProduction = {
-  director: 'Валерий Фокин',
-  production: 'Маскарад',
-  photos: ph('mk'),
+  director: '',
+  production: 'Невидимый театр: Любовь людей',
+  photos: [
+    '/directions/theathre/9/1.JPG',
+    '/directions/theathre/9/2.JPG',
+    '/directions/theathre/9/3.JPG',
+    '/directions/theathre/9/4.JPG',
+    '/directions/theathre/9/5.JPG',
+    '/directions/theathre/9/6.JPG',
+    '/directions/theathre/9/7.JPG',
+  ],
 }
 
-// ─── 10 ──────────────────────────────────────────────────────────────────────
-const belayaGvardiya: TheatreProduction = {
-  director: 'Сергей Женовач',
-  production: 'Белая гвардия',
-  photos: ph('bg'),
-}
 
 // ─── Итоговый список (порядок = порядок на странице) ─────────────────────────
 export const THEATRE_PRODUCTIONS: TheatreProduction[] = [
@@ -133,5 +167,4 @@ export const THEATRE_PRODUCTIONS: TheatreProduction[] = [
   idealnyMuzh,
   evgeniyOnegin,
   maskarad,
-  belayaGvardiya,
 ]
