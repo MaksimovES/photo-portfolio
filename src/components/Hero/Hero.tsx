@@ -12,7 +12,7 @@ export default function Hero({ isVisible }: HeroProps) {
       style={{ paddingTop: 'var(--header-height)' }}
     >
       <div
-        className="flex flex-col md:grid md:grid-cols-[42fr_58fr]"
+        className="flex flex-col md:grid md:grid-cols-[54fr_46fr]"
         style={{ minHeight: 'calc(100dvh - var(--header-height))' }}
       >
 
@@ -24,45 +24,48 @@ export default function Hero({ isVisible }: HeroProps) {
         <div
           className="relative order-1 md:order-2
             h-[38dvh] md:h-[calc(100dvh_-_var(--header-height))]
-            flex items-stretch"
+            flex items-center justify-center
+            p-4 md:p-6 lg:p-8 min-h-0"
         >
-          {/* Offset shadow border — gives depth */}
-          <motion.div
-            className="absolute inset-4 md:inset-6 lg:inset-8 translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4
-              border border-gold/35 pointer-events-none z-0"
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 1.2, duration: 0.7, ease: [0.2, 0, 0, 1] }}
-          />
-
-          {/* Photo container */}
-          <div className="relative flex-1 m-4 md:m-6 lg:m-8 overflow-hidden bg-cream-200">
-            {/* Shutter curtain */}
+          <div className="relative max-h-full max-w-full">
+            {/* Offset shadow border — hugs photo frame */}
             <motion.div
-              className="absolute inset-0 z-20 bg-cream-300 origin-top"
-              initial={{ scaleY: 1 }}
-              animate={isVisible ? { scaleY: 0 } : { scaleY: 1 }}
-              transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-            />
-
-            {/* Photo with Ken-Burns */}
-            <motion.img
-              src="https://picsum.photos/seed/portfolio/600/800"
-              alt="Портфолио фотографа"
-              className="absolute inset-0 w-full h-full object-contain"
-              loading="eager"
-              initial={{ scale: 1.07 }}
-              animate={isVisible ? { scale: 1 } : { scale: 1.07 }}
-              transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
-            />
-
-            {/* Corner accents */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none z-10"
+              className="absolute inset-0 translate-x-2 translate-y-2 md:translate-x-3 md:translate-y-3
+                border border-gold/35 rounded-xl pointer-events-none z-0"
               initial={{ opacity: 0 }}
               animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 1.3, duration: 0.4 }}
-            >
+              transition={{ delay: 1.2, duration: 0.7, ease: [0.2, 0, 0, 1] }}
+            />
+
+            {/* Photo frame — 15px padding around image */}
+            <div className="relative p-[15px] bg-cream-200 rounded-xl">
+              <div className="relative overflow-hidden rounded-lg leading-none">
+                {/* Shutter curtain */}
+                <motion.div
+                  className="absolute inset-0 z-20 bg-cream-300 origin-top rounded-lg"
+                  initial={{ scaleY: 1 }}
+                  animate={isVisible ? { scaleY: 0 } : { scaleY: 1 }}
+                  transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
+                />
+
+                {/* Photo with Ken-Burns */}
+                <motion.img
+                  src="/main-page/1test.JPG"
+                  alt="Портфолио фотографа"
+                  className="block max-h-[calc(38dvh-4rem-30px)] md:max-h-[calc(100dvh-var(--header-height)-6rem-30px)] lg:max-h-[calc(100dvh-var(--header-height)-8rem-30px)] max-w-full w-auto h-auto rounded-lg"
+                  loading="eager"
+                  initial={{ scale: 1.07 }}
+                  animate={isVisible ? { scale: 1 } : { scale: 1.07 }}
+                  transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
+                />
+
+                {/* Corner accents */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none z-10 rounded-lg"
+                  initial={{ opacity: 0 }}
+                  animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: 1.3, duration: 0.4 }}
+                >
               {/* top-left */}
               <motion.span className="absolute top-0 left-0 block h-px bg-gold"
                 initial={{ width: 0 }} animate={isVisible ? { width: 22 } : { width: 0 }}
@@ -91,7 +94,9 @@ export default function Hero({ isVisible }: HeroProps) {
               <motion.span className="absolute bottom-0 right-0 block w-px bg-gold/50"
                 initial={{ height: 0 }} animate={isVisible ? { height: 22 } : { height: 0 }}
                 transition={{ delay: 1.75, duration: 0.4, ease: [0.2, 0, 0, 1] }} />
-            </motion.div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -102,8 +107,8 @@ export default function Hero({ isVisible }: HeroProps) {
         ══════════════════════════════════════════════════ */}
         <div
           className="flex flex-col justify-start md:justify-center order-2 md:order-1
-            px-6 md:px-10 lg:px-14
-            pt-6 pb-8 md:py-16"
+            px-4 md:px-7 lg:px-9
+            pt-6 pb-8 md:py-16 min-w-0"
         >
 
           {/* Label */}
@@ -121,14 +126,16 @@ export default function Hero({ isVisible }: HeroProps) {
 
           {/* Title with KineticHeading */}
           <h1
-            className="font-display font-light text-warm-dark leading-[1.03] tracking-[-0.03em] mb-4 md:mb-6"
-            style={{ fontSize: 'clamp(2rem, 5.2vw, 4.5rem)' }}
+            className="relative z-10 font-display font-light text-warm-dark leading-[1.03] tracking-[-0.03em] mb-4 md:mb-6 max-w-none md:mr-[-2.5rem] lg:mr-[-4rem]"
+            style={{ fontSize: 'clamp(1.625rem, 4.8vw, 4.5rem)' }}
           >
-            <KineticHeading text="Не делаю ретушь" isVisible={isVisible} delay={0.15} />
-            <br />
-            <KineticHeading text="потому что —" isVisible={isVisible} delay={0.4} />
-            <br />
-            <KineticHeading text="с Вами всё так!" isVisible={isVisible} delay={0.6} className="text-gold" />
+            <span className="block whitespace-nowrap">
+              <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
+            </span>
+            <span className="block whitespace-nowrap">
+              <KineticHeading text="потому что с вами " isVisible={isVisible} delay={0.4} />
+              <KineticHeading text="всё так!" isVisible={isVisible} delay={0.55} className="text-gold" />
+            </span>
           </h1>
 
           {/* Description */}
@@ -139,8 +146,9 @@ export default function Hero({ isVisible }: HeroProps) {
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
           >
-            Ловлю ваши настоящие эмоции и уникальность в каждом кадре.
-            Посмотрите на себя моими глазами — и вы увидите, как прекрасны.
+            Я верю, что настоящая красота — в естественности.
+            Моя задача — уловить вашу уникальность, эмоции, 
+            и мимолётные движения, которые делают вас собой.
           </motion.p>
 
           {/* Stats — cards */}

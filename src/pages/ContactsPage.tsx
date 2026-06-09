@@ -501,8 +501,8 @@ function MobileContactsLayout() {
           animate="visible"
           className="mt-5 font-body text-warm-medium text-sm leading-relaxed"
         >
-          С радостью обсудим съёмку — напишите в Telegram.{' '}
-          <span className="font-display italic text-warm-dark/80">
+          С радостью обсудим съёмку — напишите в Telegram.
+          <span className="mt-1 block font-display italic text-warm-dark/80">
             Направление ниже — текст уже готов.
           </span>
         </motion.p>
