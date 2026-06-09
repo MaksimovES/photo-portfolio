@@ -65,5 +65,8 @@ rec.md
 # AI assistant config — local only
 CLAUDE.md
 
+# Archived components (not in production)
+src/_archive/
+
 #photo
 /photos/*

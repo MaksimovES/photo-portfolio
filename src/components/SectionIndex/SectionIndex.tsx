@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-const SECTIONS = ['hero', 'directions', 'forwhom', 'cases', 'reviews', 'faq']
+const SECTIONS = ['hero', 'directions', 'cases', 'reviews', 'faq']
 const TOTAL = SECTIONS.length
 
 const pad = (n: number) => String(n).padStart(2, '0')
