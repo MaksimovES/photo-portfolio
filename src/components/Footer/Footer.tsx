@@ -71,7 +71,7 @@ export default function Footer() {
             Ketrin <br /> Maxim
           </p>
           <p className="font-body text-sm text-warm-muted leading-relaxed max-w-xs">
-            Фотограф для тех, кто ценит живые эмоции и настоящие истории.
+          Меньше позирования. Больше жизни.
           </p>
         </div>
 
