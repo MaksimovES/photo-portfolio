@@ -22,7 +22,7 @@ function ph(seed: string): string[] {
 }
 
 // ─── 01 ──────────────────────────────────────────────────────────────────────
-const masterMargarita: TheatreProduction = {
+const lesAveugles: TheatreProduction = {
   director: '',
   production: 'Attaque de panique: Les Aveugles',
   photos: [
@@ -36,7 +36,7 @@ const masterMargarita: TheatreProduction = {
 }
 
 // ─── 02 ──────────────────────────────────────────────────────────────────────
-const chayka: TheatreProduction = {
+const zemletryasenie: TheatreProduction = {
   director: '',
   production: 'MusicAeterna Dance: Землетрясение',
   photos: [
@@ -51,7 +51,7 @@ const chayka: TheatreProduction = {
 }
 
 // ─── 03 ──────────────────────────────────────────────────────────────────────
-const groza: TheatreProduction = {
+const zhestyanoyBaraban: TheatreProduction = {
   director: '',
   production: 'Узел: Жестяной барабан',
   photos: [
@@ -66,7 +66,7 @@ const groza: TheatreProduction = {
 }
 
 // ─── 04 ──────────────────────────────────────────────────────────────────────
-const triSestry: TheatreProduction = {
+const skazkaOCareStakane: TheatreProduction = {
   director: '',
   production: 'ШУМ: Сказка о царе стакане',
   photos: [
@@ -81,7 +81,7 @@ const triSestry: TheatreProduction = {
 }
 
 // ─── 05 ──────────────────────────────────────────────────────────────────────
-const gorki10: TheatreProduction = {
+const elektrikA: TheatreProduction = {
   director: '',
   production: 'Новая сцена Александринского театра: Электрик.А',
   photos: [
@@ -96,7 +96,7 @@ const gorki10: TheatreProduction = {
 }
 
 // ─── 06 ──────────────────────────────────────────────────────────────────────
-const zhiznISudba: TheatreProduction = {
+const duel: TheatreProduction = {
   director: '',
   production: 'Театр на Васильевском: Дуэль',
   photos: [
@@ -111,7 +111,7 @@ const zhiznISudba: TheatreProduction = {
 }
 
 // ─── 07 ──────────────────────────────────────────────────────────────────────
-const idealnyMuzh: TheatreProduction = {
+const womensGym: TheatreProduction = {
   director: '',
   production: 'Decki: Women`s gym',
   photos: [
@@ -126,7 +126,7 @@ const idealnyMuzh: TheatreProduction = {
 }
 
 // ─── 08 ──────────────────────────────────────────────────────────────────────
-const evgeniyOnegin: TheatreProduction = {
+const nirvana: TheatreProduction = {
   director: '',
   production: 'Новая сцена Александринского театра: Нирвана',
   photos: [
@@ -141,7 +141,7 @@ const evgeniyOnegin: TheatreProduction = {
 }
 
 // ─── 09 ──────────────────────────────────────────────────────────────────────
-const maskarad: TheatreProduction = {
+const lyubovLyudey: TheatreProduction = {
   director: '',
   production: 'Невидимый театр: Любовь людей',
   photos: [
@@ -158,13 +158,13 @@ const maskarad: TheatreProduction = {
 
 // ─── Итоговый список (порядок = порядок на странице) ─────────────────────────
 export const THEATRE_PRODUCTIONS: TheatreProduction[] = [
-  masterMargarita,
-  chayka,
-  groza,
-  triSestry,
-  gorki10,
-  zhiznISudba,
-  idealnyMuzh,
-  evgeniyOnegin,
-  maskarad,
+  lesAveugles,
+  zemletryasenie,
+  zhestyanoyBaraban,
+  skazkaOCareStakane,
+  elektrikA,
+  duel,
+  womensGym,
+  nirvana,
+  lyubovLyudey,
 ]

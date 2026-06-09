@@ -9,7 +9,7 @@ export interface Genre {
 export const GENRES: Genre[] = [
   {
     slug: 'studio',
-    label: 'Студийная',
+    label: 'Персональная съемка в студии',
     labelEn: 'Studio',
     number: '01',
     description: 'Портретный и телесный формат',

@@ -4,6 +4,7 @@ import Typography from '../components/Typography'
 import { getGenreBySlug } from '../utils/genres'
 import { TheatreCarouselBlock } from '../components/TheatreCarousel'
 import { GenrePhotoGrid } from '../components/GenrePhotoGrid'
+import { StudioForWhom } from '../components/StudioForWhom'
 import { THEATRE_PRODUCTIONS } from '../data/theatreData'
 import { STUDIO_PHOTOS } from '../data/studioData'
 import { STREET_PHOTOS } from '../data/streetData'
@@ -26,18 +27,38 @@ export default function GenrePage() {
   }
 
   const isTheatre = slug === 'theatre'
+  const isStudio = slug === 'studio'
   const gridPhotos = slug ? GENRE_PHOTOS[slug] : undefined
 
   return (
     <div className="flex-1 flex flex-col">
       {/* Hero section */}
-      <section className="flex flex-col items-center justify-center px-8 pt-32 pb-20">
-        <div className="text-center space-y-6 max-w-2xl">
+      <section
+        className={`
+          flex flex-col items-center px-6 md:px-8
+          ${isStudio
+            ? 'justify-start md:justify-center pt-[5.25rem] pb-4 md:pt-32 md:pb-20 min-h-[calc(100dvh-var(--header-height)-10dvh)] md:min-h-0'
+            : 'justify-center pt-32 pb-20'}
+        `}
+      >
+        <div className={`text-center max-w-2xl ${isStudio ? 'space-y-3 md:space-y-6' : 'space-y-6'}`}>
           <Typography variant="label" className="text-gold tracking-[0.3em]">
             {genre.number} — {genre.labelEn}
           </Typography>
-          <Typography variant="h2" className="text-warm-dark md:text-5xl">
-            {genre.label}
+          <Typography
+            variant="h2"
+            className={`text-warm-dark md:text-5xl ${isStudio ? 'text-2xl' : ''}`}
+          >
+            {isStudio ? (
+              <>
+                Персональная съемка
+                <span className="md:hidden"> в студии</span>
+                <br className="hidden md:block" />
+                <span className="hidden md:block">в студии</span>
+              </>
+            ) : (
+              genre.label
+            )}
           </Typography>
           <Typography variant="h2" className="text-warm-medium text-xl md:text-xl">
             {genre.description}
@@ -45,11 +66,13 @@ export default function GenrePage() {
         </div>
 
         {/* Divider */}
-        <div className="flex items-center gap-4 pt-8">
+        <div className={`flex items-center gap-4 ${isStudio ? 'pt-4 md:pt-8' : 'pt-8'}`}>
           <span className="h-px w-16 bg-gold/30" />
           <span className="w-1.5 h-1.5 rounded-full bg-gold/50" />
           <span className="h-px w-16 bg-gold/30" />
         </div>
+
+        {isStudio && <StudioForWhom />}
       </section>
 
       {/* Theatre: carousel blocks */}
@@ -71,8 +94,8 @@ export default function GenrePage() {
 
       {/* Other genres: photo grid */}
       {!isTheatre && gridPhotos && (
-        <section className="pb-10 md:pb-32">
-          <GenrePhotoGrid photos={gridPhotos} />
+        <section className={`pb-10 md:pb-32 ${isStudio ? 'md:pt-0' : ''}`}>
+          <GenrePhotoGrid photos={gridPhotos} hideHeaderOnMobile={isStudio} />
         </section>
       )}
 
