@@ -194,16 +194,6 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
               {/* Навигация */}
               <div className="flex items-center justify-center gap-7">
                 <button
-                  onClick={() => handleNavClick('/about')}
-                  className="flex items-center gap-2.5 px-2 py-1.5 cursor-pointer"
-                >
-                  <span className="h-px w-6 bg-gold/40 block" />
-                  <span className="font-body text-[13px] tracking-[0.16em] uppercase text-cream-400">
-                    Обо мне
-                  </span>
-                </button>
-
-                <button
                   onClick={() => handleNavClick('/contacts')}
                   className="flex items-center gap-2.5 px-2 py-1.5 cursor-pointer"
                 >
@@ -235,34 +225,6 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
             {/* Десктопная раскладка: в строку */}
             <div className="hidden md:flex items-end justify-between">
               <div className="flex items-center gap-8">
-                <motion.button
-                  onClick={() => handleNavClick('/about')}
-                  className="flex items-center gap-3 cursor-pointer"
-                  whileHover="hovered"
-                  initial="idle"
-                >
-                  <motion.span
-                    className="h-px bg-gold/40 block"
-                    variants={{
-                      idle: { width: 32 },
-                      hovered: { width: 52, transition: { duration: 0.3, ease: [0.2, 0, 0, 1] } },
-                    }}
-                  />
-                  <motion.span
-                    className="font-body text-sm tracking-[0.15em] uppercase text-cream-400"
-                    variants={{
-                      idle: { color: '#C4B5A8', x: 0 },
-                      hovered: {
-                        color: '#C9A96E',
-                        x: 4,
-                        transition: { duration: 0.3, ease: [0.2, 0, 0, 1] },
-                      },
-                    }}
-                  >
-                    Обо мне
-                  </motion.span>
-                </motion.button>
-
                 <motion.button
                   onClick={() => handleNavClick('/contacts')}
                   className="flex items-center gap-3 cursor-pointer"

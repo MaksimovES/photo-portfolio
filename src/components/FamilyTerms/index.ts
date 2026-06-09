@@ -1,0 +1,1 @@
+export { FamilyTerms } from './FamilyTerms'

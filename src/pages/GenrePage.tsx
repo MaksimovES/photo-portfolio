@@ -4,9 +4,9 @@ import Typography from '../components/Typography'
 import { getGenreBySlug } from '../utils/genres'
 import { TheatreCarouselBlock } from '../components/TheatreCarousel'
 import { GenrePhotoGrid } from '../components/GenrePhotoGrid'
-import { StudioForWhom } from '../components/StudioForWhom'
 import { StudioTerms } from '../components/StudioTerms'
 import { StreetTerms } from '../components/StreetTerms'
+import { FamilyTerms } from '../components/FamilyTerms'
 import { THEATRE_PRODUCTIONS } from '../data/theatreData'
 import { STUDIO_PHOTOS } from '../data/studioData'
 import { STREET_PHOTOS } from '../data/streetData'
@@ -27,7 +27,16 @@ const STREET_POINTS = [
   },
   {
     text: `Идеальный формат, чтобы отлично провести время, отдохнуть от${nbsp}суеты и насладиться природой или архитектурой.`,
-  }
+  },
+] as const
+
+const STUDIO_POINTS = [
+  {
+    text: `Чаще всего ко мне обращаются, когда хочется: увидеть себя настоящего, почувствовать себя увереннее, запечатлеть важный этап в${nbsp}жизни, впервые оказаться на${nbsp}съёмке, обновить снимки для${nbsp}соцсетей, уделить время себе.`,
+  },
+  {
+    text: `Студийная съёмка позволяет сделать акцент на${nbsp}вас, а${nbsp}не на${nbsp}окружении.`,
+  },
 ] as const
 
 export default function GenrePage() {
@@ -42,18 +51,14 @@ export default function GenrePage() {
   const isTheatre = slug === 'theatre'
   const isStudio = slug === 'studio'
   const isStreet = slug === 'street'
+  const isFamily = slug === 'family'
   const gridPhotos = slug ? GENRE_PHOTOS[slug] : undefined
 
   return (
     <div className="flex-1 flex flex-col">
       {/* Hero section */}
       <section
-        className={`
-          flex flex-col items-center px-6 md:px-8
-          ${isStudio
-            ? 'justify-start md:justify-center pt-[5.25rem] pb-4 md:pt-32 md:pb-20 min-h-[calc(100dvh-var(--header-height)-10dvh)] md:min-h-0'
-            : 'justify-center pt-32 pb-20'}
-        `}
+        className="flex flex-col items-center justify-center px-6 md:px-8 pt-[5.25rem] md:pt-32 pb-4 md:pb-20"
       >
         <div className={`text-center max-w-2xl ${isStudio ? 'space-y-3 md:space-y-6' : 'space-y-6'}`}>
           <Typography variant="label" className="text-gold tracking-[0.3em]">
@@ -74,10 +79,11 @@ export default function GenrePage() {
               genre.label
             )}
           </Typography>
-          {isStreet ? (
-            <div className="w-full text-left md:text-center space-y-4 md:space-y-5">
-              {STREET_POINTS.map(({ text }) => (
+          {isStreet || isStudio ? (
+            <div className="w-full text-center space-y-4 md:space-y-5">
+              {(isStreet ? STREET_POINTS : STUDIO_POINTS).map(({ text }) => (
                 <p
+                  key={text}
                   className="font-body text-[0.9375rem] sm:text-base md:text-lg leading-[1.65] text-pretty"
                 >
                   <span className="text-warm-medium">{text}</span>
@@ -92,13 +98,12 @@ export default function GenrePage() {
         </div>
 
         {/* Divider */}
-        <div className={`flex items-center gap-4 ${isStudio ? 'pt-4 md:pt-8' : 'pt-8'}`}>
+        <div className="flex items-center gap-4 pt-4 md:pt-8">
           <span className="h-px w-16 bg-gold/30" />
           <span className="w-1.5 h-1.5 rounded-full bg-gold/50" />
           <span className="h-px w-16 bg-gold/30" />
         </div>
 
-        {isStudio && <StudioForWhom />}
       </section>
 
       {/* Theatre: carousel blocks */}
@@ -120,8 +125,8 @@ export default function GenrePage() {
 
       {/* Other genres: photo grid */}
       {!isTheatre && gridPhotos && (
-        <section className={`pb-10 md:pb-32 ${isStudio ? 'md:pt-0' : ''}`}>
-          <GenrePhotoGrid photos={gridPhotos} hideHeaderOnMobile={isStudio} />
+        <section className="pb-10 md:pb-32">
+          <GenrePhotoGrid photos={gridPhotos} />
         </section>
       )}
 
@@ -160,6 +165,8 @@ export default function GenrePage() {
         <StudioTerms />
       ) : isStreet ? (
         <StreetTerms />
+      ) : isFamily ? (
+        <FamilyTerms />
       ) : (
         <section className="pb-16 md:pb-24 px-6 md:px-14">
           <motion.div
