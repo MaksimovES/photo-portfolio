@@ -1,30 +1,8 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { MAIN_PAGE_WORK_PHOTOS } from '@/data/mainPageData'
 
-interface PhotoCard {
-  id: number
-  label: string
-  genre: string
-  fromColor: string
-  toColor: string
-}
-
-const photos: PhotoCard[] = [
-  { id: 1,  label: '001', genre: 'Свадьба',    fromColor: '#F5F0E8', toColor: '#C4B5A8' },
-  { id: 2,  label: '002', genre: 'Портрет',    fromColor: '#EDE4D8', toColor: '#DDD3C7' },
-  { id: 3,  label: '003', genre: 'Репортаж',   fromColor: '#DDD3C7', toColor: '#C4B5A8' },
-  { id: 4,  label: '004', genre: 'Семья',      fromColor: '#F5F0E8', toColor: '#EDE4D8' },
-  { id: 5,  label: '005', genre: 'Love story', fromColor: '#EDE4D8', toColor: '#C4B5A8' },
-  { id: 6,  label: '006', genre: 'Студия',     fromColor: '#DDD3C7', toColor: '#C4B5A8' },
-  { id: 7,  label: '007', genre: 'Свадьба',    fromColor: '#F5F0E8', toColor: '#C4B5A8' },
-  { id: 8,  label: '008', genre: 'Портрет',    fromColor: '#EDE4D8', toColor: '#DDD3C7' },
-  { id: 9,  label: '009', genre: 'Репортаж',   fromColor: '#DDD3C7', toColor: '#C4B5A8' },
-  { id: 10, label: '010', genre: 'Семья',      fromColor: '#F5F0E8', toColor: '#EDE4D8' },
-  { id: 11, label: '011', genre: 'Love story', fromColor: '#EDE4D8', toColor: '#C4B5A8' },
-  { id: 12, label: '012', genre: 'Студия',     fromColor: '#DDD3C7', toColor: '#C4B5A8' },
-]
-
-function Card({ photo, index }: { photo: PhotoCard; index: number }) {
+function Card({ src, index }: { src: string; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 32 }}
@@ -33,12 +11,14 @@ function Card({ photo, index }: { photo: PhotoCard; index: number }) {
       transition={{ duration: 0.6, ease: [0.2, 0, 0, 1], delay: (index % 4) * 0.1 }}
     >
       <div
-        className="relative overflow-hidden rounded-sm w-full"
+        className="relative overflow-hidden rounded-sm w-full bg-cream-200"
         style={{ aspectRatio: '3/4' }}
       >
-        <div
-          className="absolute inset-0"
-          style={{ background: `linear-gradient(135deg, ${photo.fromColor} 0%, ${photo.toColor} 100%)` }}
+        <img
+          src={src}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          loading={index < 4 ? 'eager' : 'lazy'}
         />
       </div>
     </motion.div>
@@ -68,8 +48,8 @@ export default function HorizontalScroll() {
 
       {/* Photo grid: 2 cols mobile, 4 cols desktop */}
       <div className="px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
-        {photos.map((photo, i) => (
-          <Card key={photo.id} photo={photo} index={i} />
+        {MAIN_PAGE_WORK_PHOTOS.map((src, i) => (
+          <Card key={src} src={src} index={i} />
         ))}
       </div>
     </section>

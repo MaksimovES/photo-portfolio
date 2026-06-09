@@ -64,3 +64,6 @@ rec.md
 
 # AI assistant config — local only
 CLAUDE.md
+
+#photo
+/photos/*

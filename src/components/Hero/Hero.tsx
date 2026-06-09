@@ -140,14 +140,13 @@ export default function Hero({ isVisible }: HeroProps) {
 
           {/* Description */}
           <motion.p
-            className="font-body text-warm-medium/80 text-sm md:text-base leading-relaxed mb-5 md:mb-7"
-            style={{ maxWidth: '34ch' }}
+            className="font-body text-warm-medium/80 text-sm md:text-base leading-relaxed mb-5 md:mb-7 max-w-[34ch] md:max-w-[33vw] md:text-justify"
             initial={{ opacity: 0, y: 16 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
           >
             Я верю, что настоящая красота — в естественности.
-            Моя задача — уловить вашу уникальность, эмоции, 
+            Моя задача уловить вашу уникальность, эмоции
             и мимолётные движения, которые делают вас собой.
           </motion.p>
 
