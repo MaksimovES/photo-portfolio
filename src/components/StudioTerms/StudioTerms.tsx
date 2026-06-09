@@ -81,7 +81,7 @@ function TermItem({
         aria-hidden="true"
       />
 
-      <p className="font-body text-sm md:text-[0.9375rem] leading-[1.65] text-justify text-pretty hyphens-auto text-warm-medium">
+      <p className="font-body text-sm md:text-[0.9375rem] leading-[1.65] text-pretty hyphens-auto text-warm-medium">
         <span className="font-medium text-warm-dark">{label}</span>
         <span className="whitespace-nowrap" aria-hidden="true">
           {'\u00A0—\u00A0'}

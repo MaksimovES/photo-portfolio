@@ -142,7 +142,7 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
                             },
                           }}
                         >
-                          {genre.label}
+                          {genre.menuLabel ?? genre.label}
                         </motion.span>
                         {/* Описание — на мобильных всегда видно под названием */}
                         <span className="font-body text-2xs text-cream-400/40 mt-0.5 block md:hidden">

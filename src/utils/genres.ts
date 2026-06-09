@@ -1,6 +1,7 @@
 export interface Genre {
   slug: string
   label: string
+  menuLabel?: string
   labelEn: string
   number: string
   description: string
@@ -10,13 +11,14 @@ export const GENRES: Genre[] = [
   {
     slug: 'studio',
     label: 'Персональная съемка в студии',
+    menuLabel: 'Студийная',
     labelEn: 'Studio',
     number: '01',
     description: 'Портретный и телесный формат',
   },
   {
     slug: 'street',
-    label: 'Стрит',
+    label: 'Фотопрогулка',
     labelEn: 'Street',
     number: '02',
     description: 'Съемка на природе или на улицах города',

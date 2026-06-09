@@ -31,7 +31,7 @@ export default function Footer() {
                   to={`/genre/${genre.slug}`}
                   className="font-body text-[14px] leading-[1.1] text-cream-400 md:hover:text-gold transition-colors duration-300"
                 >
-                  {genre.label}
+                  {genre.menuLabel ?? genre.label}
                 </Link>
               ))}
             </nav>
@@ -86,7 +86,7 @@ export default function Footer() {
                 to={`/genre/${genre.slug}`}
                 className="font-body text-sm text-cream-400 md:hover:text-gold transition-colors duration-300"
               >
-                {genre.label}
+                {genre.menuLabel ?? genre.label}
               </Link>
             ))}
           </nav>
