@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface TheatreCarouselBlockProps {
@@ -8,10 +8,23 @@ interface TheatreCarouselBlockProps {
   index: number
 }
 
-const slideVariants = {
-  enter: (d: number) => ({ opacity: 0, x: d > 0 ? '12%' : '-12%' }),
-  center: { opacity: 1, x: 0 },
-  exit: (d: number) => ({ opacity: 0, x: d > 0 ? '-12%' : '12%' }),
+const EASE: [number, number, number, number] = [0.2, 0, 0, 1]
+
+const photoVariants = {
+  initial: {
+    opacity: 0,
+    scale: 1.025,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.58, ease: EASE },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.992,
+    transition: { duration: 0.4, ease: EASE },
+  },
 }
 
 export function TheatreCarouselBlock({
@@ -21,25 +34,31 @@ export function TheatreCarouselBlock({
   index,
 }: TheatreCarouselBlockProps) {
   const [current, setCurrent] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const [loaded, setLoaded] = useState<Set<number>>(new Set())
-  const touchStartX = useRef<number>(0)
+  const isTransitioning = useRef(false)
+  const touchStartX = useRef(0)
 
-  const handleLoad = (i: number) => {
-    setLoaded(prev => new Set(prev).add(i))
-  }
+  useEffect(() => {
+    photos.forEach(src => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [photos])
 
-  const goTo = useCallback((nextIdx: number, dir: number) => {
-    setDirection(dir)
-    setCurrent(nextIdx)
-  }, [])
+  const goTo = useCallback(
+    (nextIdx: number) => {
+      if (isTransitioning.current || nextIdx === current) return
+      isTransitioning.current = true
+      setCurrent(nextIdx)
+    },
+    [current],
+  )
 
   const prev = useCallback(() => {
-    goTo((current - 1 + photos.length) % photos.length, -1)
+    goTo((current - 1 + photos.length) % photos.length)
   }, [current, photos.length, goTo])
 
   const next = useCallback(() => {
-    goTo((current + 1) % photos.length, 1)
+    goTo((current + 1) % photos.length)
   }, [current, photos.length, goTo])
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -54,7 +73,7 @@ export function TheatreCarouselBlock({
   }
 
   return (
-    <div className="w-4/5 mx-auto max-w-5xl">
+    <div className="w-4/5 mx-auto max-w-5xl [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
       {/* Header */}
       <div className="flex items-end justify-between mb-3 pb-3 border-b border-cream-400/40">
         <span className="font-body text-2xs text-warm-muted tracking-[0.3em] uppercase select-none">
@@ -76,44 +95,55 @@ export function TheatreCarouselBlock({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Slides via AnimatePresence */}
-        <AnimatePresence initial={false} custom={direction} mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={current}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.5, ease: [0.2, 0, 0, 1] }}
             className="absolute inset-0"
+            variants={photoVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            onAnimationComplete={definition => {
+              if (definition === 'animate') {
+                isTransitioning.current = false
+              }
+            }}
           >
-            {/* Shimmer overlay */}
-            <motion.div
-              className="absolute inset-0 z-10 bg-cream-200 overflow-hidden pointer-events-none"
-              animate={{ opacity: loaded.has(current) ? 0 : 1 }}
-              transition={{ duration: 0.55, ease: [0.2, 0, 0, 1] }}
-            >
-              <div
-                className="absolute inset-0 -skew-x-12"
-                style={{
-                  background:
-                    'linear-gradient(90deg, transparent 0%, rgba(255,251,245,0.55) 50%, transparent 100%)',
-                  animation: 'shimmer 1.6s ease-in-out infinite',
-                }}
-              />
-            </motion.div>
-
             <img
               src={photos[current]}
               alt={`${production} — ${current + 1}`}
-              className="w-full h-full object-cover"
-              loading={current === 0 ? 'eager' : 'lazy'}
+              className="h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
               draggable={false}
-              onLoad={() => handleLoad(current)}
             />
           </motion.div>
         </AnimatePresence>
+
+        {/* Bottom bar: dots + counter */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 px-4 py-3 flex items-center justify-between bg-gradient-to-t from-warm-dark/50 to-transparent">
+          <div className="pointer-events-auto flex gap-1.5 items-center">
+            {photos.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className="flex h-[5px] w-5 items-center justify-center outline-none"
+                aria-label={`Фото ${i + 1}`}
+              >
+                <span
+                  className={`block h-full rounded-full transition-[width,background-color] duration-500 ease-out ${
+                    i === current
+                      ? 'w-5 bg-gold'
+                      : 'w-[5px] bg-cream-100/40 md:hover:bg-cream-100/70'
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+          <span className="font-body text-2xs text-cream-100/60 tracking-[0.2em]">
+            {String(current + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
+          </span>
+        </div>
 
         {/* Left arrow */}
         <button
@@ -122,13 +152,13 @@ export function TheatreCarouselBlock({
             absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-20
             w-9 h-9 md:w-10 md:h-10
             flex items-center justify-center
-            bg-warm-dark/50 md:hover:bg-warm-dark/80
+            bg-warm-dark/60 md:hover:bg-warm-dark/85
             text-cream-100
-            transition-all duration-300
-            opacity-100 md:opacity-0 md:group-hover:opacity-100
-            backdrop-blur-sm
+            transition-[opacity,background-color] duration-300
+            opacity-100 md:opacity-45 md:group-hover:opacity-100
             border border-cream-100/10
             rounded-full
+            outline-none
           "
           aria-label="Предыдущее фото"
         >
@@ -150,13 +180,13 @@ export function TheatreCarouselBlock({
             absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20
             w-9 h-9 md:w-10 md:h-10
             flex items-center justify-center
-            bg-warm-dark/50 md:hover:bg-warm-dark/80
+            bg-warm-dark/60 md:hover:bg-warm-dark/85
             text-cream-100
-            transition-all duration-300
-            opacity-100 md:opacity-0 md:group-hover:opacity-100
-            backdrop-blur-sm
+            transition-[opacity,background-color] duration-300
+            opacity-100 md:opacity-45 md:group-hover:opacity-100
             border border-cream-100/10
             rounded-full
+            outline-none
           "
           aria-label="Следующее фото"
         >
@@ -170,27 +200,6 @@ export function TheatreCarouselBlock({
             />
           </svg>
         </button>
-
-        {/* Bottom bar: dots + counter */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 px-4 py-3 flex items-center justify-between bg-gradient-to-t from-warm-dark/50 to-transparent">
-          <div className="flex gap-1.5 items-center">
-            {photos.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i, i > current ? 1 : -1)}
-                className={`transition-all duration-300 rounded-full ${
-                  i === current
-                    ? 'w-5 h-[3px] bg-gold'
-                    : 'w-[5px] h-[5px] bg-cream-100/40 md:hover:bg-cream-100/70'
-                }`}
-                aria-label={`Фото ${i + 1}`}
-              />
-            ))}
-          </div>
-          <span className="font-body text-2xs text-cream-100/60 tracking-[0.2em]">
-            {String(current + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
-          </span>
-        </div>
       </div>
     </div>
   )
