@@ -2,10 +2,10 @@
  * Фотографии для страницы «Студийная».
  *
  * Как добавить:
- * 1. Положите фото в public/studio/
- * 2. Замените строки с picsum.photos на реальные пути:
- *    '/studio/01.jpg', '/studio/02.jpg', ...
- * 3. Порядок = порядок в сетке (слева направо, сверху вниз).
+ * 1. Черновики: photos/directions/studio/1.JPG, 2.JPG, … (gitignored)
+ * 2. Публикация: public/directions/studio/
+ * 3. Замените ph('studio') на пути '/directions/studio/1.JPG', …
+ * 4. Порядок = порядок в сетке (слева направо, сверху вниз).
  */
 
 /** Заглушки — удалите когда добавите реальные фото */
@@ -17,20 +17,7 @@ export const STUDIO_PHOTOS: string[] = ph('studio')
 
 // Когда добавите реальные фото — замените на:
 // export const STUDIO_PHOTOS: string[] = [
-//   '/studio/01.jpg',
-//   '/studio/02.jpg',
-//   '/studio/03.jpg',
-//   '/studio/04.jpg',
-//   '/studio/05.jpg',
-//   '/studio/06.jpg',
-//   '/studio/07.jpg',
-//   '/studio/08.jpg',
-//   '/studio/09.jpg',
-//   '/studio/10.jpg',
-//   '/studio/11.jpg',
-//   '/studio/12.jpg',
-//   '/studio/13.jpg',
-//   '/studio/14.jpg',
-//   '/studio/15.jpg',
-//   '/studio/16.jpg',
+//   '/directions/studio/1.JPG',
+//   '/directions/studio/2.JPG',
+//   ...
 // ]

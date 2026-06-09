@@ -347,7 +347,6 @@ export default function Reviews() {
             className="font-display text-3xl md:text-7xl text-warm-dark leading-tight"
           >
             Отзывы <br />
-            <span className="italic text-warm-medium/50 font-light text-2xl md:text-5xl">клиентов</span>
           </motion.h2>
         </div>
 

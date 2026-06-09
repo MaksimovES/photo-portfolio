@@ -26,7 +26,7 @@ export const GENRES: Genre[] = [
     label: 'Театр',
     labelEn: 'Theatre',
     number: '03',
-    description: 'Спектакли, танцевальные перфомансы',
+    description: 'Спектакли, танцевальные перфомансы и мастер-классы',
   },
   {
     slug: 'family',

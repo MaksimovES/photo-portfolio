@@ -1,14 +1,13 @@
 /**
  * Данные театральных съёмок.
  *
+ * Номер папки = порядок спектакля в THEATRE_PRODUCTIONS (01 → 1, 02 → 2, …).
+ *
  * Как добавить фотографии:
- * 1. Положите фото в папку  public/theatre/<название-постановки>/
- *    Например: public/theatre/master-margarita/01.jpg
- *
- * 2. Замените строки с picsum.photos на реальные пути:
- *    '/theatre/master-margarita/01.jpg'
- *
- * 3. Порядок в массиве = порядок в карусели.
+ * 1. Черновики: photos/directions/theathre/<номер>/1.JPG, 2.JPG, … (gitignored)
+ * 2. Публикация: скопируйте в public/directions/theathre/<номер>/
+ * 3. Замените ph('…') на пути '/directions/theathre/<номер>/1.JPG', …
+ * 4. Порядок в массиве = порядок в карусели.
  */
 
 export interface TheatreProduction {
@@ -24,35 +23,61 @@ function ph(seed: string): string[] {
 
 // ─── 01 ──────────────────────────────────────────────────────────────────────
 const masterMargarita: TheatreProduction = {
-  director: 'Кирилл Серебренников',
-  production: 'Мастер и Маргарита',
-  photos: ph('mm'),
-  // photos: [
-  //   '/theatre/master-margarita/01.jpg',
-  //   '/theatre/master-margarita/02.jpg',
-  //   ...
-  // ],
+  director: '',
+  production: 'Attaque de panique: Les Aveugles',
+  photos: [
+    '/directions/theathre/1/1.JPG',
+    '/directions/theathre/1/2.JPG',
+    '/directions/theathre/1/3.JPG',
+    '/directions/theathre/1/4.JPG',
+    '/directions/theathre/1/5.JPG',
+    '/directions/theathre/1/6.JPG',
+  ],
 }
 
 // ─── 02 ──────────────────────────────────────────────────────────────────────
 const chayka: TheatreProduction = {
-  director: 'Юрий Бутусов',
-  production: 'Чайка',
-  photos: ph('ch'),
+  director: '',
+  production: 'MusicAeterna Dance: Землетрясение',
+  photos: [
+    '/directions/theathre/2/1.JPG',
+    '/directions/theathre/2/2.JPG',
+    '/directions/theathre/2/3.JPG',
+    '/directions/theathre/2/4.JPG',
+    '/directions/theathre/2/5.JPG',
+    '/directions/theathre/2/6.JPG',
+    '/directions/theathre/2/7.JPG',
+  ],
 }
 
 // ─── 03 ──────────────────────────────────────────────────────────────────────
 const groza: TheatreProduction = {
-  director: 'Андрей Могучий',
-  production: 'Гроза',
-  photos: ph('gr'),
+  director: '',
+  production: 'Узел: Жестяной барабан',
+  photos: [
+    '/directions/theathre/3/1.JPG',
+    '/directions/theathre/3/2.JPG',
+    '/directions/theathre/3/3.JPG',
+    '/directions/theathre/3/4.JPG',
+    '/directions/theathre/3/5.JPG',
+    '/directions/theathre/3/6.JPG',
+    '/directions/theathre/3/7.JPG',
+  ],
 }
 
 // ─── 04 ──────────────────────────────────────────────────────────────────────
 const triSestry: TheatreProduction = {
-  director: 'Тимофей Кулябин',
-  production: 'Три сестры',
-  photos: ph('ts'),
+  director: '',
+  production: 'ШУМ: Сказка о царе стакане',
+  photos: [
+    '/directions/theathre/4/1.JPG',
+    '/directions/theathre/4/2.JPG',
+    '/directions/theathre/4/3.JPG',
+    '/directions/theathre/4/4.JPG',
+    '/directions/theathre/4/5.JPG',
+    '/directions/theathre/4/6.JPG',
+    '/directions/theathre/4/7.JPG',
+  ],
 }
 
 // ─── 05 ──────────────────────────────────────────────────────────────────────

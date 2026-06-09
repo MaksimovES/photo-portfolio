@@ -2,9 +2,9 @@
  * Фотографии для страницы «Стрит».
  *
  * Как добавить:
- * 1. Положите фото в public/street/
- * 2. Замените строки с picsum.photos на реальные пути:
- *    '/street/01.jpg', '/street/02.jpg', ...
+ * 1. Черновики: photos/directions/street/1.JPG, 2.JPG, … (gitignored)
+ * 2. Публикация: public/directions/street/
+ * 3. Замените ph('street') на пути '/directions/street/1.JPG', …
  */
 
 function ph(seed: string, count = 16): string[] {
@@ -14,6 +14,7 @@ function ph(seed: string, count = 16): string[] {
 export const STREET_PHOTOS: string[] = ph('street')
 
 // export const STREET_PHOTOS: string[] = [
-//   '/street/01.jpg',
+//   '/directions/street/1.JPG',
+//   '/directions/street/2.JPG',
 //   ...
 // ]
