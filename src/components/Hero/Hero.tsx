@@ -1,5 +1,12 @@
 import { motion } from 'framer-motion'
-import { DashLabel, KineticHeading, philosophyBlocks } from './heroUtils'
+import {
+  HeroEyebrow,
+  HeroLead,
+  KineticHeading,
+  PhilosophyBody,
+  PhilosophyTitle,
+  philosophyBlocks,
+} from './heroUtils'
 
 interface HeroProps {
   isVisible: boolean
@@ -12,25 +19,29 @@ export default function Hero({ isVisible }: HeroProps) {
       style={{ paddingTop: 'var(--header-height)' }}
     >
       <div
-        className="flex flex-col md:grid md:grid-cols-[54fr_46fr]"
+        className="flex flex-col md:grid md:grid-cols-[54fr_46fr] md:items-start"
         style={{ minHeight: 'calc(100dvh - var(--header-height))' }}
       >
 
         {/* ══════════════════════════════════════════════════
             MOBILE PHOTO PANEL
-            Full-bleed crop + blur overlay for slogan/description
+            Full-bleed crop + gradient scrim for slogan/description
         ══════════════════════════════════════════════════ */}
-        <div className="md:hidden order-1 flex flex-col min-h-0">
+        <div className="md:hidden order-1 flex flex-col min-h-0 px-6">
           <motion.div
-            className="px-4 pt-4 pb-3"
+            className="pt-4 pb-3"
             initial={{ opacity: 0, x: -14 }}
             animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
             transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 0.1 }}
           >
-            <DashLabel>Портфолио фотографа</DashLabel>
+            <HeroEyebrow>Портфолио фотографа</HeroEyebrow>
           </motion.div>
 
-          <div className="relative w-full h-[44dvh] overflow-hidden flex-shrink-0">
+          <div
+            className="relative w-full flex-shrink-0 rounded-lg border border-gold/30
+              bg-cream-200 p-1.5 shadow-warm-sm"
+          >
+            <div className="relative w-full h-[44dvh] overflow-hidden rounded-[5px]">
             <motion.img
               src="/main-page/1test.JPG"
               alt="Портфолио фотографа"
@@ -42,30 +53,47 @@ export default function Hero({ isVisible }: HeroProps) {
             />
 
             <div
-              className="absolute inset-x-0 bottom-0 h-1/4
-                backdrop-blur-md bg-cream-100/40
-                flex flex-col justify-end px-4 pb-3 gap-1.5"
+              className="absolute inset-x-0 bottom-0 h-[52%] pointer-events-none
+                bg-gradient-to-t from-cream-100 from-25% via-cream-100 via-55% to-cream-100/0"
+              aria-hidden
+            />
+
+            <div
+              className="absolute inset-x-0 bottom-0 h-[52%]
+                flex flex-col justify-end pb-3 gap-2"
             >
               <h1
-                className="font-display font-light text-warm-dark leading-[1.03] tracking-[-0.03em] max-w-[min(100%,36ch)]"
+                className="font-display font-light text-warm-dark leading-[1.06] tracking-[-0.03em]
+                  max-w-[min(100%,36ch)]
+                  [text-shadow:0_1px_0_#FAF7F2,0_2px_20px_rgba(250,247,242,0.85)]"
                 style={{ fontSize: 'clamp(1.625rem, 4.8vw, 4.5rem)' }}
               >
-                <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
-                {' '}
-                <KineticHeading text="потому что с вами " isVisible={isVisible} delay={0.4} />
-                <KineticHeading text="всё так!" isVisible={isVisible} delay={0.55} className="text-gold" />
+                <span className="block">
+                  <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
+                </span>
+                <span className="block">
+                  <KineticHeading text="потому что с вами " isVisible={isVisible} delay={0.4} />
+                  <KineticHeading
+                    text="всё так!"
+                    isVisible={isVisible}
+                    delay={0.55}
+                    className="italic text-gold-deep font-normal"
+                  />
+                </span>
               </h1>
 
-              <motion.p
-                className="font-body text-warm-medium/80 text-sm leading-snug max-w-[44ch]"
+              <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
                 transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
               >
-                Я верю, что настоящая красота — в естественности.
-                Моя задача уловить вашу уникальность, эмоции
-                и мимолётные движения, которые делают вас собой.
-              </motion.p>
+                <HeroLead className="max-w-[44ch] border-l-0 pl-0 text-warm-dark">
+                  Я верю, что настоящая красота — в естественности.
+                  Моя задача уловить вашу уникальность, эмоции
+                  и мимолётные движения, которые делают вас собой.
+                </HeroLead>
+              </motion.div>
+            </div>
             </div>
           </div>
         </div>
@@ -150,50 +178,58 @@ export default function Hero({ isVisible }: HeroProps) {
             Desktop: label, slogan, description, philosophy blocks, CTA
         ══════════════════════════════════════════════════ */}
         <div
-          className="flex flex-col flex-1 justify-start md:justify-center order-2 md:order-1
-            px-4 md:px-7 lg:px-9
-            pt-4 pb-8 md:py-16 min-w-0"
+          className="flex flex-col flex-1 justify-start md:justify-start lg:justify-center order-2 md:order-1
+            px-6 md:px-7 lg:px-9
+            pt-4 pb-8 md:pt-10 md:pb-10 lg:py-14 min-w-0
+            md:-translate-y-[5%]"
         >
 
           {/* Desktop label */}
           <motion.div
-            className="hidden md:flex items-center gap-3 mb-7"
+            className="hidden md:flex items-center gap-3 mb-5 lg:mb-7"
             initial={{ opacity: 0, x: -14 }}
             animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
             transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 0.1 }}
           >
-            <DashLabel>Портфолио фотографа</DashLabel>
+            <HeroEyebrow>Портфолио фотографа</HeroEyebrow>
           </motion.div>
 
           {/* Desktop slogan */}
           <h1
-            className="hidden md:block relative z-10 font-display font-light text-warm-dark leading-[1.03] tracking-[-0.03em] mb-6 max-w-none md:mr-[-2.5rem] lg:mr-[-4rem]"
+            className="hidden md:block relative z-10 font-display font-light text-warm-dark leading-[1.03] tracking-[-0.03em] mb-4 lg:mb-6 max-w-none md:mr-[-2.5rem] lg:mr-[-4rem]"
             style={{ fontSize: 'clamp(1.625rem, 4.8vw, 4.5rem)' }}
           >
-            <span className="block whitespace-nowrap">
+            <span className="block whitespace-nowrap text-warm-dark">
               <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
             </span>
             <span className="block whitespace-nowrap">
               <KineticHeading text="потому что с вами " isVisible={isVisible} delay={0.4} />
-              <KineticHeading text="всё так!" isVisible={isVisible} delay={0.55} className="text-gold" />
+              <KineticHeading
+                text="всё так!"
+                isVisible={isVisible}
+                delay={0.55}
+                className="italic text-gold"
+              />
             </span>
           </h1>
 
           {/* Desktop description */}
-          <motion.p
-            className="hidden md:block font-body text-warm-medium/80 text-base leading-relaxed mb-7 max-w-[33vw] md:text-justify"
+          <motion.div
+            className="hidden md:block mb-5 lg:mb-7 max-w-[33vw]"
             initial={{ opacity: 0, y: 16 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
           >
-            Я верю, что настоящая красота — в естественности.
-            Моя задача уловить вашу уникальность, эмоции
-            и мимолётные движения, которые делают вас собой.
-          </motion.p>
+            <HeroLead className="md:text-justify">
+              Я верю, что настоящая красота — в естественности.
+              Моя задача уловить вашу уникальность, эмоции
+              и мимолётные движения, которые делают вас собой.
+            </HeroLead>
+          </motion.div>
 
           {/* Philosophy blocks */}
           <motion.div
-            className="flex flex-col gap-3 md:gap-6 mb-4 md:mb-8"
+            className="flex flex-col gap-3 md:gap-4 lg:gap-6 mb-4 md:mb-5 lg:mb-8"
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.86 }}
@@ -206,30 +242,30 @@ export default function Hero({ isVisible }: HeroProps) {
                 animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
                 transition={{ duration: 0.5, ease: [0.2, 0, 0, 1], delay: 0.86 + i * 0.1 }}
               >
-                <DashLabel>{block.title}</DashLabel>
-                <p className="font-body text-warm-medium/80 text-xs md:text-base leading-snug md:leading-relaxed pl-11">
+                <PhilosophyTitle>{block.title}</PhilosophyTitle>
+                <PhilosophyBody>
                   <span className="md:hidden">{block.textMobile}</span>
                   <span className="hidden md:inline">{block.textDesktop}</span>
-                </p>
+                </PhilosophyBody>
               </motion.div>
             ))}
           </motion.div>
 
           {/* CTA */}
           <motion.div
-            className="mt-auto"
+            className="mt-auto md:mt-5 lg:mt-auto md:flex md:justify-end w-full"
             initial={{ opacity: 0, y: 14 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
             transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 1.02 }}
           >
             <a
               href="#cases"
-              className="group flex md:inline-flex items-center justify-center md:justify-start gap-4
-                 rounded-lg md:rounded-xl bg-cream-200 border border-cream-400 shadow-sm
-                 md:hover:border-gold md:hover:shadow-md
-                 text-warm-dark font-body text-2xs tracking-[0.22em] uppercase
-                 px-8 transition-all duration-300 md:hover:bg-gold/10 shimmer-btn"
-              style={{ minHeight: '48px' }}
+              className="group flex md:inline-flex items-center justify-center md:justify-center gap-3 md:gap-4
+                 rounded-lg md:rounded-xl bg-cream-200 border border-cream-400 shadow-warm-sm
+                 md:hover:border-gold md:hover:shadow-warm-md
+                 text-warm-dark font-body font-medium text-2xs tracking-[0.24em] uppercase
+                 px-8 md:px-6 lg:px-8 transition-all duration-300 md:hover:bg-gold/10 shimmer-btn
+                 min-h-[48px] md:min-h-[44px] lg:min-h-[48px]"
             >
               <motion.span
                 className="block h-px bg-gold flex-shrink-0"
