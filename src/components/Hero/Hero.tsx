@@ -35,11 +35,41 @@ export default function Hero({ isVisible }: HeroProps) {
             className="relative w-full flex-shrink-0 rounded-lg border border-gold/30
               bg-cream-200 p-1.5 shadow-warm-sm overflow-hidden"
           >
+            <motion.h1
+              className="relative px-4 pt-4 pb-3 font-display font-light text-warm-dark leading-[1.1] tracking-[-0.025em]"
+              style={{ fontSize: 'clamp(1.375rem, 5.2vw, 1.75rem)' }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+              transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.15 }}
+            >
+              <span className="block text-warm-dark/90">
+                <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
+              </span>
+              <span className="block mt-1 text-warm-dark/90">
+                <KineticHeading text="потому что с вами" isVisible={isVisible} delay={0.35} />
+              </span>
+              <span
+                className="block mt-2"
+                style={{ fontSize: 'clamp(1.625rem, 6.5vw, 2.125rem)' }}
+              >
+                <KineticHeading
+                  text="всё так!"
+                  isVisible={isVisible}
+                  delay={0.52}
+                  className="italic text-gold-deep font-normal"
+                />
+              </span>
+              <span
+                className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-gold/45 to-transparent"
+                aria-hidden
+              />
+            </motion.h1>
+
             <div className="relative w-full h-[40dvh] overflow-hidden rounded-[5px]">
               <motion.img
                 {...heroImageAttrs}
                 alt="Портретная фотография"
-                className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
+                className="absolute inset-0 w-full h-full object-cover object-[center_48%]"
                 loading="eager"
                 {...({ fetchpriority: 'high' } as Record<string, string>)}
                 decoding="async"
@@ -59,29 +89,6 @@ export default function Hero({ isVisible }: HeroProps) {
                 className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-gold/45 to-transparent"
                 aria-hidden
               />
-
-              <h1
-                className="font-display font-light text-warm-dark leading-[1.1] tracking-[-0.025em]"
-                style={{ fontSize: 'clamp(1.375rem, 5.2vw, 1.75rem)' }}
-              >
-                <span className="block text-warm-dark/90">
-                  <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
-                </span>
-                <span className="block mt-1 text-warm-dark/90">
-                  <KineticHeading text="потому что с вами" isVisible={isVisible} delay={0.35} />
-                </span>
-                <span
-                  className="block mt-2"
-                  style={{ fontSize: 'clamp(1.625rem, 6.5vw, 2.125rem)' }}
-                >
-                  <KineticHeading
-                    text="всё так!"
-                    isVisible={isVisible}
-                    delay={0.52}
-                    className="italic text-gold-deep font-normal"
-                  />
-                </span>
-              </h1>
 
               <div className="flex items-center gap-2.5" aria-hidden>
                 <span className="block h-px w-6 bg-gold/55 flex-shrink-0" />
@@ -234,9 +241,9 @@ export default function Hero({ isVisible }: HeroProps) {
             </HeroLead>
           </motion.div>
 
-          {/* Philosophy blocks */}
+          {/* Philosophy blocks — desktop only */}
           <motion.div
-            className="flex flex-col gap-3 md:gap-4 lg:gap-6 mb-4 md:mb-5 lg:mb-8"
+            className="hidden md:flex flex-col gap-3 md:gap-4 lg:gap-6 mb-4 md:mb-5 lg:mb-8"
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.86 }}
@@ -280,7 +287,8 @@ export default function Hero({ isVisible }: HeroProps) {
                 animate={isVisible ? { width: 24 } : { width: 0 }}
                 transition={{ delay: 1.35, duration: 0.4 }}
               />
-              Направления съёмок
+              <span className="md:hidden">к направлениям</span>
+              <span className="hidden md:inline">Направления съёмок</span>
               <motion.span
                 className="block h-px bg-gold flex-shrink-0"
                 initial={{ width: 0 }}
