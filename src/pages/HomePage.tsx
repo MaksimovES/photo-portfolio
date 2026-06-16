@@ -5,7 +5,6 @@ import HorizontalScroll from '../components/HorizontalScroll/HorizontalScroll'
 import Cases from '../components/Cases/Cases'
 import Reviews from '../components/Reviews/Reviews'
 import FAQ from '../components/FAQ/FAQ'
-import SectionBridge from '../components/SectionBridge/SectionBridge'
 
 export default function HomePage() {
   const [preloaderDone, setPreloaderDone] = useState(
@@ -16,13 +15,9 @@ export default function HomePage() {
     <>
       <Preloader onComplete={() => setPreloaderDone(true)} />
       <div id="hero" className="scroll-mt-[var(--header-height)]"><Hero isVisible={preloaderDone} /></div>
-      <SectionBridge />
       <HorizontalScroll />
-      <SectionBridge />
       <div id="cases" className="scroll-mt-[var(--header-height)]"><Cases /></div>
-      <SectionBridge className="bg-gradient-to-b from-cream-100 to-cream-200" />
       <div id="reviews" className="scroll-mt-[var(--header-height)]"><Reviews /></div>
-      <SectionBridge className="bg-gradient-to-b from-cream-200 to-cream-100" />
       <div id="faq" className="scroll-mt-[var(--header-height)]"><FAQ /></div>
     </>
   )
