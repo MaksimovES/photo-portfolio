@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 
 const TELEGRAM_URL = 'https://t.me/ketrin_maxim'
+const CONTACT_PORTRAIT_SRC = '/contacts/portrait.png'
 const EASE = [0.2, 0, 0, 1] as const
 
 const stagger = {
@@ -35,43 +36,43 @@ function TelegramIcon({ className }: { className?: string }) {
 export default function ContactsPage() {
   return (
     <section
-      className="relative flex-1 flex flex-col justify-start bg-cream-100 px-7 sm:px-9 md:px-16 lg:px-24 overflow-hidden"
+      className="relative flex-1 flex flex-col bg-cream-100 px-7 sm:px-9 md:px-16 lg:px-24 overflow-hidden"
       style={{
         paddingTop: 'var(--header-height)',
         minHeight: 'calc(100dvh - var(--header-height))',
       }}
     >
       <motion.div
-        className="relative z-10 w-full max-w-5xl mx-auto pt-5 sm:pt-6 md:pt-10"
+        className="relative z-10 w-full max-w-6xl mx-auto flex-1 flex flex-col items-start justify-center
+          pb-8 md:items-center md:justify-start md:pt-8 md:pb-0"
         variants={stagger}
         initial="hidden"
         animate="show"
       >
-        <motion.div variants={fadeUp} className="mb-6 md:mb-8">
+        <motion.div
+          variants={fadeUp}
+          className="mb-0 mt-0 md:mt-8 w-full min-w-0 md:text-center"
+        >
           <p
-            className="font-display font-light text-warm-dark leading-[1.12] tracking-[-0.025em] max-w-xl md:max-w-2xl"
+            className="font-display font-light text-warm-dark leading-[1.15] tracking-[-0.025em] md:mx-auto"
             style={{ fontSize: 'clamp(1.25rem, 4.6vw, 2rem)' }}
           >
-            <span className="block text-warm-dark/90">
+            <span className="block text-warm-dark/90 max-w-[20rem] sm:max-w-[22rem] md:max-w-2xl md:mx-auto">
               Снимаю так, чтобы вы
-              <span className="md:hidden">
-                <br />
-                нравились себе
-                <br />
-                даже если
+              <br />
+              нравились себе даже если
+              <br />
+              <span
+                className="whitespace-nowrap italic text-gold-deep font-normal"
+                style={{ fontSize: 'clamp(1.375rem, 5.2vw, 2.25rem)' }}
+              >
+                «не умеете позировать»
               </span>
-              <span className="hidden md:inline"> нравились себе даже если </span>
-            </span>
-            <span
-              className="block mt-1.5 md:mt-0 md:inline italic text-gold-deep font-normal"
-              style={{ fontSize: 'clamp(1.375rem, 5.2vw, 2.25rem)' }}
-            >
-              «не умеете позировать»
             </span>
           </p>
 
           <span
-            className="flex items-center gap-2.5 mt-6 md:mt-7 max-w-xs"
+            className="flex items-center gap-2.5 mt-4 max-w-xs md:mx-auto"
             aria-hidden
           >
             <span className="block h-px w-8 bg-gold/50 shrink-0" />
@@ -86,66 +87,76 @@ export default function ContactsPage() {
           rel="noopener noreferrer"
           aria-label="Telegram @ketrin_maxim, откроется в новой вкладке"
           variants={fadeUp}
-          className="group relative flex flex-col w-full max-w-[min(100%,22rem)] sm:max-w-sm shrink-0 cursor-pointer mb-8 md:mb-10
+          className="w-full mt-4 sm:mt-5 md:mt-6 md:w-auto md:max-w-md lg:max-w-lg md:mx-auto group relative flex shrink-0 cursor-pointer
             border border-cream-400/70 bg-cream-200/50 overflow-hidden
-            px-5 py-4 sm:px-8 sm:py-7 md:px-10 md:py-11
+            px-6 py-6 sm:px-7 sm:py-7 md:px-10 md:py-10
             md:hover:bg-cream-100/80 md:transition-colors md:duration-500"
         >
           <span
-            className="absolute top-0 left-0 w-5 h-5 md:w-8 md:h-8 border-l border-t border-gold/35 pointer-events-none"
+            className="absolute top-0 left-0 w-5 h-5 md:w-7 md:h-7 border-l border-t border-gold/35 pointer-events-none"
             aria-hidden
           />
           <span
-            className="absolute bottom-0 right-0 w-5 h-5 md:w-8 md:h-8 border-r border-b border-gold/35 pointer-events-none"
+            className="absolute bottom-0 right-0 w-5 h-5 md:w-7 md:h-7 border-r border-b border-gold/35 pointer-events-none"
             aria-hidden
           />
 
-          <div className="flex items-center gap-3">
-            <span
-              className="flex items-center justify-center w-9 h-9 md:w-11 md:h-11 rounded-full flex-shrink-0
-                bg-gold/12 border border-gold/25
-                md:group-hover:border-gold/45 md:group-hover:bg-gold/18
-                md:transition-[background-color,border-color] md:duration-500"
-            >
-              <TelegramIcon className="w-4 h-4 md:w-5 md:h-5 text-gold" />
-            </span>
-            <div className="flex-1 min-w-0 flex items-baseline justify-between gap-3">
+          <div className="flex-1 min-w-0 flex flex-col justify-center">
+            <div className="flex items-center gap-3 md:gap-3.5">
+              <span
+                className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full flex-shrink-0
+                  bg-gold/12 border border-gold/25
+                  md:group-hover:border-gold/45 md:group-hover:bg-gold/18
+                  md:transition-[background-color,border-color] md:duration-500"
+              >
+                <TelegramIcon className="w-4 h-4 md:w-[1.125rem] md:h-[1.125rem] text-gold" />
+              </span>
               <div className="min-w-0">
-                <span className="block font-body text-[9px] md:text-2xs tracking-[0.28em] text-gold uppercase">
+                <span className="hidden md:block font-body text-[9px] md:text-2xs tracking-[0.28em] text-gold uppercase">
                   Telegram
                 </span>
                 <p
-                  className="mt-0.5 md:hidden font-display text-warm-dark leading-none tracking-[-0.03em] truncate
+                  className="md:hidden font-display text-warm-dark leading-none tracking-[-0.03em]
                     md:group-hover:text-gold md:transition-colors md:duration-500"
-                  style={{ fontSize: 'clamp(1.125rem, 5vw, 1.375rem)' }}
+                  style={{ fontSize: 'clamp(1.2rem, 5vw, 1.5rem)' }}
                 >
                   @ketrin_maxim
                 </p>
               </div>
-              <span
-                className="font-body text-gold/60 text-sm shrink-0 md:hidden"
-                aria-hidden
-              >
-                →
-              </span>
             </div>
+
+            <p
+              className="hidden md:block mt-5 font-display text-warm-dark leading-[0.95] tracking-[-0.03em]
+                md:group-hover:text-gold md:transition-colors md:duration-500"
+              style={{ fontSize: 'clamp(1.6rem, 6.8vw, 2.35rem)' }}
+            >
+              @ketrin_maxim
+            </p>
+
+            <p className="mt-2.5 md:mt-4 font-body text-[11px] md:text-sm text-warm-medium leading-relaxed">
+              <span className="block text-warm-muted text-[10px] md:text-xs tracking-wide">
+                Напишите, обсудим дату, формат и детали
+              </span>
+            </p>
           </div>
 
-          <p
-            className="hidden md:block mt-8 sm:mt-10 font-display text-warm-dark leading-[0.95] tracking-[-0.03em]
-              md:group-hover:text-gold md:transition-colors md:duration-500"
-            style={{ fontSize: 'clamp(1.85rem, 8vw, 2.75rem)' }}
-          >
-            @ketrin_maxim
-          </p>
-
-          <p className="mt-2.5 md:mt-5 font-body text-xs md:text-sm text-warm-medium leading-relaxed">
-            <span className="block mt-0.5 md:mt-1 text-warm-muted text-[10px] md:text-xs tracking-wide">
-              Напишите, обсудим дату, формат и детали.
-            </span>
-          </p>
+          <div className="relative shrink-0 self-center pl-4 sm:pl-5 md:pl-6">
+            <span
+              className="absolute -inset-1.5 rounded-full bg-gold/10 blur-[3px] pointer-events-none"
+              aria-hidden
+            />
+            <img
+              src={CONTACT_PORTRAIT_SRC}
+              alt=""
+              aria-hidden
+              loading="lazy"
+              decoding="async"
+              className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full object-cover object-[center_18%]
+                border border-cream-400/90 ring-1 ring-gold/20
+                md:group-hover:ring-gold/35 md:transition-[box-shadow] md:duration-500"
+            />
+          </div>
         </motion.a>
-
       </motion.div>
     </section>
   )

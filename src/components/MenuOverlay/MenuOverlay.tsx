@@ -203,74 +203,37 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
                   </span>
                 </button>
               </div>
-
-              {/* Соцсети */}
-              <div className="flex items-center justify-center gap-7">
-                {([
-                  { name: 'Telegram', href: 'https://t.me/ketrin_maxim' },
-                ] as const).map(({ name, href }) => (
-                  <a
-                    key={name}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-body text-xs tracking-[0.16em] uppercase text-cream-500/60 px-2 py-1.5"
-                  >
-                    {name}
-                  </a>
-                ))}
-              </div>
             </div>
 
             {/* Десктопная раскладка: в строку */}
-            <div className="hidden md:flex items-end justify-between">
-              <div className="flex items-center gap-8">
-                <motion.button
-                  onClick={() => handleNavClick('/contacts')}
-                  className="flex items-center gap-3 cursor-pointer"
-                  whileHover="hovered"
-                  initial="idle"
+            <div className="hidden md:flex items-end">
+              <motion.button
+                onClick={() => handleNavClick('/contacts')}
+                className="flex items-center gap-3 cursor-pointer"
+                whileHover="hovered"
+                initial="idle"
+              >
+                <motion.span
+                  className="h-px bg-gold/40 block"
+                  variants={{
+                    idle: { width: 32 },
+                    hovered: { width: 52, transition: { duration: 0.3, ease: [0.2, 0, 0, 1] } },
+                  }}
+                />
+                <motion.span
+                  className="font-body text-sm tracking-[0.15em] uppercase text-cream-400"
+                  variants={{
+                    idle: { color: '#C4B5A8', x: 0 },
+                    hovered: {
+                      color: '#C9A96E',
+                      x: 4,
+                      transition: { duration: 0.3, ease: [0.2, 0, 0, 1] },
+                    },
+                  }}
                 >
-                  <motion.span
-                    className="h-px bg-gold/40 block"
-                    variants={{
-                      idle: { width: 32 },
-                      hovered: { width: 52, transition: { duration: 0.3, ease: [0.2, 0, 0, 1] } },
-                    }}
-                  />
-                  <motion.span
-                    className="font-body text-sm tracking-[0.15em] uppercase text-cream-400"
-                    variants={{
-                      idle: { color: '#C4B5A8', x: 0 },
-                      hovered: {
-                        color: '#C9A96E',
-                        x: 4,
-                        transition: { duration: 0.3, ease: [0.2, 0, 0, 1] },
-                      },
-                    }}
-                  >
-                    Контакты
-                  </motion.span>
-                </motion.button>
-              </div>
-
-              <div className="flex items-center gap-6">
-                {([
-                  { name: 'Telegram', href: 'https://t.me/ketrin_maxim' },
-                ] as const).map(({ name, href }) => (
-                  <motion.a
-                    key={name}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-body text-2xs tracking-[0.15em] uppercase text-cream-500/60 relative"
-                    whileHover={{ color: '#C9A96E', y: -2 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {name}
-                  </motion.a>
-                ))}
-              </div>
+                  Контакты
+                </motion.span>
+              </motion.button>
             </div>
           </motion.div>
         </motion.div>

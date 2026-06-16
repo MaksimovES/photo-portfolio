@@ -1,6 +1,20 @@
 import { Link } from 'react-router-dom'
 import { GENRES } from '../../utils/genres'
 
+function EasterEgg({ textClassName }: { textClassName: string }) {
+  return (
+    <>
+      <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+        <span className="absolute -inset-0.5 inline-flex animate-pulse rounded-full bg-terracotta/55" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-terracotta shadow-[0_0_6px_rgba(160,92,59,0.5)]" />
+      </span>
+      <span className={textClassName}>
+        улыбнитесь, вас снимает скрытая камера :)
+      </span>
+    </>
+  )
+}
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
@@ -39,7 +53,7 @@ export default function Footer() {
 
           <div className="text-left">
             <p className="font-body text-[9px] uppercase tracking-[0.2em] text-gold/50 mb-5">
-              Связь
+              Контакты
             </p>
             <div className="flex flex-col gap-y-3 items-start">
               <a
@@ -119,29 +133,26 @@ export default function Footer() {
       </div>
 
       {/* Нижняя информационная панель */}
-      <div className="px-6 md:px-16 lg:px-24 pt-6 pb-0 md:py-8">
+      <div className="px-6 md:px-16 lg:px-24 pt-6 pb-4 md:py-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
           <p className="font-body text-[10px] md:text-[12px] text-cream-400/30 tracking-[0.1em]">
             © {year} ketrin_maxim. Все права защищены.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-4">
             <span className="hidden md:block w-8 h-px bg-gold/10" />
             <p className="font-body text-[9px] md:text-[12px] text-cream-400/30 tracking-[0.1em] uppercase">
               Санкт-Петербург — Россия
             </p>
+            <div className="flex items-center gap-1.5 md:hidden">
+              <EasterEgg textClassName="font-body text-[8px] tracking-wide text-cream-400/25" />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Easter egg — camera OSD in the corner */}
-      <div className="group/egg pointer-events-none absolute bottom-[calc(0.75rem+env(safe-area-inset-bottom))] right-6 md:right-16 lg:right-24 flex items-center gap-1.5 md:pointer-events-auto">
-        <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-          <span className="absolute -inset-0.5 inline-flex animate-pulse rounded-full bg-terracotta/55" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-terracotta shadow-[0_0_6px_rgba(160,92,59,0.5)]" />
-        </span>
-        <span className="font-body text-[8px] md:text-[8px] tracking-wide text-cream-400/25 md:group-hover/egg:text-gold/60 transition-colors duration-700 ease-out">
-          улыбнитесь, вас снимает скрытая камера :)
-        </span>
+      {/* Easter egg — camera OSD in the corner (desktop) */}
+      <div className="group/egg pointer-events-none absolute bottom-[calc(0.75rem+env(safe-area-inset-bottom))] right-6 md:right-16 lg:right-24 hidden md:flex items-center gap-1.5 md:pointer-events-auto">
+        <EasterEgg textClassName="font-body text-[8px] tracking-wide text-cream-400/25 md:group-hover/egg:text-gold/60 transition-colors duration-700 ease-out" />
       </div>
     </footer>
   )
