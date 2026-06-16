@@ -100,7 +100,10 @@ export default function Hero({ isVisible }: HeroProps) {
               >
                 <HeroLead className="text-warm-medium leading-[1.65] text-[0.8125rem]">
                   <span className="block text-warm-dark">
-                    Я верю, что настоящая красота — в естественности.
+                    Я верю, что настоящая красота
+                  </span>
+                  <span className="block text-warm-dark">
+                    в естественности.
                   </span>
                   <span className="block mt-2">
                     Моя задача уловить вашу уникальность, эмоции
@@ -235,7 +238,8 @@ export default function Hero({ isVisible }: HeroProps) {
             transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
           >
             <HeroLead className="md:text-justify">
-              Я верю, что настоящая красота — в естественности.
+              <span className="block">Я верю, что настоящая красота —</span>
+              <span className="block">в естественности.</span>
               Моя задача уловить вашу уникальность, эмоции
               и мимолётные движения, которые делают вас собой.
             </HeroLead>

@@ -14,7 +14,7 @@ export default function Footer() {
             Ketrin <br /> Maxim
           </p>
           <p className="font-body text-[12px] text-warm-muted leading-relaxed max-w-[180px] opacity-80 text-right">
-            Живые эмоции и настоящие истории в каждом кадре.
+            Меньше позирования. <br /> Больше жизни.
           </p>
         </div>
 

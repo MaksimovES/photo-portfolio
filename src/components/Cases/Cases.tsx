@@ -2,20 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { GENRES } from '../../utils/genres'
-
-const descriptions: Record<string, string> = {
-  studio: 'Глубокое исследование личности через портретный и телесный формат. Работа со светом и тенями для создания эстетичных, минималистичных кадров.',
-  street: 'Эстетика момента в ритме города или в гармонии с природой. Кинематографичные прогулки, где декорациями выступают улицы.',
-  theatre: 'Съемка спектаклей, закулисья и танцевальных перфомансов. Ловим динамику движения и магию сцены.',
-  family: 'Искренние домашние истории и теплые прогулки. Мы создаем честные кадры о вашей любви и уюте.',
-}
-
-const details: Record<string, string> = {
-  studio: '1–3 часа · студия',
-  street: 'от 1.5 часов · город / природа',
-  theatre: 'событие · театры',
-  family: 'от 2 часов · дом / прогулка',
-}
+import { GENRE_INTRO_TEXTS } from '../../data/genreIntroTexts'
 
 function GenreItem({
   genre,
@@ -49,7 +36,15 @@ function GenreItem({
         <div className="flex-1">
           <div className="flex justify-between items-center">
             <h3 className="font-display text-warm-medium text-lg md:text-2xl uppercase tracking-wider md:group-hover:text-gold transition-colors duration-300">
-              {genre.label}
+              {genre.listLabel ? (
+                genre.listLabel.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))
+              ) : (
+                genre.label
+              )}
             </h3>
             <span className={`text-gold transition-transform duration-500 ${isOpen ? 'rotate-45' : ''}`}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -69,25 +64,27 @@ function GenreItem({
               >
                 <div className="pt-5 pb-6 flex flex-col items-start gap-5">
                   <div className="space-y-2">
-                    <div className="overflow-hidden">
-                      <motion.p
-                        className="font-body text-warm-medium text-sm md:text-base leading-relaxed max-w-xl"
-                        initial={{ y: '110%' }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.65, ease: [0.19, 1, 0.22, 1], delay: 0.1 }}
-                      >
-                        {descriptions[genre.slug] || genre.description}
-                      </motion.p>
-                    </div>
-                    <div className="overflow-hidden">
-                      <motion.span
-                        className="block font-body text-[10px] md:text-xs text-gold tracking-[0.2em] uppercase italic opacity-80"
-                        initial={{ y: '110%' }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.55, ease: [0.19, 1, 0.22, 1], delay: 0.2 }}
-                      >
-                        {details[genre.slug]}
-                      </motion.span>
+                    <div className="space-y-3 max-w-xl">
+                      {(GENRE_INTRO_TEXTS[genre.slug] ?? [genre.description]).map((text, textIndex) => (
+                        <div key={text} className="overflow-hidden">
+                          <motion.p
+                            className="font-body text-warm-medium text-sm md:text-base leading-relaxed"
+                            initial={{ y: '110%' }}
+                            animate={{ y: 0 }}
+                            transition={{
+                              duration: 0.65,
+                              ease: [0.19, 1, 0.22, 1],
+                              delay: 0.1 + textIndex * 0.08,
+                            }}
+                          >
+                            {text.split('\n').map((line, lineIndex) => (
+                              <span key={lineIndex} className={lineIndex > 0 ? 'block' : undefined}>
+                                {line}
+                              </span>
+                            ))}
+                          </motion.p>
+                        </div>
+                      ))}
                     </div>
                   </div>
 

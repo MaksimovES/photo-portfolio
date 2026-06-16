@@ -2,6 +2,7 @@ export interface Genre {
   slug: string
   label: string
   menuLabel?: string
+  listLabel?: readonly string[]
   labelEn: string
   number: string
   description: string
@@ -11,6 +12,7 @@ export const GENRES: Genre[] = [
   {
     slug: 'studio',
     label: 'Персональная съемка в студии',
+    listLabel: ['Персональная съемка', 'в студии'],
     menuLabel: 'Студийная',
     labelEn: 'Studio',
     number: '01',
@@ -24,18 +26,18 @@ export const GENRES: Genre[] = [
     description: 'Съемка на природе или на улицах города',
   },
   {
-    slug: 'theatre',
-    label: 'Театр',
-    labelEn: 'Theatre',
-    number: '03',
-    description: 'Спектакли, танцевальные перфомансы и мастер-классы',
-  },
-  {
     slug: 'family',
     label: 'Семейная',
     labelEn: 'Family',
-    number: '04',
+    number: '03',
     description: 'Домашние истории и прогулки',
+  },
+  {
+    slug: 'theatre',
+    label: 'Театр',
+    labelEn: 'Theatre',
+    number: '04',
+    description: 'Спектакли, танцевальные перфомансы и мастер-классы',
   },
 ]
 

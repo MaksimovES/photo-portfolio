@@ -11,7 +11,6 @@ import { motion, useInView } from 'framer-motion'
 interface Review {
   id: number
   name: string
-  date: string
   genre: string
   text: string
 }
@@ -24,56 +23,97 @@ const scrollbarHideStyle = {
 const reviews: Review[] = [
   {
     id: 1,
-    name: 'Анна и Дмитрий',
-    date: 'Март 2024',
-    genre: 'Свадьба',
-    text: 'Невероятно атмосферные фотографии! Каждый кадр передаёт настроение нашего дня. Рекомендуем всем парам.',
+    name: 'Ксения',
+    genre: 'Студия',
+    text: `Спасибо тебе огромное ❤️❤️❤️
+Черно- белые - это все таки прям любовь моя )
+
+Буду еще рассматривать и повешу распечатанные .
+Шик и гранж, я так считаю ❤️🙃🙃🙃`,
   },
   {
     id: 2,
-    name: 'Мария Соколова',
-    date: 'Февраль 2024',
-    genre: 'Портрет',
-    text: 'Долго искала фотографа для бизнес-портрета. Результат превзошёл все ожидания — живые и выразительные снимки.',
+    name: 'Дарья',
+    genre: 'Семья',
+    text: `Спасибо за фото!
+Мне понравились фотографии, яркие, живые
+Мама тоже довольна, и ей еще понравился сам процесс, как вы погуляли, спасибо Тебе❤️`,
   },
   {
     id: 3,
-    name: 'Семья Петровых',
-    date: 'Январь 2024',
-    genre: 'Семья',
-    text: 'Замечательная семейная съёмка. Дети не напрягались, всё прошло легко. Снимки бесценны!',
+    name: 'Жанна',
+    genre: 'Студия',
+    text: `Катя, как красиво! 🖤 спасибо. Я в твоем объективе другая. Не такая, какую я вижу себя) и не такая, какой меня видят другие фотографы)`,
   },
   {
     id: 4,
-    name: 'Александр Ковалёв',
-    date: 'Декабрь 2023',
-    genre: 'Репортаж',
-    text: 'Снимал наше корпоративное мероприятие. Все коллеги восхищены результатом. Профессионально.',
+    name: 'Дарья',
+    genre: 'Студия',
+    text: `Кать….
+ну настроение решает , с тобой и смех и слезы и душа и акробатика 😂
+просто любовь ❤️‍🩹❤️‍🩹❤️‍🩹мне приятно видеть себя такой , и радость больше - что ты видишь нас такими , это капец как ценно , и пусть все у тебя только открываются и кайфуют и живут!!!! Лучшая , ей богу лучшая`,
+  },
+  {
+    id: 5,
+    name: 'Лиза',
+    genre: 'Студия',
+    text: 'Катя, спасибо огромное, это очень-очень красиво, я в восторге 😍😭',
+  },
+  {
+    id: 6,
+    name: 'Екатерина',
+    genre: 'Студия',
+    text: 'Катя, большое тебе человеческое спасибо за такую красоту!❤️ Удалось сделать невозможное с учетом ограниченности времени и моего настроения😂 Очень классно! И снова я по-новому на себя смотрю)',
+  },
+  {
+    id: 7,
+    name: 'Наталья',
+    genre: 'Прогулка',
+    text: 'Катя, привет! ещё раз хотели тебя поблагодарить!! Супер формат, крутые локации, ну и результат - выше всяких похвал',
+  },
+  {
+    id: 8,
+    name: 'Екатерина',
+    genre: 'Студия',
+    text: 'Катюша , спасибо тебе большое ❤️ лучшие  фотки на память 🫶🫶🫶',
+  },
+  {
+    id: 9,
+    name: 'Ангелина',
+    genre: 'Прогулка',
+    text: `Катя, какие снимки! Столько воздуха и света. Как хорошо всё-таки, что дождь сменился солнцем.
+
+И как цветок подходит. Именно этот. Именно к этому платью. Мне очень нравится`,
+  },
+  {
+    id: 10,
+    name: 'Ирина',
+    genre: 'Семья',
+    text: `Катя, я еще не все посмотрела и девчонки мои посмотрят только завтра, но уже от первых снимков у меня слезы на глазах.
+Ты так красиво нас увидела, так искренне, так тонко поймала моменты. Фотографии на самом деле живые, настоящие, теплые.
+Спасибо тебе огромное ❤️❤️❤️`,
+  },
+  {
+    id: 11,
+    name: 'Анна',
+    genre: 'Студия',
+    text: `Посмотрела... Катя, я просто в восторге! Это произведения искусства, конечно, а ты настрящий художник! Я очень рада, что мне удалось посниматься у тебя! Это и незабываемое общение с прекрасным человеком, с которым сразу случился контакт и "одна волна", и такой потрясающий результат! Браво и спасибо! ❤️😘❤️😘`,
+  },
+  {
+    id: 12,
+    name: 'Ирина',
+    genre: 'Студия',
+    text: 'Катя, доброе утро! С замиранием сердца! Хочется рассматривать и рассматривать! Спасибо большое 🙏🏼',
+  },
+  {
+    id: 13,
+    name: 'София',
+    genre: 'Студия',
+    text: 'Катя!!!!!💔💔💔💔💔 Как это красиво невероятно, простоооо восторг 😭😭😭 Мне так нравится сильно 🥺 И чб, и цвет, как вкусно все выглядит!! Спасибо огромнейшее за твою работу, ты - вау!!! 🤍 Оооочень не зря наткнулась на тебя тогда, такую творишь красоту!! 🙏🏽',
   },
 ]
 
 const GAP_PX = 24
-
-/** Layered radial + linear gradients — site palette only, stable per review id. */
-const REVIEW_AVATAR_GRADIENTS: readonly string[] = [
-  'radial-gradient(ellipse 75% 65% at 25% 15%, #DBBE8A 0%, transparent 68%), radial-gradient(ellipse 60% 70% at 80% 85%, #C47A58 0%, transparent 62%), linear-gradient(140deg, #FAF7F2 0%, #EDE4D8 45%, #C9A96E 100%)',
-  'radial-gradient(ellipse 70% 55% at 70% 25%, #C9A96E 0%, transparent 65%), radial-gradient(ellipse 55% 75% at 20% 75%, #A05C3B 0%, transparent 60%), linear-gradient(165deg, #EDE4D8 0%, #DDD3C7 50%, #8C7B70 100%)',
-  'radial-gradient(ellipse 80% 50% at 50% 10%, #DBBE8A 0%, transparent 70%), radial-gradient(ellipse 65% 80% at 15% 60%, #A07840 0%, transparent 58%), linear-gradient(120deg, #F5F0E8 0%, #C9A96E 55%, #A05C3B 100%)',
-  'radial-gradient(ellipse 60% 80% at 85% 40%, #EDE4D8 0%, transparent 65%), radial-gradient(ellipse 75% 60% at 10% 90%, #6B5A4E 0%, transparent 55%), linear-gradient(200deg, #DDD3C7 0%, #C4B5A8 40%, #8C7B70 100%)',
-]
-
-function ReviewAvatar({ reviewId }: { reviewId: number }) {
-  const gradient =
-    REVIEW_AVATAR_GRADIENTS[(reviewId - 1) % REVIEW_AVATAR_GRADIENTS.length]
-
-  return (
-    <div
-      className="size-12 flex-shrink-0 rounded-full ring-1 ring-gold/25 ring-offset-1 ring-offset-cream-100 shadow-warm-sm"
-      style={{ background: gradient }}
-      aria-hidden="true"
-    />
-  )
-}
 
 interface CardProps {
   review: Review
@@ -87,30 +127,24 @@ function ReviewCard({ review, className = '' }: CardProps) {
         h-[300px] md:h-[320px] w-full overflow-hidden min-w-0 flex flex-col justify-between ${className}`}
     >
       <div className="w-full min-w-0">
-        <div className="flex items-center justify-between mb-6">
-          <span className="font-body text-[10px] tracking-[0.25em] text-gold uppercase">
-            {review.genre}
-          </span>
-          <span className="font-body text-[10px] text-warm-muted uppercase tracking-widest">
-            {review.date}
-          </span>
-        </div>
+        <span className="font-body text-[10px] tracking-[0.25em] text-gold uppercase block mb-6">
+          {review.genre}
+        </span>
 
         <p
           className="font-body text-warm-medium text-base md:text-lg leading-relaxed italic 
-          break-words whitespace-normal line-clamp-5 overflow-hidden min-w-0"
+          break-words whitespace-pre-line line-clamp-6 overflow-hidden min-w-0"
         >
-          &ldquo;{review.text}&rdquo;
+          {review.text}
         </p>
       </div>
 
       <div className="flex items-center gap-3 mt-auto w-full min-w-0">
-        <ReviewAvatar reviewId={review.id} />
         <span className="h-px flex-1 bg-cream-400" />
         <span className="font-display text-warm-dark text-lg flex-shrink min-w-0 truncate">
           {review.name}
         </span>
-        <span className="h-px w-4 bg-gold/30" />
+        <span className="h-px flex-1 bg-cream-400" />
       </div>
     </div>
   )
@@ -413,9 +447,6 @@ export default function Reviews() {
             </div>
 
             <div className="mt-8 flex flex-col items-center gap-3">
-              <div className="font-body text-[11px] tracking-[0.25em] uppercase text-warm-muted">
-                {focusIndex + 1} / {totalSteps}
-              </div>
               {totalSteps > 1 && (
                 <div
                   className="flex items-center justify-center gap-2"
@@ -486,10 +517,6 @@ export default function Reviews() {
             >
               ←
             </button>
-
-            <div className="font-body text-[11px] tracking-[0.25em] uppercase text-warm-muted">
-              {focusIndex + 1} / {reviews.length}
-            </div>
 
             <button
               type="button"

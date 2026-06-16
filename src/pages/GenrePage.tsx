@@ -11,6 +11,7 @@ import { THEATRE_PRODUCTIONS } from '../data/theatreData'
 import { STUDIO_PHOTOS } from '../data/studioData'
 import { STREET_PHOTOS } from '../data/streetData'
 import { FAMILY_PHOTOS } from '../data/familyData'
+import { GENRE_INTRO_TEXTS } from '../data/genreIntroTexts'
 import { useIsDesktop } from '../hooks/useIsDesktop'
 
 const GENRE_PHOTOS: Record<string, string[]> = {
@@ -18,32 +19,6 @@ const GENRE_PHOTOS: Record<string, string[]> = {
   street: STREET_PHOTOS,
   family: FAMILY_PHOTOS,
 }
-
-const nbsp = '\u00A0'
-
-const STREET_POINTS = [
-  {
-    text: `Спланируем маршрут по${nbsp}вашим любимым улицам и памятным местам, чтобы кадры отражали вашу историю.`,
-  },
-  {
-    text: `Идеальный формат, чтобы отлично провести время, отдохнуть от${nbsp}суеты и насладиться природой или архитектурой.`,
-  },
-] as const
-
-const STUDIO_POINTS = [
-  {
-    text: `Чаще всего ко мне обращаются, когда хочется: увидеть себя настоящего, почувствовать себя увереннее, запечатлеть важный этап в${nbsp}жизни, впервые оказаться на${nbsp}съёмке, обновить снимки для${nbsp}соцсетей, уделить время себе.`,
-  },
-  {
-    text: `Студийная съёмка позволяет сделать акцент на${nbsp}вас, а${nbsp}не на${nbsp}окружении.`,
-  },
-] as const
-
-const FAMILY_POINTS = [
-  {
-    text: `Идеальный формат, чтобы провести время с близкими и получить фотографии, которые будут радовать вас спустя${nbsp}годы.`,
-  },
-] as const
 
 export default function GenrePage() {
   const { slug } = useParams<{ slug: string }>()
@@ -85,14 +60,20 @@ export default function GenrePage() {
               genre.label
             )}
           </Typography>
-          {isStreet || isStudio || isFamily ? (
+          {slug && GENRE_INTRO_TEXTS[slug] ? (
             <div className="w-full text-center space-y-4 md:space-y-5">
-              {(isStreet ? STREET_POINTS : isStudio ? STUDIO_POINTS : FAMILY_POINTS).map(({ text }) => (
+              {GENRE_INTRO_TEXTS[slug].map((text) => (
                 <p
                   key={text}
                   className="font-body text-[0.9375rem] sm:text-base md:text-lg leading-[1.65] text-pretty"
                 >
-                  <span className="text-warm-medium">{text}</span>
+                  <span className="text-warm-medium">
+                    {text.split('\n').map((line, lineIndex) => (
+                      <span key={lineIndex} className={lineIndex > 0 ? 'block' : undefined}>
+                        {line}
+                      </span>
+                    ))}
+                  </span>
                 </p>
               ))}
             </div>
