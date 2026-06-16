@@ -87,11 +87,11 @@ export default function FAQ() {
   const toggle = (i: number) => setOpenIndex((prev) => (prev === i ? null : i))
 
   return (
-    <section ref={ref} className="py-24 md:py-32 px-6 md:px-10 lg:px-14 bg-cream-100">
+    <section ref={ref} className="py-14 md:py-20 px-6 md:px-10 lg:px-14 bg-cream-100 scroll-mt-[var(--header-height)]">
       <div className="max-w-screen-xl mx-auto">
         {/* Title */}
         <motion.h2
-          className="font-display text-display-sm md:text-display-md text-warm-dark mb-16 md:mb-20"
+          className="font-display text-display-sm md:text-display-md text-warm-dark mb-10 md:mb-14"
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.2, 0, 0, 1] }}

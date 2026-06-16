@@ -14,7 +14,7 @@ export default function SectionBridge({ className = 'bg-cream-100' }: SectionBri
   return (
     <div
       ref={ref}
-      className={`flex justify-center py-5 md:py-8 ${className}`}
+      className={`flex justify-center py-2 md:py-3 ${className}`}
       aria-hidden
     >
       <motion.div

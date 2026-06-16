@@ -246,8 +246,9 @@ export default function Hero({ isVisible }: HeroProps) {
             transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
           >
             <HeroLead className="md:text-justify">
-              <span className="block">Я верю, что настоящая красота —</span>
-              <span className="block">в естественности.</span>
+              <span className="block whitespace-nowrap">
+                Я верю, что настоящая красота в естественности.
+              </span>
               Моя задача уловить вашу уникальность, эмоции
               и мимолётные движения, которые делают вас собой.
             </HeroLead>
@@ -271,7 +272,7 @@ export default function Hero({ isVisible }: HeroProps) {
                 <PhilosophyTitle>{block.title}</PhilosophyTitle>
                 <PhilosophyBody>
                   <span className="md:hidden">{block.textMobile}</span>
-                  <span className="hidden md:inline">{block.textDesktop}</span>
+                  <span className="hidden md:block">{block.textDesktop}</span>
                 </PhilosophyBody>
               </motion.div>
             ))}

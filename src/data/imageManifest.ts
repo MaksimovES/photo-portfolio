@@ -840,5 +840,11 @@ export const IMAGE_MANIFEST: Record<string, ImageManifestEntry> = {
     "h": 6240,
     "w800": 800,
     "w1600": 1600
+  },
+  "/main-page/directions.JPG": {
+    "w": 820,
+    "h": 1024,
+    "w800": 800,
+    "w1600": 820
   }
 } as const

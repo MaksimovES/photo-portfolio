@@ -15,15 +15,15 @@ export default function HomePage() {
   return (
     <>
       <Preloader onComplete={() => setPreloaderDone(true)} />
-      <div id="hero"><Hero isVisible={preloaderDone} /></div>
+      <div id="hero" className="scroll-mt-[var(--header-height)]"><Hero isVisible={preloaderDone} /></div>
       <SectionBridge />
       <HorizontalScroll />
       <SectionBridge />
-      <div id="cases"><Cases /></div>
+      <div id="cases" className="scroll-mt-[var(--header-height)]"><Cases /></div>
       <SectionBridge className="bg-gradient-to-b from-cream-100 to-cream-200" />
-      <div id="reviews"><Reviews /></div>
+      <div id="reviews" className="scroll-mt-[var(--header-height)]"><Reviews /></div>
       <SectionBridge className="bg-gradient-to-b from-cream-200 to-cream-100" />
-      <div id="faq"><FAQ /></div>
+      <div id="faq" className="scroll-mt-[var(--header-height)]"><FAQ /></div>
     </>
   )
 }

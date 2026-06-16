@@ -3,6 +3,10 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { GENRES } from '../../utils/genres'
 import { GENRE_INTRO_TEXTS } from '../../data/genreIntroTexts'
+import { getGridImageAttrs } from '@/utils/images'
+
+const DIRECTIONS_PHOTO_SRC = '/main-page/directions.JPG'
+const directionsImageAttrs = getGridImageAttrs(DIRECTIONS_PHOTO_SRC)
 
 function GenreItem({
   genre,
@@ -122,10 +126,10 @@ export default function Cases() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="directions" className="py-16 md:py-32 px-6 md:px-14 bg-cream-100">
+    <section id="directions" className="py-12 md:py-20 px-6 md:px-14 bg-cream-100 scroll-mt-[var(--header-height)]">
       <div className="max-w-screen-xl mx-auto">
 
-        <div ref={titleRef} className="mb-10 md:mb-20">
+        <div ref={titleRef} className="mb-8 md:mb-14">
           <motion.h2
             className="font-display md:text-3xl text-2xl md:text-display-md text-warm-dark uppercase tracking-tight"
             initial={{ opacity: 0, y: 20 }}
@@ -150,10 +154,23 @@ export default function Cases() {
           </div>
 
           <div className="hidden md:block md:w-[30%] flex-shrink-0 self-center">
-            <div className="relative aspect-[2/3]">
-              <div className="absolute inset-0 bg-cream-200 rounded-sm" />
-              <div className="absolute -bottom-4 -left-4 inset-0 border border-gold/30 rounded-sm" />
-            </div>
+            <motion.div
+              className="relative aspect-[2/3]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.9, ease: [0.2, 0, 0, 1], delay: 0.2 }}
+            >
+              <div className="absolute inset-0 overflow-hidden rounded-sm">
+                <img
+                  {...directionsImageAttrs}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 inset-0 border border-gold/30 rounded-sm pointer-events-none" />
+            </motion.div>
           </div>
         </div>
       </div>
