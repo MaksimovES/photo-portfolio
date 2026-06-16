@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, type PanInfo } from 'framer-motion'
+import { getFullImageAttrs, preloadAdjacentImages } from '@/utils/images'
 
 interface LightboxProps {
   photos: string[]
@@ -36,6 +37,10 @@ function LightboxContent({ photos, currentIndex, onClose, onChangeIndex }: Light
       onChangeIndex(currentIndex + 1)
     }
   }, [currentIndex, hasNext, onChangeIndex])
+
+  useEffect(() => {
+    preloadAdjacentImages(photos, currentIndex, 'full')
+  }, [photos, currentIndex])
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -172,9 +177,10 @@ function LightboxContent({ photos, currentIndex, onClose, onChangeIndex }: Light
             className="flex items-center justify-center max-w-full max-h-full touch-none"
           >
             <img
-              src={photos[currentIndex]}
+              {...getFullImageAttrs(photos[currentIndex])}
               alt={`Фото ${currentIndex + 1}`}
               className="max-h-[85vh] max-w-full w-auto h-auto object-contain rounded-sm select-none"
+              decoding="async"
               draggable={false}
             />
           </motion.div>

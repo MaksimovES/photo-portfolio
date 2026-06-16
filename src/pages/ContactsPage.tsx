@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
+import { getPortraitImageAttrs } from '@/utils/images'
 
 const TELEGRAM_URL = 'https://t.me/ketrin_maxim'
 const CONTACT_PORTRAIT_SRC = '/contacts/portrait.png'
+const portraitImageAttrs = getPortraitImageAttrs(CONTACT_PORTRAIT_SRC)
 const EASE = [0.2, 0, 0, 1] as const
 
 const stagger = {
@@ -146,7 +148,7 @@ export default function ContactsPage() {
               aria-hidden
             />
             <img
-              src={CONTACT_PORTRAIT_SRC}
+              {...portraitImageAttrs}
               alt=""
               aria-hidden
               loading="lazy"

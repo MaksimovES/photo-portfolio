@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Lightbox } from '../Lightbox'
+import { getGridImageAttrs } from '@/utils/images'
 
 function PhotoItem({
   src,
@@ -24,6 +25,7 @@ function PhotoItem({
   // Once revealed, always stay revealed — no re-animation
   const revealed = hasRevealed.current
   const delay = (index % 4) * 0.07
+  const imageAttrs = getGridImageAttrs(src)
 
   return (
     <motion.div
@@ -34,10 +36,11 @@ function PhotoItem({
       transition={{ duration: 0.15, ease: [0.2, 0, 0, 1] }}
     >
       <motion.img
-        src={src}
+        {...imageAttrs}
         alt={alt}
         className="absolute inset-0 w-full h-full object-cover"
         loading={index < 8 ? 'eager' : 'lazy'}
+        decoding="async"
         draggable={false}
         onLoad={() => setLoaded(true)}
         initial={false}

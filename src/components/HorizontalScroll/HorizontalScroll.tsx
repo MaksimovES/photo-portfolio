@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import { MAIN_PAGE_WORK_PHOTOS } from '@/data/mainPageData'
+import { getHomeGridImageAttrs } from '@/utils/images'
 
 function Card({ src, index }: { src: string; index: number }) {
+  const imageAttrs = getHomeGridImageAttrs(src)
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 32 }}
@@ -14,10 +17,11 @@ function Card({ src, index }: { src: string; index: number }) {
         style={{ aspectRatio: '3/4' }}
       >
         <img
-          src={src}
+          {...imageAttrs}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
           loading={index < 4 ? 'eager' : 'lazy'}
+          decoding="async"
         />
       </div>
     </motion.div>

@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getCarouselImageAttrs, preloadAdjacentImages } from '@/utils/images'
 
 interface TheatreCarouselBlockProps {
   director: string
@@ -38,11 +39,8 @@ export function TheatreCarouselBlock({
   const touchStartX = useRef(0)
 
   useEffect(() => {
-    photos.forEach(src => {
-      const img = new Image()
-      img.src = src
-    })
-  }, [photos])
+    preloadAdjacentImages(photos, current, 'w1600')
+  }, [photos, current])
 
   const goTo = useCallback(
     (nextIdx: number) => {
@@ -110,7 +108,7 @@ export function TheatreCarouselBlock({
             }}
           >
             <img
-              src={photos[current]}
+              {...getCarouselImageAttrs(photos[current])}
               alt={`${production} — ${current + 1}`}
               className="h-full w-full object-cover"
               loading="eager"

@@ -5,6 +5,12 @@ node_modules/
 dist/
 dist-ssr/
 
+# Generated WebP variants (npm run optimize-images / prebuild)
+public/**/*.webp
+
+# Local code intelligence index
+.codegraph/
+
 # Logs
 logs/
 *.log

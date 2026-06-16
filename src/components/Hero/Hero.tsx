@@ -7,6 +7,10 @@ import {
   PhilosophyTitle,
   philosophyBlocks,
 } from './heroUtils'
+import { getHeroImageAttrs } from '@/utils/images'
+
+const HERO_IMAGE_SRC = '/main-page/1test.JPG'
+const heroImageAttrs = getHeroImageAttrs(HERO_IMAGE_SRC)
 
 interface HeroProps {
   isVisible: boolean
@@ -43,10 +47,12 @@ export default function Hero({ isVisible }: HeroProps) {
           >
             <div className="relative w-full h-[40dvh] overflow-hidden rounded-[5px]">
               <motion.img
-                src="/main-page/1test.JPG"
+                {...heroImageAttrs}
                 alt="Портфолио фотографа"
                 className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
                 loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 initial={{ scale: 1.1 }}
                 animate={isVisible ? { scale: 1.05 } : { scale: 1.1 }}
                 transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
@@ -144,10 +150,12 @@ export default function Hero({ isVisible }: HeroProps) {
                 />
 
                 <motion.img
-                  src="/main-page/1test.JPG"
+                  {...heroImageAttrs}
                   alt="Портфолио фотографа"
                   className="block max-h-[calc(100dvh-var(--header-height)-6rem-30px)] lg:max-h-[calc(100dvh-var(--header-height)-8rem-30px)] max-w-full w-auto h-auto rounded-lg"
                   loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   initial={{ scale: 1.07 }}
                   animate={isVisible ? { scale: 1 } : { scale: 1.07 }}
                   transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}

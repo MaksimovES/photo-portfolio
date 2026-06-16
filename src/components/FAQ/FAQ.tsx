@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type ReactNode } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 interface FaqSection {
@@ -8,7 +8,7 @@ interface FaqSection {
 
 interface FaqItem {
   question: string
-  answer?: string
+  answer?: ReactNode
   sections?: FaqSection[]
 }
 
@@ -31,9 +31,22 @@ const faqs: FaqItem[] = [
       'Со стоимостью съемки и подробными условиями можно ознакомиться на странице интересующего вас формата.',
   },
   {
-    question: 'Есть ли у вас подарочные сертификаты?',
-    answer:
-      'Со стоимостью съемки и подробными условиями можно ознакомиться на странице интересующего вас формата.',
+    question: 'Можно ли подарить фотосессию другому человеку?',
+    answer: (
+      <>
+        Да, вы можете приобрести электронный подарочный сертификат. Для оформления и оплаты напишите мне в{' '}
+        <a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Написать в Telegram, откроется в новой вкладке"
+          className="text-gold underline underline-offset-4 decoration-gold/40 md:hover:decoration-gold transition-colors duration-300"
+        >
+          Telegram
+        </a>
+        .
+      </>
+    ),
   },
   {
     question: 'Как подготовиться к фотосессии?',
