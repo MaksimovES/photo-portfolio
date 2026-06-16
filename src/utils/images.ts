@@ -69,9 +69,9 @@ export function getCarouselImageAttrs(src: string): OptimizedImageAttrs {
 }
 
 export function getFullImageAttrs(src: string): OptimizedImageAttrs {
-  const srcSet = buildSrcSet(src, ['w1600', 'full'])
+  const srcSet = buildSrcSet(src, ['w1600'])
   if (!srcSet) return { src }
-  return { src, srcSet, sizes: FULL_IMAGE_SIZES }
+  return { src: getDefaultWebpSrc(src, 'w1600'), srcSet, sizes: FULL_IMAGE_SIZES }
 }
 
 export function getHeroVariantForViewport(): 'w800' | 'w1600' {

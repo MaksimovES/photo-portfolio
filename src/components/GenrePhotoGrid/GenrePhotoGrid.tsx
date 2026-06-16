@@ -1,7 +1,7 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Lightbox } from '../Lightbox'
-import { getGridImageAttrs } from '@/utils/images'
+import { getGridImageAttrs, preloadOptimizedImage } from '@/utils/images'
 
 function PhotoItem({
   src,
@@ -18,6 +18,10 @@ function PhotoItem({
   const ref = useRef<HTMLDivElement>(null)
   const hasRevealed = useRef(false)
   const inView = useInView(ref, { once: true, margin: '0px 0px -5% 0px' })
+
+  useEffect(() => {
+    if (inView) preloadOptimizedImage(src, 'w1600')
+  }, [inView, src])
 
   const shouldReveal = loaded && inView
   if (shouldReveal) hasRevealed.current = true
