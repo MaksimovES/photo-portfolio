@@ -6,7 +6,7 @@
  * Как добавить фотографии:
  * 1. Черновики: photos/directions/theathre/<номер>/1.JPG, 2.JPG, … (gitignored)
  * 2. Публикация: скопируйте в public/directions/theathre/<номер>/
- * 3. Замените ph('…') на пути '/directions/theathre/<номер>/1.JPG', …
+ * 3. Замените заглушки на пути '/directions/theathre/<номер>/1.JPG', …
  * 4. Порядок в массиве = порядок в карусели.
  */
 
@@ -16,10 +16,6 @@ export interface TheatreProduction {
   photos: string[]
 }
 
-/** Генератор заглушек — удалите вызовы когда добавите реальные фото */
-function ph(seed: string): string[] {
-  return Array.from({ length: 10 }, (_, i) => `https://picsum.photos/seed/${seed}-${i + 1}/1200/675`)
-}
 
 // ─── 01 ──────────────────────────────────────────────────────────────────────
 const lesAveugles: TheatreProduction = {

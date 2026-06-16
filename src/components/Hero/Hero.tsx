@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import {
-  HeroEyebrow,
   HeroLead,
   KineticHeading,
   PhilosophyBody,
@@ -31,16 +30,7 @@ export default function Hero({ isVisible }: HeroProps) {
             MOBILE PHOTO PANEL
             Editorial card: clean photo + dedicated text zone below
         ══════════════════════════════════════════════════ */}
-        <div className="md:hidden order-1 flex flex-col min-h-0 px-6">
-          <motion.div
-            className="pt-4 pb-3"
-            initial={{ opacity: 0, x: -14 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
-            transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 0.1 }}
-          >
-            <HeroEyebrow>Портфолио фотографа</HeroEyebrow>
-          </motion.div>
-
+        <div className="md:hidden order-1 flex flex-col min-h-0 px-6 pt-4">
           <div
             className="relative w-full flex-shrink-0 rounded-lg border border-gold/30
               bg-cream-200 p-1.5 shadow-warm-sm overflow-hidden"
@@ -48,10 +38,10 @@ export default function Hero({ isVisible }: HeroProps) {
             <div className="relative w-full h-[40dvh] overflow-hidden rounded-[5px]">
               <motion.img
                 {...heroImageAttrs}
-                alt="Портфолио фотографа"
+                alt="Портретная фотография"
                 className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
                 loading="eager"
-                fetchPriority="high"
+                {...({ fetchpriority: 'high' } as Record<string, string>)}
                 decoding="async"
                 initial={{ scale: 1.1 }}
                 animate={isVisible ? { scale: 1.05 } : { scale: 1.1 }}
@@ -128,8 +118,8 @@ export default function Hero({ isVisible }: HeroProps) {
         <div
           className="hidden md:flex relative order-2
             h-[calc(100dvh_-_var(--header-height))]
-            items-center justify-center
-            p-6 lg:p-8 min-h-0"
+            items-center justify-end
+            py-6 lg:py-8 pl-2 lg:pl-3 pr-6 lg:pr-8 min-h-0"
         >
           <div className="relative max-h-full max-w-full">
             <motion.div
@@ -151,10 +141,10 @@ export default function Hero({ isVisible }: HeroProps) {
 
                 <motion.img
                   {...heroImageAttrs}
-                  alt="Портфолио фотографа"
+                  alt="Портретная фотография"
                   className="block max-h-[calc(100dvh-var(--header-height)-6rem-30px)] lg:max-h-[calc(100dvh-var(--header-height)-8rem-30px)] max-w-full w-auto h-auto rounded-lg"
                   loading="eager"
-                  fetchPriority="high"
+                  {...({ fetchpriority: 'high' } as Record<string, string>)}
                   decoding="async"
                   initial={{ scale: 1.07 }}
                   animate={isVisible ? { scale: 1 } : { scale: 1.07 }}
@@ -200,7 +190,7 @@ export default function Hero({ isVisible }: HeroProps) {
         {/* ══════════════════════════════════════════════════
             TEXT PANEL
             Mobile: philosophy blocks + CTA
-            Desktop: label, slogan, description, philosophy blocks, CTA
+            Desktop: slogan, description, philosophy blocks, CTA
         ══════════════════════════════════════════════════ */}
         <div
           className="flex flex-col flex-1 justify-start md:justify-start lg:justify-center order-2 md:order-1
@@ -208,16 +198,6 @@ export default function Hero({ isVisible }: HeroProps) {
             pt-6 pb-8 md:pt-10 md:pb-10 lg:py-14 min-w-0
             md:-translate-y-[5%]"
         >
-
-          {/* Desktop label */}
-          <motion.div
-            className="hidden md:flex items-center gap-3 mb-5 lg:mb-7"
-            initial={{ opacity: 0, x: -14 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
-            transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 0.1 }}
-          >
-            <HeroEyebrow>Портфолио фотографа</HeroEyebrow>
-          </motion.div>
 
           {/* Desktop slogan */}
           <h1

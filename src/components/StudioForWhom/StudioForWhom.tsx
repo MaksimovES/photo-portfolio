@@ -70,7 +70,7 @@ export function StudioForWhom() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
       >
         <span className="text-warm-dark">Чаще всего ко мне обращаются, когда хочется: </span>
-        {QUOTES.map((quote, i) => (
+        {QUOTES.map((quote) => (
           <span key={quote}>
             <span className="text-warm-medium">{quote}</span>
           </span>

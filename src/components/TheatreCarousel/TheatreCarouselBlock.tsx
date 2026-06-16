@@ -1,31 +1,15 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { getCarouselImageAttrs, preloadAdjacentImages } from '@/utils/images'
+import {
+  getCarouselImageAttrs,
+  preloadAdjacentImages,
+  preloadOptimizedImage,
+} from '@/utils/images'
 
 interface TheatreCarouselBlockProps {
   director: string
   production: string
   photos: string[]
   index: number
-}
-
-const EASE: [number, number, number, number] = [0.2, 0, 0, 1]
-
-const photoVariants = {
-  initial: {
-    opacity: 0,
-    scale: 1.025,
-  },
-  animate: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.58, ease: EASE },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.992,
-    transition: { duration: 0.4, ease: EASE },
-  },
 }
 
 export function TheatreCarouselBlock({
@@ -35,7 +19,6 @@ export function TheatreCarouselBlock({
   index,
 }: TheatreCarouselBlockProps) {
   const [current, setCurrent] = useState(0)
-  const isTransitioning = useRef(false)
   const touchStartX = useRef(0)
 
   useEffect(() => {
@@ -44,11 +27,11 @@ export function TheatreCarouselBlock({
 
   const goTo = useCallback(
     (nextIdx: number) => {
-      if (isTransitioning.current || nextIdx === current) return
-      isTransitioning.current = true
+      if (nextIdx === current) return
+      preloadOptimizedImage(photos[nextIdx], 'w1600')
       setCurrent(nextIdx)
     },
-    [current],
+    [current, photos],
   )
 
   const prev = useCallback(() => {
@@ -89,34 +72,18 @@ export function TheatreCarouselBlock({
 
       {/* Carousel */}
       <div
-        className="relative z-[10000] aspect-video bg-cream-200 overflow-hidden group select-none"
+        className="relative z-[10000] aspect-video bg-warm-dark/10 overflow-hidden group select-none"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={current}
-            className="absolute inset-0"
-            variants={photoVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            onAnimationComplete={definition => {
-              if (definition === 'animate') {
-                isTransitioning.current = false
-              }
-            }}
-          >
-            <img
-              {...getCarouselImageAttrs(photos[current])}
-              alt={`${production} — ${current + 1}`}
-              className="h-full w-full object-cover"
-              loading="eager"
-              decoding="async"
-              draggable={false}
-            />
-          </motion.div>
-        </AnimatePresence>
+        <img
+          {...getCarouselImageAttrs(photos[current])}
+          alt={`${production} — ${current + 1}`}
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+          decoding="async"
+          draggable={false}
+        />
 
         {/* Bottom bar: dots + counter */}
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 px-4 py-3 flex items-center justify-between bg-gradient-to-t from-warm-dark/50 to-transparent">
