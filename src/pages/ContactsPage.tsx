@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import Typography from '../components/Typography'
 
 const TELEGRAM_URL = 'https://t.me/ketrin_maxim'
 const EASE = [0.2, 0, 0, 1] as const
@@ -36,116 +35,117 @@ function TelegramIcon({ className }: { className?: string }) {
 export default function ContactsPage() {
   return (
     <section
-      className="relative flex-1 flex flex-col justify-center bg-cream-100 px-7 sm:px-9 md:px-16 lg:px-24 overflow-hidden"
+      className="relative flex-1 flex flex-col justify-start bg-cream-100 px-7 sm:px-9 md:px-16 lg:px-24 overflow-hidden"
       style={{
         paddingTop: 'var(--header-height)',
         minHeight: 'calc(100dvh - var(--header-height))',
       }}
     >
-      <div
-        className="pointer-events-none absolute inset-0 select-none"
-        aria-hidden="true"
-      >
-        <span className="absolute top-[18%] -left-[6%] font-display text-[clamp(6rem,22vw,14rem)] leading-none tracking-[-0.06em] text-cream-300/60">
-          59°
-        </span>
-        <span className="absolute bottom-[14%] -right-[4%] font-body text-2xs tracking-[0.35em] text-cream-400/50 uppercase rotate-90 origin-bottom-right">
-          N 30°19′
-        </span>
-      </div>
-
       <motion.div
-        className="relative z-10 w-full max-w-5xl mx-auto"
+        className="relative z-10 w-full max-w-5xl mx-auto pt-5 sm:pt-6 md:pt-10"
         variants={stagger}
         initial="hidden"
         animate="show"
       >
-        <motion.div variants={fadeUp} className="mb-10 md:mb-14">
-          <Typography variant="label" className="text-gold tracking-[0.32em]">
-            Связь
-          </Typography>
-          <h1
-            className="mt-4 font-display font-light text-warm-dark leading-[0.92] tracking-[-0.04em]"
-            style={{ fontSize: 'clamp(2.25rem, 7vw, 4.5rem)' }}
+        <motion.div variants={fadeUp} className="mb-6 md:mb-8">
+          <p
+            className="font-display font-light text-warm-dark leading-[1.12] tracking-[-0.025em] max-w-xl md:max-w-2xl"
+            style={{ fontSize: 'clamp(1.25rem, 4.6vw, 2rem)' }}
           >
-            Напишите
-            <br />
-            <span className="text-warm-muted">в Telegram</span>
-          </h1>
+            <span className="block text-warm-dark/90">
+              Снимаю так, чтобы вы
+              <span className="md:hidden">
+                <br />
+                нравились себе
+                <br />
+                даже если
+              </span>
+              <span className="hidden md:inline"> нравились себе даже если </span>
+            </span>
+            <span
+              className="block mt-1.5 md:mt-0 md:inline italic text-gold-deep font-normal"
+              style={{ fontSize: 'clamp(1.375rem, 5.2vw, 2.25rem)' }}
+            >
+              «не умеете позировать»
+            </span>
+          </p>
+
+          <span
+            className="flex items-center gap-2.5 mt-6 md:mt-7 max-w-xs"
+            aria-hidden
+          >
+            <span className="block h-px w-8 bg-gold/50 shrink-0" />
+            <span className="block h-1 w-1 rounded-full bg-gold/45 shrink-0" />
+            <span className="block h-px flex-1 bg-gold/20" />
+          </span>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-16 lg:gap-24">
-          <motion.a
-            href={TELEGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Telegram @ketrin_maxim, откроется в новой вкладке"
-            variants={fadeUp}
-            className="group relative block w-full max-w-[min(100%,22rem)] sm:max-w-sm shrink-0 cursor-pointer
-              border border-cream-400/70 bg-cream-200/50 overflow-hidden
-              px-8 sm:px-10 py-9 sm:py-11
-              md:hover:bg-cream-100/80 md:transition-colors md:duration-500"
-          >
-            <span
-              className="absolute top-0 left-0 w-8 h-8 border-l border-t border-gold/35 pointer-events-none"
-              aria-hidden
-            />
-            <span
-              className="absolute bottom-0 right-0 w-8 h-8 border-r border-b border-gold/35 pointer-events-none"
-              aria-hidden
-            />
+        <motion.a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Telegram @ketrin_maxim, откроется в новой вкладке"
+          variants={fadeUp}
+          className="group relative flex flex-col w-full max-w-[min(100%,22rem)] sm:max-w-sm shrink-0 cursor-pointer mb-8 md:mb-10
+            border border-cream-400/70 bg-cream-200/50 overflow-hidden
+            px-5 py-4 sm:px-8 sm:py-7 md:px-10 md:py-11
+            md:hover:bg-cream-100/80 md:transition-colors md:duration-500"
+        >
+          <span
+            className="absolute top-0 left-0 w-5 h-5 md:w-8 md:h-8 border-l border-t border-gold/35 pointer-events-none"
+            aria-hidden
+          />
+          <span
+            className="absolute bottom-0 right-0 w-5 h-5 md:w-8 md:h-8 border-r border-b border-gold/35 pointer-events-none"
+            aria-hidden
+          />
 
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
+            <span
+              className="flex items-center justify-center w-9 h-9 md:w-11 md:h-11 rounded-full flex-shrink-0
+                bg-gold/12 border border-gold/25
+                md:group-hover:border-gold/45 md:group-hover:bg-gold/18
+                md:transition-[background-color,border-color] md:duration-500"
+            >
+              <TelegramIcon className="w-4 h-4 md:w-5 md:h-5 text-gold" />
+            </span>
+            <div className="flex-1 min-w-0 flex items-baseline justify-between gap-3">
+              <div className="min-w-0">
+                <span className="block font-body text-[9px] md:text-2xs tracking-[0.28em] text-gold uppercase">
+                  Telegram
+                </span>
+                <p
+                  className="mt-0.5 md:hidden font-display text-warm-dark leading-none tracking-[-0.03em] truncate
+                    md:group-hover:text-gold md:transition-colors md:duration-500"
+                  style={{ fontSize: 'clamp(1.125rem, 5vw, 1.375rem)' }}
+                >
+                  @ketrin_maxim
+                </p>
+              </div>
               <span
-                className="flex items-center justify-center w-11 h-11 rounded-full flex-shrink-0
-                  bg-gold/12 border border-gold/25
-                  md:group-hover:border-gold/45 md:group-hover:bg-gold/18
-                  md:transition-[background-color,border-color] md:duration-500"
+                className="font-body text-gold/60 text-sm shrink-0 md:hidden"
+                aria-hidden
               >
-                <TelegramIcon className="w-5 h-5 text-gold" />
-              </span>
-              <span className="font-body text-2xs tracking-[0.28em] text-gold uppercase">
-                Telegram
+                →
               </span>
             </div>
+          </div>
 
-            <p
-              className="mt-8 sm:mt-10 font-display text-warm-dark leading-[0.95] tracking-[-0.03em]
-                md:group-hover:text-gold md:transition-colors md:duration-500"
-              style={{ fontSize: 'clamp(1.85rem, 8vw, 2.75rem)' }}
-            >
-              @ketrin_maxim
-            </p>
-
-            <p className="mt-5 font-body text-sm text-warm-medium leading-relaxed">
-              Отвечаю в течение дня.
-              <span className="block mt-1 text-warm-muted text-xs tracking-wide">
-                Нажмите, чтобы открыть чат
-              </span>
-            </p>
-          </motion.a>
-
-          <motion.div
-            variants={fadeUp}
-            className="md:pb-3 md:text-right md:max-w-[min(100%,18rem)]"
+          <p
+            className="hidden md:block mt-8 sm:mt-10 font-display text-warm-dark leading-[0.95] tracking-[-0.03em]
+              md:group-hover:text-gold md:transition-colors md:duration-500"
+            style={{ fontSize: 'clamp(1.85rem, 8vw, 2.75rem)' }}
           >
-            <span
-              className="block w-10 h-px bg-gold/30 mb-6 md:ml-auto"
-              aria-hidden
-            />
-            <p
-              className="font-display text-warm-dark leading-[0.88] tracking-[-0.04em]"
-              style={{ fontSize: 'clamp(1.75rem, 5.5vw, 3.25rem)' }}
-            >
-              Санкт-
-              <br />
-              Петербург
-            </p>
-            <p className="mt-4 font-body text-2xs tracking-[0.28em] text-warm-muted uppercase">
-              Россия
-            </p>
-          </motion.div>
-        </div>
+            @ketrin_maxim
+          </p>
+
+          <p className="mt-2.5 md:mt-5 font-body text-xs md:text-sm text-warm-medium leading-relaxed">
+            <span className="block mt-0.5 md:mt-1 text-warm-muted text-[10px] md:text-xs tracking-wide">
+              Напишите, обсудим дату, формат и детали.
+            </span>
+          </p>
+        </motion.a>
+
       </motion.div>
     </section>
   )
