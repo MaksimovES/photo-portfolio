@@ -39,7 +39,7 @@ function PhotoItem({
         {...imageAttrs}
         alt={alt}
         className="absolute inset-0 w-full h-full object-cover"
-        loading={index < 8 ? 'eager' : 'lazy'}
+        loading={index < 4 ? 'eager' : 'lazy'}
         decoding="async"
         draggable={false}
         onLoad={() => setLoaded(true)}

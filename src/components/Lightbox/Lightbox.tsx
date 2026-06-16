@@ -39,7 +39,7 @@ function LightboxContent({ photos, currentIndex, onClose, onChangeIndex }: Light
   }, [currentIndex, hasNext, onChangeIndex])
 
   useEffect(() => {
-    preloadAdjacentImages(photos, currentIndex, 'full')
+    preloadAdjacentImages(photos, currentIndex, 'w1600')
   }, [photos, currentIndex])
 
   useEffect(() => {

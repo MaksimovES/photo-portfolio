@@ -15,7 +15,7 @@ export default function HomePage() {
     <>
       <Preloader onComplete={() => setPreloaderDone(true)} />
       <div id="hero" className="scroll-mt-[var(--header-height)]"><Hero isVisible={preloaderDone} /></div>
-      <HorizontalScroll />
+      {preloaderDone && <HorizontalScroll />}
       <div id="cases" className="scroll-mt-[var(--header-height)]"><Cases /></div>
       <div id="reviews" className="scroll-mt-[var(--header-height)]"><Reviews /></div>
       <div id="faq" className="scroll-mt-[var(--header-height)]"><FAQ /></div>

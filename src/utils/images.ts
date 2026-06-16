@@ -1,4 +1,9 @@
 import { IMAGE_MANIFEST } from '@/data/imageManifest'
+import {
+  HOME_CRITICAL_GRID_COUNT,
+  HOME_HERO_IMAGE_SRC,
+  MAIN_PAGE_WORK_PHOTOS,
+} from '@/data/mainPageData'
 
 type VariantKey = 'w800' | 'w1600' | 'full'
 
@@ -40,22 +45,27 @@ export const FULL_IMAGE_SIZES = 'min(100vw, 1600px)'
 export const HERO_IMAGE_SIZES = '(min-width: 1024px) 50vw, 90vw'
 export const PORTRAIT_IMAGE_SIZES = '80px'
 
+function getDefaultWebpSrc(src: string, variant: VariantKey = 'w800'): string {
+  if (!IMAGE_MANIFEST[src]) return src
+  return getVariantPaths(src)[variant]
+}
+
 export function getGridImageAttrs(src: string): OptimizedImageAttrs {
   const srcSet = buildSrcSet(src, ['w800'])
   if (!srcSet) return { src }
-  return { src, srcSet, sizes: GRID_IMAGE_SIZES }
+  return { src: getDefaultWebpSrc(src, 'w800'), srcSet, sizes: GRID_IMAGE_SIZES }
 }
 
 export function getHomeGridImageAttrs(src: string): OptimizedImageAttrs {
   const srcSet = buildSrcSet(src, ['w800'])
   if (!srcSet) return { src }
-  return { src, srcSet, sizes: HOME_GRID_IMAGE_SIZES }
+  return { src: getDefaultWebpSrc(src, 'w800'), srcSet, sizes: HOME_GRID_IMAGE_SIZES }
 }
 
 export function getCarouselImageAttrs(src: string): OptimizedImageAttrs {
-  const srcSet = buildSrcSet(src, ['w1600', 'full'])
+  const srcSet = buildSrcSet(src, ['w800', 'w1600'])
   if (!srcSet) return { src }
-  return { src, srcSet, sizes: CAROUSEL_IMAGE_SIZES }
+  return { src: getDefaultWebpSrc(src, 'w800'), srcSet, sizes: CAROUSEL_IMAGE_SIZES }
 }
 
 export function getFullImageAttrs(src: string): OptimizedImageAttrs {
@@ -64,10 +74,18 @@ export function getFullImageAttrs(src: string): OptimizedImageAttrs {
   return { src, srcSet, sizes: FULL_IMAGE_SIZES }
 }
 
-export function getHeroImageAttrs(src: string): OptimizedImageAttrs {
-  const srcSet = buildSrcSet(src, ['w1600', 'full'])
+export function getHeroVariantForViewport(): 'w800' | 'w1600' {
+  if (typeof window === 'undefined') return 'w1600'
+  return window.matchMedia('(min-width: 768px)').matches ? 'w1600' : 'w800'
+}
+
+export function getHeroImageAttrs(
+  src: string,
+  variant: 'w800' | 'w1600' = getHeroVariantForViewport(),
+): OptimizedImageAttrs {
+  const srcSet = buildSrcSet(src, ['w800', 'w1600'])
   if (!srcSet) return { src }
-  return { src, srcSet, sizes: HERO_IMAGE_SIZES }
+  return { src: getDefaultWebpSrc(src, variant), srcSet, sizes: HERO_IMAGE_SIZES }
 }
 
 export function getPortraitImageAttrs(src: string): OptimizedImageAttrs {
@@ -81,9 +99,30 @@ export function getPreloadUrl(src: string, variant: 'w800' | 'w1600' | 'full' = 
   return getVariantPaths(src)[variant]
 }
 
+export function preloadImageUrl(url: string): Promise<void> {
+  return new Promise(resolve => {
+    const img = new Image()
+    img.onload = () => resolve()
+    img.onerror = () => resolve()
+    img.src = url
+  })
+}
+
+export function getHomeCriticalPreloadUrls(): string[] {
+  const heroVariant = getHeroVariantForViewport()
+  const urls = [getPreloadUrl(HOME_HERO_IMAGE_SRC, heroVariant)]
+  MAIN_PAGE_WORK_PHOTOS.slice(0, HOME_CRITICAL_GRID_COUNT).forEach(src => {
+    urls.push(getPreloadUrl(src, 'w800'))
+  })
+  return urls
+}
+
+export function preloadHomeCriticalImages(): Promise<void> {
+  return Promise.all(getHomeCriticalPreloadUrls().map(preloadImageUrl)).then(() => undefined)
+}
+
 export function preloadOptimizedImage(src: string, variant: 'w800' | 'w1600' | 'full' = 'w1600') {
-  const img = new Image()
-  img.src = getPreloadUrl(src, variant)
+  void preloadImageUrl(getPreloadUrl(src, variant))
 }
 
 export function preloadAdjacentImages(

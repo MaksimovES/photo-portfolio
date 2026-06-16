@@ -7,15 +7,57 @@ import {
   philosophyBlocks,
 } from './heroUtils'
 import { getHeroImageAttrs } from '@/utils/images'
-
-const HERO_IMAGE_SRC = '/main-page/1test.JPG'
-const heroImageAttrs = getHeroImageAttrs(HERO_IMAGE_SRC)
+import { HOME_HERO_IMAGE_SRC } from '@/data/mainPageData'
+import { useMdViewport } from '@/hooks/useMdViewport'
 
 interface HeroProps {
   isVisible: boolean
 }
 
+function HeroPhoto({
+  isVisible,
+  variant,
+}: {
+  isVisible: boolean
+  variant: 'mobile' | 'desktop'
+}) {
+  const heroVariant = variant === 'desktop' ? 'w1600' : 'w800'
+  const imageAttrs = getHeroImageAttrs(HOME_HERO_IMAGE_SRC, heroVariant)
+
+  if (variant === 'mobile') {
+    return (
+      <motion.img
+        {...imageAttrs}
+        alt="Портретная фотография"
+        className="absolute inset-0 w-full h-full object-cover object-[center_48%]"
+        loading="eager"
+        {...({ fetchpriority: 'high' } as Record<string, string>)}
+        decoding="async"
+        initial={{ scale: 1.1 }}
+        animate={isVisible ? { scale: 1.05 } : { scale: 1.1 }}
+        transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
+      />
+    )
+  }
+
+  return (
+    <motion.img
+      {...imageAttrs}
+      alt="Портретная фотография"
+      className="block max-h-[calc(100dvh-var(--header-height)-6rem-30px)] lg:max-h-[calc(100dvh-var(--header-height)-8rem-30px)] max-w-full w-auto h-auto rounded-lg"
+      loading="eager"
+      {...({ fetchpriority: 'high' } as Record<string, string>)}
+      decoding="async"
+      initial={{ scale: 1.07 }}
+      animate={isVisible ? { scale: 1 } : { scale: 1.07 }}
+      transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
+    />
+  )
+}
+
 export default function Hero({ isVisible }: HeroProps) {
+  const isMd = useMdViewport()
+
   return (
     <section
       className="relative bg-cream-100"
@@ -66,17 +108,7 @@ export default function Hero({ isVisible }: HeroProps) {
             </motion.h1>
 
             <div className="relative w-full h-[40dvh] overflow-hidden rounded-[5px]">
-              <motion.img
-                {...heroImageAttrs}
-                alt="Портретная фотография"
-                className="absolute inset-0 w-full h-full object-cover object-[center_48%]"
-                loading="eager"
-                {...({ fetchpriority: 'high' } as Record<string, string>)}
-                decoding="async"
-                initial={{ scale: 1.1 }}
-                animate={isVisible ? { scale: 1.05 } : { scale: 1.1 }}
-                transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
-              />
+              {!isMd && <HeroPhoto isVisible={isVisible} variant="mobile" />}
             </div>
 
             <motion.div
@@ -146,17 +178,7 @@ export default function Hero({ isVisible }: HeroProps) {
                   transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
                 />
 
-                <motion.img
-                  {...heroImageAttrs}
-                  alt="Портретная фотография"
-                  className="block max-h-[calc(100dvh-var(--header-height)-6rem-30px)] lg:max-h-[calc(100dvh-var(--header-height)-8rem-30px)] max-w-full w-auto h-auto rounded-lg"
-                  loading="eager"
-                  {...({ fetchpriority: 'high' } as Record<string, string>)}
-                  decoding="async"
-                  initial={{ scale: 1.07 }}
-                  animate={isVisible ? { scale: 1 } : { scale: 1.07 }}
-                  transition={{ duration: 2.0, ease: [0.2, 0, 0, 1], delay: 0.25 }}
-                />
+                {isMd && <HeroPhoto isVisible={isVisible} variant="desktop" />}
 
                 <motion.div
                   className="absolute inset-0 pointer-events-none z-10 rounded-lg"

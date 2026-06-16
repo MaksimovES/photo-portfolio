@@ -6,6 +6,11 @@
  * 2. Обновите пути ниже — порядок = порядок в сетке (слева направо, сверху вниз).
  */
 
+export const HOME_HERO_IMAGE_SRC = '/main-page/1test.JPG'
+
+/** Сколько фото сетки «Примеры работ» грузим во время прелоадера */
+export const HOME_CRITICAL_GRID_COUNT = 4
+
 export const MAIN_PAGE_WORK_PHOTOS: string[] = [
   '/main-page/1.JPG',
   '/main-page/2.JPG',

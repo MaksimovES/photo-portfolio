@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
+import { useInView } from 'framer-motion'
 import {
   getCarouselImageAttrs,
   preloadAdjacentImages,
@@ -20,15 +21,18 @@ export function TheatreCarouselBlock({
 }: TheatreCarouselBlockProps) {
   const [current, setCurrent] = useState(0)
   const touchStartX = useRef(0)
+  const blockRef = useRef<HTMLDivElement>(null)
+  const inView = useInView(blockRef, { once: true, margin: '200px 0px' })
 
   useEffect(() => {
-    preloadAdjacentImages(photos, current, 'w1600')
-  }, [photos, current])
+    if (!inView) return
+    preloadAdjacentImages(photos, current, 'w800')
+  }, [photos, current, inView])
 
   const goTo = useCallback(
     (nextIdx: number) => {
       if (nextIdx === current) return
-      preloadOptimizedImage(photos[nextIdx], 'w1600')
+      preloadOptimizedImage(photos[nextIdx], 'w800')
       setCurrent(nextIdx)
     },
     [current, photos],
@@ -54,7 +58,10 @@ export function TheatreCarouselBlock({
   }
 
   return (
-    <div className="w-4/5 mx-auto max-w-5xl [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
+    <div
+      ref={blockRef}
+      className="w-4/5 mx-auto max-w-5xl [content-visibility:auto] [contain-intrinsic-size:auto_320px]"
+    >
       {/* Header */}
       <div className="flex items-end justify-between mb-3 pb-3 border-b border-cream-400/40">
         <span className="font-body text-2xs text-warm-muted tracking-[0.3em] uppercase select-none">
@@ -76,14 +83,16 @@ export function TheatreCarouselBlock({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <img
-          {...getCarouselImageAttrs(photos[current])}
-          alt={`${production} — ${current + 1}`}
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="eager"
-          decoding="async"
-          draggable={false}
-        />
+        {inView && (
+          <img
+            {...getCarouselImageAttrs(photos[current])}
+            alt={`${production} — ${current + 1}`}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            draggable={false}
+          />
+        )}
 
         {/* Bottom bar: dots + counter */}
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 px-4 py-3 flex items-center justify-between bg-gradient-to-t from-warm-dark/50 to-transparent">
