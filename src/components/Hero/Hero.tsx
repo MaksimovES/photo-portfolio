@@ -227,28 +227,44 @@ export default function Hero({ isVisible }: HeroProps) {
           </h1>
 
           {/* Desktop description */}
-          <div className="hidden md:flex flex-1 items-center min-w-0">
+          <div className="flex flex-1 items-center min-w-0">
             <motion.div
-              className="max-w-[38vw] lg:max-w-[34rem]"
-              initial={{ opacity: 0, y: 16 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
+              className="max-w-[min(36rem,42vw)]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.9, ease: [0.2, 0, 0, 1], delay: 0.72 }}
             >
+            <div className="relative pl-6 lg:pl-7">
+              <span
+                className="absolute left-0 top-0.5 bottom-0.5 w-px
+                  bg-gradient-to-b from-gold/80 via-gold/30 to-transparent"
+                aria-hidden
+              />
+
               <p
-                className="relative font-body text-warm-medium pl-5 lg:pl-6 border-l-2 border-gold/50
-                  text-[1.1875rem] lg:text-[1.3125rem] leading-[1.72] lg:leading-[1.78] md:text-justify"
+                className="font-display font-light text-warm-dark tracking-[-0.012em]
+                  text-[1.4375rem] lg:text-[1.5625rem] leading-[1.42] lg:leading-[1.44] text-pretty"
               >
-                <span className="block text-warm-dark mb-4 lg:mb-5">
-                  <span className="block">На моих съёмках нет заученных поз</span>
-                  <span className="block mt-1">
-                    я отдаю предпочтение импровизации, ориентируясь на ваше состояние, настроение и музыку.
-                  </span>
-                </span>
-                <span className="block pt-4 lg:pt-5 border-t border-gold/25">
-                  Бережно направляю вас, чтобы вы могли расслабиться и{' '}
-                  <span className="italic text-gold-deep">быть собой.</span>
+                На моих съёмках нет заученных поз
+                <br />
+                <span className="text-warm-dark/88">
+                  я отдаю предпочтение импровизации, ориентируясь на ваше состояние, настроение и музыку.
                 </span>
               </p>
+
+              <motion.p
+                className="mt-5 lg:mt-6 font-body text-warm-medium
+                  text-[1.125rem] lg:text-[1.1875rem] leading-[1.62] lg:leading-[1.66] text-pretty"
+                initial={{ opacity: 0, y: 10 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                transition={{ duration: 0.75, ease: [0.2, 0, 0, 1], delay: 0.92 }}
+              >
+                Бережно направляю вас, чтобы вы могли расслабиться
+                <br />
+                и{' '}
+                <span className="font-display font-light italic text-gold-deep">быть собой.</span>
+              </motion.p>
+            </div>
             </motion.div>
           </div>
         </div>
