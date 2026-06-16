@@ -60,15 +60,14 @@ export default function Hero({ isVisible }: HeroProps) {
       style={{ paddingTop: 'var(--header-height)' }}
     >
       <div
-        className="flex flex-col md:grid md:grid-cols-[54fr_46fr] md:items-start"
-        style={{ minHeight: 'calc(100dvh - var(--header-height))' }}
+        className="flex flex-col md:grid md:grid-cols-[54fr_46fr] md:items-start md:min-h-[calc(100dvh-var(--header-height))]"
       >
 
         {/* ══════════════════════════════════════════════════
             MOBILE PHOTO PANEL
             Editorial card: clean photo + dedicated text zone below
         ══════════════════════════════════════════════════ */}
-        <div className="md:hidden order-1 flex flex-col min-h-0 px-6 pt-4 pb-8">
+        <div className="md:hidden order-1 flex flex-col min-h-0 px-6 pt-2 pb-0">
           <div
             className="relative w-full flex-shrink-0 rounded-lg border border-gold/30
               bg-cream-200 p-1.5 shadow-warm-sm overflow-hidden"
@@ -84,12 +83,7 @@ export default function Hero({ isVisible }: HeroProps) {
                 <KineticHeading text="Не делаю ретушь," isVisible={isVisible} delay={0.15} />
               </span>
               <span className="block mt-1 text-warm-dark/90">
-                <KineticHeading text="потому что с вами" isVisible={isVisible} delay={0.35} />
-              </span>
-              <span
-                className="block mt-2"
-                style={{ fontSize: 'clamp(1.625rem, 6.5vw, 2.125rem)' }}
-              >
+                <KineticHeading text="потому что с вами " isVisible={isVisible} delay={0.35} />
                 <KineticHeading
                   text="всё так!"
                   isVisible={isVisible}
@@ -109,17 +103,11 @@ export default function Hero({ isVisible }: HeroProps) {
           </div>
 
           <motion.div
-            className="pt-6 flex flex-col gap-4"
+            className="pt-6"
             initial={{ opacity: 0, y: 16 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.45 }}
           >
-            <div className="flex items-center gap-2.5" aria-hidden>
-              <span className="block h-px w-6 bg-gold/55 flex-shrink-0" />
-              <span className="block h-1 w-1 rounded-full bg-gold/45 flex-shrink-0" />
-              <span className="block h-px flex-1 bg-gold/20" />
-            </div>
-
             <motion.p
               className="font-body pl-4 border-l-2 border-gold/40"
               initial={{ opacity: 0, y: 10 }}
@@ -130,10 +118,11 @@ export default function Hero({ isVisible }: HeroProps) {
                 className="block font-display font-light text-warm-dark leading-[1.38] tracking-[-0.01em]"
                 style={{ fontSize: 'clamp(0.9375rem, 3.8vw, 1.0625rem)' }}
               >
-                На моих съёмках нет заученных поз — я отдаю предпочтение импровизации,
-                ориентируясь на ваше состояние, настроение и музыку.
+                На моих съёмках нет заученных поз
+                <br />
+                я отдаю предпочтение импровизации, ориентируясь на ваше состояние, настроение и музыку.
               </span>
-              <span className="block mt-3.5 text-[0.8125rem] leading-[1.68] text-warm-medium">
+              <span className="block mt-3.5 text-[0.875rem] leading-[1.68] text-warm-medium">
                 Бережно направляю вас, чтобы вы могли расслабиться и{' '}
                 <span className="text-gold-deep italic">быть собой.</span>
               </span>
@@ -209,8 +198,7 @@ export default function Hero({ isVisible }: HeroProps) {
 
         {/* ══════════════════════════════════════════════════
             TEXT PANEL
-            Mobile: philosophy blocks + CTA
-            Desktop: slogan, description, philosophy blocks, CTA
+            Desktop: slogan + description
         ══════════════════════════════════════════════════ */}
         <div
           className="hidden md:flex flex-col flex-1 order-2 md:order-1
@@ -239,58 +227,30 @@ export default function Hero({ isVisible }: HeroProps) {
           </h1>
 
           {/* Desktop description */}
-          <motion.div
-            className="hidden md:block mb-6 lg:mb-8 max-w-[38vw] lg:max-w-[34rem]"
-            initial={{ opacity: 0, y: 16 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
-          >
-            <p
-              className="relative font-body text-warm-medium pl-5 lg:pl-6 border-l-2 border-gold/50
-                text-[1.0625rem] lg:text-[1.1875rem] leading-[1.72] lg:leading-[1.78] md:text-justify"
+          <div className="hidden md:flex flex-1 items-center min-w-0">
+            <motion.div
+              className="max-w-[38vw] lg:max-w-[34rem]"
+              initial={{ opacity: 0, y: 16 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
             >
-              <span className="block text-warm-dark mb-4 lg:mb-5">
-                На моих съёмках нет заученных поз — я отдаю предпочтение импровизации,
-                ориентируясь на ваше состояние, настроение и музыку.
-              </span>
-              <span className="block pt-4 lg:pt-5 border-t border-gold/25">
-                Бережно направляю вас, чтобы вы могли расслабиться и{' '}
-                <span className="italic text-gold-deep">быть собой.</span>
-              </span>
-            </p>
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            className="hidden md:flex mt-auto justify-end w-full"
-            initial={{ opacity: 0, y: 14 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-            transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 1.02 }}
-          >
-            <a
-              href="#cases"
-              className="group flex md:inline-flex items-center justify-center md:justify-center gap-3 md:gap-4
-                 rounded-lg md:rounded-xl bg-cream-200 border border-cream-400 shadow-warm-sm
-                 md:hover:border-gold md:hover:shadow-warm-md
-                 text-warm-dark font-body font-medium text-2xs tracking-[0.24em] uppercase
-                 px-8 md:px-6 lg:px-8 transition-all duration-300 md:hover:bg-gold/10 shimmer-btn
-                 min-h-[48px] md:min-h-[44px] lg:min-h-[48px]"
-            >
-              <motion.span
-                className="block h-px bg-gold flex-shrink-0"
-                initial={{ width: 0 }}
-                animate={isVisible ? { width: 24 } : { width: 0 }}
-                transition={{ delay: 1.35, duration: 0.4 }}
-              />
-              <span>Направления съёмок</span>
-              <motion.span
-                className="block h-px bg-gold flex-shrink-0"
-                initial={{ width: 0 }}
-                animate={isVisible ? { width: 24 } : { width: 0 }}
-                transition={{ delay: 1.35, duration: 0.4 }}
-              />
-            </a>
-          </motion.div>
+              <p
+                className="relative font-body text-warm-medium pl-5 lg:pl-6 border-l-2 border-gold/50
+                  text-[1.1875rem] lg:text-[1.3125rem] leading-[1.72] lg:leading-[1.78] md:text-justify"
+              >
+                <span className="block text-warm-dark mb-4 lg:mb-5">
+                  <span className="block">На моих съёмках нет заученных поз</span>
+                  <span className="block mt-1">
+                    я отдаю предпочтение импровизации, ориентируясь на ваше состояние, настроение и музыку.
+                  </span>
+                </span>
+                <span className="block pt-4 lg:pt-5 border-t border-gold/25">
+                  Бережно направляю вас, чтобы вы могли расслабиться и{' '}
+                  <span className="italic text-gold-deep">быть собой.</span>
+                </span>
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
