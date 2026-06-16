@@ -4,10 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "ensure-public": "node scripts/ensure-public.mjs",
     "optimize-images": "node scripts/optimize-images.mjs",
+    "prune-public": "node scripts/prune-public.mjs",
     "dev": "vite",
-    "prebuild": "npm run optimize-images",
+    "prebuild": "npm run ensure-public && npm run optimize-images",
     "build": "tsc && vite build",
+    "deploy": "npm run build && npm run prune-public",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
