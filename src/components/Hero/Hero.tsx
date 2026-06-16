@@ -1,10 +1,6 @@
 import { motion } from 'framer-motion'
 import {
-  HeroLead,
   KineticHeading,
-  PhilosophyBody,
-  PhilosophyTitle,
-  philosophyBlocks,
 } from './heroUtils'
 import { getHeroImageAttrs } from '@/utils/images'
 import { HOME_HERO_IMAGE_SRC } from '@/data/mainPageData'
@@ -72,7 +68,7 @@ export default function Hero({ isVisible }: HeroProps) {
             MOBILE PHOTO PANEL
             Editorial card: clean photo + dedicated text zone below
         ══════════════════════════════════════════════════ */}
-        <div className="md:hidden order-1 flex flex-col min-h-0 px-6 pt-4">
+        <div className="md:hidden order-1 flex flex-col min-h-0 px-6 pt-4 pb-8">
           <div
             className="relative w-full flex-shrink-0 rounded-lg border border-gold/30
               bg-cream-200 p-1.5 shadow-warm-sm overflow-hidden"
@@ -110,44 +106,39 @@ export default function Hero({ isVisible }: HeroProps) {
             <div className="relative w-full h-[40dvh] overflow-hidden rounded-[5px]">
               {!isMd && <HeroPhoto isVisible={isVisible} variant="mobile" />}
             </div>
+          </div>
 
-            <motion.div
-              className="relative px-4 pt-5 pb-5 flex flex-col gap-4"
-              initial={{ opacity: 0, y: 16 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.45 }}
+          <motion.div
+            className="pt-6 flex flex-col gap-4"
+            initial={{ opacity: 0, y: 16 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.45 }}
+          >
+            <div className="flex items-center gap-2.5" aria-hidden>
+              <span className="block h-px w-6 bg-gold/55 flex-shrink-0" />
+              <span className="block h-1 w-1 rounded-full bg-gold/45 flex-shrink-0" />
+              <span className="block h-px flex-1 bg-gold/20" />
+            </div>
+
+            <motion.p
+              className="font-body pl-4 border-l-2 border-gold/40"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 0.58 }}
             >
               <span
-                className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-gold/45 to-transparent"
-                aria-hidden
-              />
-
-              <div className="flex items-center gap-2.5" aria-hidden>
-                <span className="block h-px w-6 bg-gold/55 flex-shrink-0" />
-                <span className="block h-1 w-1 rounded-full bg-gold/50 flex-shrink-0" />
-                <span className="block h-px flex-1 bg-gold/25" />
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 0.72 }}
+                className="block font-display font-light text-warm-dark leading-[1.38] tracking-[-0.01em]"
+                style={{ fontSize: 'clamp(0.9375rem, 3.8vw, 1.0625rem)' }}
               >
-                <HeroLead className="text-warm-medium leading-[1.65] text-[0.8125rem]">
-                  <span className="block text-warm-dark">
-                    Я верю, что настоящая красота
-                  </span>
-                  <span className="block text-warm-dark">
-                    в естественности.
-                  </span>
-                  <span className="block mt-2">
-                    Моя задача уловить вашу уникальность, эмоции
-                    и мимолётные движения, которые делают вас собой.
-                  </span>
-                </HeroLead>
-              </motion.div>
-            </motion.div>
-          </div>
+                На моих съёмках нет заученных поз — я отдаю предпочтение импровизации,
+                ориентируясь на ваше состояние, настроение и музыку.
+              </span>
+              <span className="block mt-3.5 text-[0.8125rem] leading-[1.68] text-warm-medium">
+                Бережно направляю вас, чтобы вы могли расслабиться и{' '}
+                <span className="text-gold-deep italic">быть собой.</span>
+              </span>
+            </motion.p>
+          </motion.div>
         </div>
 
         {/* ══════════════════════════════════════════════════
@@ -222,10 +213,10 @@ export default function Hero({ isVisible }: HeroProps) {
             Desktop: slogan, description, philosophy blocks, CTA
         ══════════════════════════════════════════════════ */}
         <div
-          className="flex flex-col flex-1 justify-start md:justify-start lg:justify-center order-2 md:order-1
+          className="hidden md:flex flex-col flex-1 order-2 md:order-1
+            h-[calc(100dvh_-_var(--header-height))]
             px-6 md:px-7 lg:px-9
-            pt-6 pb-8 md:pt-10 md:pb-10 lg:py-14 min-w-0
-            md:-translate-y-[5%]"
+            pt-10 pb-6 lg:pt-14 lg:pb-8 min-w-0"
         >
 
           {/* Desktop slogan */}
@@ -249,47 +240,29 @@ export default function Hero({ isVisible }: HeroProps) {
 
           {/* Desktop description */}
           <motion.div
-            className="hidden md:block mb-5 lg:mb-7 max-w-[33vw]"
+            className="hidden md:block mb-6 lg:mb-8 max-w-[38vw] lg:max-w-[34rem]"
             initial={{ opacity: 0, y: 16 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.8, ease: [0.2, 0, 0, 1], delay: 0.75 }}
           >
-            <HeroLead className="md:text-justify">
-              <span className="block whitespace-nowrap">
-                Я верю, что настоящая красота в естественности.
+            <p
+              className="relative font-body text-warm-medium pl-5 lg:pl-6 border-l-2 border-gold/50
+                text-[1.0625rem] lg:text-[1.1875rem] leading-[1.72] lg:leading-[1.78] md:text-justify"
+            >
+              <span className="block text-warm-dark mb-4 lg:mb-5">
+                На моих съёмках нет заученных поз — я отдаю предпочтение импровизации,
+                ориентируясь на ваше состояние, настроение и музыку.
               </span>
-              Моя задача уловить вашу уникальность, эмоции
-              и мимолётные движения, которые делают вас собой.
-            </HeroLead>
-          </motion.div>
-
-          {/* Philosophy blocks — desktop only */}
-          <motion.div
-            className="hidden md:flex flex-col gap-3 md:gap-4 lg:gap-6 mb-4 md:mb-5 lg:mb-8"
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.86 }}
-          >
-            {philosophyBlocks.map((block, i) => (
-              <motion.div
-                key={block.title}
-                className="flex flex-col gap-1.5 md:gap-2"
-                initial={{ opacity: 0, y: 12 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-                transition={{ duration: 0.5, ease: [0.2, 0, 0, 1], delay: 0.86 + i * 0.1 }}
-              >
-                <PhilosophyTitle>{block.title}</PhilosophyTitle>
-                <PhilosophyBody>
-                  <span className="md:hidden">{block.textMobile}</span>
-                  <span className="hidden md:block">{block.textDesktop}</span>
-                </PhilosophyBody>
-              </motion.div>
-            ))}
+              <span className="block pt-4 lg:pt-5 border-t border-gold/25">
+                Бережно направляю вас, чтобы вы могли расслабиться и{' '}
+                <span className="italic text-gold-deep">быть собой.</span>
+              </span>
+            </p>
           </motion.div>
 
           {/* CTA */}
           <motion.div
-            className="mt-auto md:mt-5 lg:mt-auto md:flex md:justify-end w-full"
+            className="hidden md:flex mt-auto justify-end w-full"
             initial={{ opacity: 0, y: 14 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
             transition={{ duration: 0.7, ease: [0.2, 0, 0, 1], delay: 1.02 }}
@@ -309,8 +282,7 @@ export default function Hero({ isVisible }: HeroProps) {
                 animate={isVisible ? { width: 24 } : { width: 0 }}
                 transition={{ delay: 1.35, duration: 0.4 }}
               />
-              <span className="md:hidden">к направлениям</span>
-              <span className="hidden md:inline">Направления съёмок</span>
+              <span>Направления съёмок</span>
               <motion.span
                 className="block h-px bg-gold flex-shrink-0"
                 initial={{ width: 0 }}
