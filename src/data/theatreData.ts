@@ -66,9 +66,9 @@ const zhestyanoyBaraban: TheatreProduction = {
 }
 
 // ─── 04 ──────────────────────────────────────────────────────────────────────
-const skazkaOCareStakane: TheatreProduction = {
+const womensGym: TheatreProduction = {
   director: '',
-  production: 'ШУМ: Сказка о царе стакане',
+  production: 'Decki: Women`s gym',
   photos: [
     '/directions/theathre/4/1.JPG',
     '/directions/theathre/4/2.JPG',
@@ -111,9 +111,9 @@ const duel: TheatreProduction = {
 }
 
 // ─── 07 ──────────────────────────────────────────────────────────────────────
-const womensGym: TheatreProduction = {
+const skazkaOCareStakane: TheatreProduction = {
   director: '',
-  production: 'Decki: Women`s gym',
+  production: 'ШУМ: Сказка о царе стакане',
   photos: [
     '/directions/theathre/7/1.JPG',
     '/directions/theathre/7/2.JPG',
@@ -126,9 +126,9 @@ const womensGym: TheatreProduction = {
 }
 
 // ─── 08 ──────────────────────────────────────────────────────────────────────
-const nirvana: TheatreProduction = {
+const lyubovLyudey: TheatreProduction = {
   director: '',
-  production: 'Новая сцена Александринского театра: Нирвана',
+  production: 'Невидимый театр: Любовь людей',
   photos: [
     '/directions/theathre/8/1.JPG',
     '/directions/theathre/8/2.JPG',
@@ -141,9 +141,9 @@ const nirvana: TheatreProduction = {
 }
 
 // ─── 09 ──────────────────────────────────────────────────────────────────────
-const lyubovLyudey: TheatreProduction = {
+const nirvana: TheatreProduction = {
   director: '',
-  production: 'Невидимый театр: Любовь людей',
+  production: 'Новая сцена Александринского театра: Нирвана',
   photos: [
     '/directions/theathre/9/1.JPG',
     '/directions/theathre/9/2.JPG',
@@ -158,13 +158,13 @@ const lyubovLyudey: TheatreProduction = {
 
 // ─── Итоговый список (порядок = порядок на странице) ─────────────────────────
 export const THEATRE_PRODUCTIONS: TheatreProduction[] = [
-  lesAveugles,
   zemletryasenie,
+  lesAveugles,
   zhestyanoyBaraban,
-  skazkaOCareStakane,
+  womensGym,
   elektrikA,
   duel,
-  womensGym,
-  nirvana,
+  skazkaOCareStakane,
   lyubovLyudey,
+  nirvana,
 ]

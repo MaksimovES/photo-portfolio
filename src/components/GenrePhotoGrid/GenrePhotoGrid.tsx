@@ -64,10 +64,9 @@ function PhotoItem({
 
 interface GenrePhotoGridProps {
   photos: string[]
-  hideHeaderOnMobile?: boolean
 }
 
-export function GenrePhotoGrid({ photos, hideHeaderOnMobile = false }: GenrePhotoGridProps) {
+export function GenrePhotoGrid({ photos }: GenrePhotoGridProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const openLightbox = useCallback((i: number) => setLightboxIndex(i), [])
@@ -77,15 +76,6 @@ export function GenrePhotoGrid({ photos, hideHeaderOnMobile = false }: GenrePhot
   return (
     <>
       <div className="w-4/5 md:w-[80%] mx-auto max-w-8xl">
-        <div
-          className={`items-end justify-between mb-3 pb-3 border-b border-cream-400/40 ${
-            hideHeaderOnMobile ? 'hidden md:flex' : 'flex'
-          }`}
-        >
-          <span className="font-body text-2xs text-warm-muted tracking-[0.3em] uppercase select-none">
-            Галерея
-          </span>
-        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1.5">
           {photos.map((src, i) => (
             <PhotoItem
