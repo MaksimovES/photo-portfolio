@@ -24,7 +24,7 @@ const TERMS = [
   },
   {
     label: 'Срок готовности',
-    value: `в${nbsp}течение 24${nbsp}часов после${nbsp}съёмки.`,
+    value: `в${nbsp}течение трёх${nbsp}дней после${nbsp}съёмки.`,
   },
   {
     label: 'Передача материалов',
@@ -143,7 +143,7 @@ export function FamilyTerms() {
               </p>
               <div className="flex items-baseline justify-center gap-2">
                 <span className="font-display text-4xl md:text-[3.25rem] text-warm-dark tracking-tight leading-none">
-                  14{nbsp}000{nbsp}₽
+                  20{nbsp}000{nbsp}₽
                 </span>
                 <span className="font-body text-xs text-warm-muted whitespace-nowrap">
                   /{nbsp}съёмка
