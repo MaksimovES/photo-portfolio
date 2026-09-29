@@ -10,7 +10,7 @@
     "dev": "vite",
     "prebuild": "npm run ensure-public && npm run optimize-images",
     "build": "tsc && vite build",
-    "deploy": "npm run build && npm run prune-public",
+    "deploy": "npm run build && rsync -a --delete dist/ /var/www/ketrinmaxim/ && rm -rf dist",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
