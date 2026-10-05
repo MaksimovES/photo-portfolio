@@ -1,14 +1,22 @@
-import { readdir, stat, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const PUBLIC_DIR = path.join(__dirname, '..', 'public')
-const MANIFEST_PATH = path.join(__dirname, '..', 'src', 'data', 'imageManifest.ts')
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
+const PUBLIC_DIR = path.join(ROOT, 'public')
+const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'imageManifest.ts')
+// Outside public/ so nginx never serves it; gitignored.
+const CACHE_PATH = path.join(ROOT, '.image-cache.json')
 
 const SOURCE_RE = /\.(jpe?g|png)$/i
 const SKIP_RE = /-(w800|w1600)\.webp$/i
+
+const WEBP_OPTIONS = { quality: 88, effort: 4 }
+const VARIANT_WIDTHS = { full: null, w800: 800, w1600: 1600 }
+// Changing encode settings invalidates the whole cache.
+const SETTINGS = JSON.stringify({ webp: WEBP_OPTIONS, widths: VARIANT_WIDTHS })
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true })
@@ -37,12 +45,26 @@ function variantPaths(absPath) {
   }
 }
 
-async function isFresh(outputPath, inputPath) {
+async function statOrNull(filePath) {
   try {
-    const [outStat, inStat] = await Promise.all([stat(outputPath), stat(inputPath)])
-    return outStat.mtimeMs >= inStat.mtimeMs
+    return await stat(filePath)
   } catch {
-    return false
+    return null
+  }
+}
+
+async function hashFile(filePath) {
+  return createHash('sha1')
+    .update(await readFile(filePath))
+    .digest('hex')
+}
+
+async function readCache() {
+  try {
+    const cache = JSON.parse(await readFile(CACHE_PATH, 'utf8'))
+    return cache.settings === SETTINGS ? cache.files : {}
+  } catch {
+    return {}
   }
 }
 
@@ -51,54 +73,72 @@ async function writeWebp(inputPath, outputPath, width) {
   if (width) {
     pipeline = pipeline.resize({ width, withoutEnlargement: true })
   }
-  await pipeline.webp({ quality: 88, effort: 4 }).toFile(outputPath)
-  const meta = await sharp(outputPath).metadata()
-  return meta.width ?? width ?? 0
+  const { width: outWidth, height: outHeight } = await pipeline.webp(WEBP_OPTIONS).toFile(outputPath)
+  return { width: outWidth, height: outHeight }
 }
 
-async function optimizeOne(inputPath, manifest) {
-  const publicSrc = toPublicPath(inputPath)
+async function encode(inputPath, outputs) {
+  const [full, w800, w1600] = await Promise.all([
+    writeWebp(inputPath, outputs.full, VARIANT_WIDTHS.full),
+    writeWebp(inputPath, outputs.w800, VARIANT_WIDTHS.w800),
+    writeWebp(inputPath, outputs.w1600, VARIANT_WIDTHS.w1600),
+  ])
+  return { w: full.width, h: full.height, w800: w800.width, w1600: w1600.width }
+}
+
+// Read sizes from webp produced before the cache existed.
+async function readSizes(outputs) {
+  const [full, w800, w1600] = await Promise.all(
+    [outputs.full, outputs.w800, outputs.w1600].map(p => sharp(p).metadata()),
+  )
+  return { w: full.width ?? 0, h: full.height ?? 0, w800: w800.width ?? 0, w1600: w1600.width ?? 0 }
+}
+
+// Returns { entry, action } where action is 'skipped' | 'adopted' | 'encoded'.
+async function optimizeOne(inputPath, cached) {
   const outputs = variantPaths(inputPath)
-  const allFresh =
-    (await isFresh(outputs.full, inputPath)) &&
-    (await isFresh(outputs.w800, inputPath)) &&
-    (await isFresh(outputs.w1600, inputPath))
+  const [sourceStat, ...outputStats] = await Promise.all([
+    stat(inputPath),
+    statOrNull(outputs.full),
+    statOrNull(outputs.w800),
+    statOrNull(outputs.w1600),
+  ])
+  const outputsExist = outputStats.every(Boolean)
+  const fileInfo = { size: sourceStat.size, mtimeMs: sourceStat.mtimeMs }
 
-  let fullWidth
-  let w800Width
-  let w1600Width
-  let height
-
-  if (allFresh) {
-    const meta = await sharp(outputs.full).metadata()
-    fullWidth = meta.width ?? 0
-    height = meta.height ?? 0
-    w800Width = (await sharp(outputs.w800).metadata()).width ?? 0
-    w1600Width = (await sharp(outputs.w1600).metadata()).width ?? 0
-  } else {
-    const sourceMeta = await sharp(inputPath).metadata()
-    fullWidth = sourceMeta.width ?? 0
-    height = sourceMeta.height ?? 0
-
-    ;[fullWidth, w800Width, w1600Width] = await Promise.all([
-      writeWebp(inputPath, outputs.full, null).then(w => w || fullWidth),
-      writeWebp(inputPath, outputs.w800, 800),
-      writeWebp(inputPath, outputs.w1600, 1600),
-    ])
+  if (cached && outputsExist) {
+    // Fast path: untouched file, no need to read it.
+    if (cached.size === fileInfo.size && cached.mtimeMs === fileInfo.mtimeMs) {
+      return { entry: cached, action: 'skipped' }
+    }
+    // mtime changed (git checkout, restore, copy) — compare content.
+    const hash = await hashFile(inputPath)
+    if (hash === cached.hash) {
+      return { entry: { ...cached, ...fileInfo }, action: 'skipped' }
+    }
+    return { entry: { ...fileInfo, hash, ...(await encode(inputPath, outputs)) }, action: 'encoded' }
   }
 
-  manifest[publicSrc] = { w: fullWidth, h: height, w800: w800Width, w1600: w1600Width }
+  const hash = await hashFile(inputPath)
+
+  // No cache entry yet: trust webp that are newer than the source (pre-cache behaviour).
+  if (!cached && outputsExist && outputStats.every(s => s.mtimeMs >= sourceStat.mtimeMs)) {
+    return { entry: { ...fileInfo, hash, ...(await readSizes(outputs)) }, action: 'adopted' }
+  }
+
+  return { entry: { ...fileInfo, hash, ...(await encode(inputPath, outputs)) }, action: 'encoded' }
 }
 
-function writeManifest(manifest) {
-  const sorted = Object.keys(manifest)
+function renderManifest(cacheFiles) {
+  const manifest = Object.keys(cacheFiles)
     .sort()
     .reduce((acc, key) => {
-      acc[key] = manifest[key]
+      const { w, h, w800, w1600 } = cacheFiles[key]
+      acc[key] = { w, h, w800, w1600 }
       return acc
     }, {})
 
-  const body = `// Generated by scripts/optimize-images.mjs — do not edit manually.
+  return `// Generated by scripts/optimize-images.mjs — do not edit manually.
 export type ImageManifestEntry = {
   w: number
   h: number
@@ -106,23 +146,37 @@ export type ImageManifestEntry = {
   w1600: number
 }
 
-export const IMAGE_MANIFEST: Record<string, ImageManifestEntry> = ${JSON.stringify(sorted, null, 2)} as const
+export const IMAGE_MANIFEST: Record<string, ImageManifestEntry> = ${JSON.stringify(manifest, null, 2)} as const
 `
-  return writeFile(MANIFEST_PATH, body, 'utf8')
+}
+
+async function writeIfChanged(filePath, content) {
+  const current = await readFile(filePath, 'utf8').catch(() => null)
+  if (current !== content) await writeFile(filePath, content, 'utf8')
 }
 
 async function main() {
-  const files = await walk(PUBLIC_DIR)
-  const manifest = {}
+  const files = (await walk(PUBLIC_DIR)).filter(file => !SKIP_RE.test(file))
+  const cache = await readCache()
+  // Rebuilt from current sources, so entries for deleted photos drop out.
+  const nextCache = {}
+  const counts = { skipped: 0, adopted: 0, encoded: 0 }
 
   for (const file of files) {
-    if (SKIP_RE.test(file)) continue
-    process.stdout.write(`Optimizing ${toPublicPath(file)}\n`)
-    await optimizeOne(file, manifest)
+    const publicSrc = toPublicPath(file)
+    const { entry, action } = await optimizeOne(file, cache[publicSrc])
+    if (action === 'encoded') process.stdout.write(`Encoded ${publicSrc}\n`)
+    nextCache[publicSrc] = entry
+    counts[action]++
   }
 
-  await writeManifest(manifest)
-  process.stdout.write(`Done — ${files.length} source images, manifest at src/data/imageManifest.ts\n`)
+  await writeIfChanged(MANIFEST_PATH, renderManifest(nextCache))
+  await writeIfChanged(CACHE_PATH, JSON.stringify({ settings: SETTINGS, files: nextCache }, null, 2))
+  process.stdout.write(
+    `Images: ${counts.encoded} encoded, ${counts.skipped} unchanged` +
+      (counts.adopted ? `, ${counts.adopted} adopted into cache` : '') +
+      '\n',
+  )
 }
 
 main().catch(err => {
