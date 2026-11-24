@@ -11,10 +11,6 @@ const TERMS = [
     value: `50% при${nbsp}бронировании даты, оставшаяся сумма оплачивается после${nbsp}съёмки.`,
   },
   {
-    label: 'Аренда студии',
-    value: 'включена в стоимость.',
-  },
-  {
     label: 'Место проведения',
     value: `съёмки проводятся только в${nbsp}фотостудиях из${nbsp}моего списка. Подбор и${nbsp}бронирование студии осуществляются из${nbsp}доступных проверенных вариантов.`,
   },
@@ -142,17 +138,9 @@ export function StudioTerms() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease: EASE, delay: 0.05 }}
             >
-              <p className="font-body text-[8px] md:text-[10px] uppercase tracking-[0.32em] text-gold/50 mb-3 md:mb-4">
+              <p className="font-body text-[8px] md:text-[10px] uppercase tracking-[0.32em] text-gold/50">
                 Условия и{nbsp}детали съёмки
               </p>
-              <div className="flex items-baseline justify-center gap-2">
-                <span className="font-display text-4xl md:text-[3.25rem] text-warm-dark tracking-tight leading-none">
-                  20{nbsp}000{nbsp}₽
-                </span>
-                <span className="font-body text-xs text-warm-muted whitespace-nowrap">
-                  /{nbsp}съёмка
-                </span>
-              </div>
             </motion.div>
 
             <div className="relative pt-8 md:pt-10">
